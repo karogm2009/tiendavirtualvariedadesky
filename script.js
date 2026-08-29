@@ -163,21 +163,21 @@ const productos = {
     19: {
         nombre: "Tendido Queen (Beige)",
         precio: 120000,
-        imagen: "img/tendidoqueen1.png",
+        imagen: "img/tendidoqueen2.png",
         descripcion: "Tendido tamaño Queen color beige, elegante y cómodo para tu habitación."
     },
 
     20: {
         nombre: "Tendido Queen (Gris oscuro con blanco)",
         precio: 120000,
-        imagen: "img/tendidoqueen1.png",
+        imagen: "img/tendidoqueen3.png",
         descripcion: "Tendido tamaño Queen en gris oscuro combinado con blanco, elegante y cómodo para tu habitación."
     },
 
     21: {
         nombre: "Tendido Queen (Gris claro con negro)",
         precio: 120000,
-        imagen: "img/tendidoqueen1.png",
+        imagen: "img/tendidoqueen4.png",
         descripcion: "Tendido tamaño Queen en gris claro combinado con negro, elegante y cómodo para tu habitación."
     },
 
@@ -195,7 +195,7 @@ const productos = {
         nombre: "Tendido King (Blanco + beige crema)",
         precio: 140000,
         imagenes: [
-            "img/tendidoking1.png",
+            "img/tendidoking3.png",
             "img/tendidoking2.png"
         ],
         descripcion: "Tendido tamaño King en blanco combinado con beige crema, elegante y cómodo para tu habitación."
@@ -221,6 +221,78 @@ const productos = {
 };
 
 const numeroWhatsapp = "573113100317";
+
+
+/* ================================
+   GRUPOS DE VARIANTES (productos con selector de color)
+================================ */
+
+const grupos = {
+    "tendido-queen": {
+        variantes: [
+            { id: 18, color: "Rosado", hex: "#f4b6c2" },
+            { id: 19, color: "Beige", hex: "#e8dcc8" },
+            { id: 20, color: "Gris oscuro con blanco", hex: "#5a5a5a" },
+            { id: 21, color: "Gris claro con negro", hex: "#b5b5b5" }
+        ]
+    },
+    "tendido-king": {
+        variantes: [
+            { id: 22, color: "Blanco con azul", hex: "#a9cce3" },
+            { id: 23, color: "Blanco + beige crema", hex: "#e8dcc8" }
+        ]
+    }
+};
+
+// Guarda qué variante está seleccionada actualmente en cada tarjeta de grupo
+const estadoGrupos = {};
+
+function obtenerVarianteActual(grupoId) {
+    if (estadoGrupos[grupoId]) return estadoGrupos[grupoId];
+    return grupos[grupoId].variantes[0].id;
+}
+
+function seleccionarVariante(grupoId, varianteId) {
+    estadoGrupos[grupoId] = varianteId;
+
+    const producto = productos[varianteId];
+    if (!producto) return;
+
+    const imgEl = document.getElementById(`img-grupo-${grupoId}`);
+    const precioEl = document.getElementById(`precio-grupo-${grupoId}`);
+
+    if (imgEl) imgEl.src = producto.imagenes ? producto.imagenes[0] : producto.imagen;
+    if (precioEl) precioEl.textContent = formatearPrecio(producto.precio);
+
+    // Marca visualmente cuál color está activo
+    const contenedorSwatches = document.getElementById(`colores-grupo-${grupoId}`);
+    if (contenedorSwatches) {
+        contenedorSwatches.querySelectorAll(".swatch").forEach(sw => {
+            sw.classList.toggle("activo", Number(sw.dataset.varianteId) === varianteId);
+        });
+    }
+}
+
+function renderSelectoresColor() {
+    Object.keys(grupos).forEach(grupoId => {
+        const contenedor = document.getElementById(`colores-grupo-${grupoId}`);
+        if (!contenedor) return;
+
+        const variantes = grupos[grupoId].variantes;
+        const seleccionada = obtenerVarianteActual(grupoId);
+
+        contenedor.innerHTML = variantes.map(v => `
+            <button type="button"
+                class="swatch ${v.id === seleccionada ? 'activo' : ''}"
+                style="background:${v.hex}"
+                data-variante-id="${v.id}"
+                title="${v.color}"
+                aria-label="${v.color}"
+                onclick="event.stopPropagation(); seleccionarVariante('${grupoId}', ${v.id})">
+            </button>
+        `).join("");
+    });
+}
 
 
 /* ================================
@@ -473,6 +545,7 @@ function toggleMenuMovil() {
 document.addEventListener("DOMContentLoaded", () => {
 
     renderCarrito();
+    renderSelectoresColor();
 
     // Carrito: abrir / cerrar
     document.getElementById("btnCarrito").addEventListener("click", (e) => {
