@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Variedades KY | Productos para tu hogar</title>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+
+        <div class="header-top">
+
+            <div class="logo">
+                <span>KY</span>
+                <strong>Variedades KY</strong>
+            </div>
+
+            <div class="buscador">
+                <input type="text" id="inputBuscar" placeholder="Buscar productos, marcas y más...">
+                <button aria-label="Buscar">&#128269;</button>
+            </div>
+
+            <div class="envio-gratis">
+                <span class="rotulo">ENVÍO GRATIS</span>
+                <span class="detalle">EN TU <strong>PRIMERA COMPRA</strong></span>
+            </div>
+
+        </div>
+
+        <nav class="header-menu">
+
+            <div class="menu-izquierda">
+                <a href="#" data-nav="inicio">Inicio</a>
+                <a href="#productos" data-nav="productos">Productos</a>
+                <a href="#categorias" data-nav="categorias">Categorías</a>
+                <a href="#ofertas" data-nav="ofertas">Ofertas</a>
+                <a href="#contacto" data-nav="contacto">Contacto</a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de cuenta">&#9776;</button>
+
+            <div class="menu-derecha" id="menuDerecha">
+                <a href="#">Crea tu cuenta</a>
+                <a href="#">Ingresa</a>
+                <a href="#" class="carrito" id="btnCarrito" aria-label="Carrito">
+                    &#128722;
+                    <span class="carrito-contador" id="carritoContador">0</span>
+                </a>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- BANNER PRINCIPAL -->
+    <section class="hero">
+
+        <div class="hero-texto">
+
+            <p class="etiqueta">✨ OFERTAS ESPECIALES</p>
+
+            <h1>
+                Todo lo que necesitas
+                para tu hogar
+            </h1>
+
+            <p>
+                Encuentra productos para tu cocina,
+                dormitorio, organización y mucho más.
+            </p>
+
+            <a href="#productos" class="boton">
+                Ver productos
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section id="categorias" class="seccion reveal">
+
+        <h2>Compra por categorías</h2>
+
+        <p class="subtitulo">
+            Encuentra fácilmente lo que necesitas
+        </p>
+
+        <div class="categorias">
+
+            <div class="categoria" data-categoria="cocina">
+                <div class="icono">🍳</div>
+                <h3>Cocina</h3>
+            </div>
+
+            <div class="categoria" data-categoria="habitacion">
+                <div class="icono">🛏️</div>
+                <h3>Habitación</h3>
+            </div>
+
+            <div class="categoria" data-categoria="usopersonal">
+                <div class="icono">🧺</div>
+                <h3>Para uso personal</h3>
+            </div>
+
+            <div class="categoria" data-categoria="electrodomesticos">
+                <div class="icono">☕</div>
+                <h3>Electrodomésticos</h3>
+            </div>
+
+            <div class="categoria" data-categoria="decoracion">
+                <div class="icono">🪴</div>
+                <h3>Decoración</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section id="productos" class="seccion productos-seccion reveal">
+
+        <div class="titulo-productos">
+            <h2>Nuestros productos</h2>
+            <a href="#" id="verTodos">Ver todos</a>
+        </div>
+
+        <p class="sin-resultados" id="sinResultados">
+            No encontramos productos que coincidan con tu búsqueda.
+        </p>
+
+        <div class="productos">
+
+            <!-- PRODUCTO 1: CAFETERA -->
+            <article class="producto"
+                data-categoria="electrodomesticos"
+                data-nombre="cafetera italiana"
+                onclick="abrirProducto(1)">
+
+                <div class="imagen-producto">
+                    <img src="img/cafeteraitaliana1.png"
+                         alt="Cafetera italiana">
+                </div>
+
+                <div class="informacion">
+                    <h3>Cafetera italiana</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$20.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 1)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 2: CUCHILLOS -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="juego de cuchillos cutlery"
+                onclick="abrirProducto(2)">
+
+                <div class="imagen-producto">
+                    <img src="img/cuchilloscutlery1.png"
+                         alt="Juego de cuchillos Cutlery">
+                </div>
+
+                <div class="informacion">
+                    <h3>Juego de cuchillos Cutlery</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$89.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 2)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 3: EXPRIMIDOR -->
+            <article class="producto"
+                data-categoria="electrodomesticos"
+                data-nombre="exprimidor"
+                onclick="abrirProducto(3)">
+
+                <div class="imagen-producto">
+                    <img src="img/exprimidor1.png"
+                         alt="Exprimidor">
+                </div>
+
+                <div class="informacion">
+                    <h3>Exprimidor</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$120.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 3)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 4: OLLAS -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="ollas de acero inoxidable"
+                onclick="abrirProducto(4)">
+
+                <div class="imagen-producto">
+                    <img src="img/ollasdeacero1.png"
+                         alt="Ollas de acero inoxidable">
+                </div>
+
+                <div class="informacion">
+                    <h3>Ollas de acero inoxidable</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$580.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 4)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 5: PLANCHA -->
+            <article class="producto"
+                data-categoria="hogar"
+                data-nombre="plancha para ropa"
+                onclick="abrirProducto(5)">
+
+                <div class="imagen-producto">
+
+                    <img src="img/plancha1.png"
+                         alt="Plancha para ropa">
+
+                </div>
+
+                <div class="informacion">
+
+                    <h3>Plancha para ropa</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$40.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 5)">
+                        Agregar al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 6: TABLAS DE PICAR -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="set de tablas de picar"
+                onclick="abrirProducto(6)">
+
+                <div class="imagen-producto">
+
+                    <img src="img/tablasdepicar1.png"
+                         alt="Set de tablas de picar">
+
+                </div>
+
+                <div class="informacion">
+
+                    <h3>Set de tablas de picar</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$30.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 6)">
+                        Agregar al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 7: CORTINAS -->
+            <article class="producto"
+                data-categoria="decoracion"
+                data-nombre="cortinas"
+                onclick="abrirProducto(7)">
+
+                <div class="imagen-producto">
+                    <img src="img/cortinas1.png"
+                         alt="Cortinas">
+                </div>
+
+                <div class="informacion">
+                    <h3>Cortinas</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$55.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 7)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 8: SÁBANAS BAMBÚ DOBLE -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="sabanas de bambu lisas doble"
+                onclick="abrirProducto(8)">
+
+                <div class="imagen-producto">
+                    <img src="img/sabanabambu1.401.png"
+                         alt="Sábanas de bambú lisas Doble">
+                </div>
+
+                <div class="informacion">
+                    <h3>Sábanas de bambú lisas (1.40 m, Doble)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$75.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 8)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 10: SÁBANAS BAMBÚ KING -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="sabanas de bambu lisas king"
+                onclick="abrirProducto(10)">
+
+                <div class="imagen-producto">
+                    <img src="img/sabanabambu2x2.png"
+                         alt="Sábanas de bambú lisas King">
+                </div>
+
+                <div class="informacion">
+                    <h3>Sábanas de bambú lisas (2 x 2 m, King)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$85.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 10)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 11: SÁBANAS BAMBÚ ESTAMPADAS QUEEN -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="sabanas de bambu estampadas queen"
+                onclick="abrirProducto(11)">
+
+                <div class="imagen-producto">
+                    <img src="img/sabanabambu1.601.png"
+                         alt="Sábanas de bambú estampadas Queen">
+                </div>
+
+                <div class="informacion">
+                    <h3>Sábanas de bambú estampadas (1.60 m, Queen)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$85.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 11)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 12: SÁBANAS BAMBÚ ESTAMPADAS DOBLE -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="sabanas de bambu estampadas doble"
+                onclick="abrirProducto(12)">
+
+                <div class="imagen-producto">
+                    <img src="img/sabanabambuestampada1.401.png"
+                         alt="Sábanas de bambú estampadas Doble">
+                </div>
+
+                <div class="informacion">
+                    <h3>Sábanas de bambú estampadas (1.40 m, Doble)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$85.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 12)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 13: LLAVE PARA JABÓN -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="llave para jabon"
+                onclick="abrirProducto(13)">
+
+                <div class="imagen-producto">
+                    <img src="img/llavejabon1.png"
+                         alt="Llave para jabón">
+                </div>
+
+                <div class="informacion">
+                    <h3>Llave para jabón</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$20.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 13)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 14: TOALLA BEIGE CREMA -->
+            <article class="producto"
+                data-categoria="usopersonal"
+                data-nombre="toalla beige crema"
+                onclick="abrirProducto(14)">
+
+                <div class="imagen-producto">
+                    <img src="img/toalla2.png"
+                         alt="Toalla Beige crema">
+                </div>
+
+                <div class="informacion">
+                    <h3>Toalla (Beige crema)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$48.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 14)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 15: TOALLA GRIS CON DORADO -->
+            <article class="producto"
+                data-categoria="usopersonal"
+                data-nombre="toalla gris con dorado"
+                onclick="abrirProducto(15)">
+
+                <div class="imagen-producto">
+                    <img src="img/toalla1.png"
+                         alt="Toalla Gris con dorado">
+                </div>
+
+                <div class="informacion">
+                    <h3>Toalla (Gris con dorado)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$55.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 15)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 16: TOALLA DE PLAYA -->
+            <article class="producto"
+                data-categoria="usopersonal"
+                data-nombre="toalla de playa"
+                onclick="abrirProducto(16)">
+
+                <div class="imagen-producto">
+                    <img src="img/toalla3.png"
+                         alt="Toalla de playa">
+                </div>
+
+                <div class="informacion">
+                    <h3>Toalla de playa</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$57.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 16)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 17: COBIJA TÉRMICA -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="cobija termica"
+                onclick="abrirProducto(17)">
+
+                <div class="imagen-producto">
+                    <img src="img/cobijatermica1.png"
+                         alt="Cobija térmica">
+                </div>
+
+                <div class="informacion">
+                    <h3>Cobija térmica</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$85.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 17)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 18: TENDIDO QUEEN ROSADO -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido queen rosado"
+                onclick="abrirProducto(18)">
+
+                <div class="imagen-producto">
+                    <img src="img/tendidoqueen1.png"
+                         alt="Tendido Queen Rosado">
+                </div>
+
+                <div class="informacion">
+                    <h3>Tendido Queen (Rosado)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$160.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 18)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 19: TENDIDO QUEEN BEIGE -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido queen beige"
+                onclick="abrirProducto(19)">
+
+                <div class="imagen-producto">
+                    <img src="img/tendidoqueen2.png"
+                         alt="Tendido Queen Beige">
+                </div>
+
+                <div class="informacion">
+                    <h3>Tendido Queen (Beige)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$120.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 19)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 20: TENDIDO QUEEN GRIS OSCURO CON BLANCO -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido queen gris oscuro con blanco"
+                onclick="abrirProducto(20)">
+
+                <div class="imagen-producto">
+                    <img src="img/tendidoqueen2.png"
+                         alt="Tendido Queen Gris oscuro con blanco">
+                </div>
+
+                <div class="informacion">
+                    <h3>Tendido Queen (Gris oscuro con blanco)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$120.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 20)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 21: TENDIDO QUEEN GRIS CLARO CON NEGRO -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido queen gris claro con negro"
+                onclick="abrirProducto(21)">
+
+                <div class="imagen-producto">
+                    <img src="img/tendidoqueen3.png"
+                         alt="Tendido Queen Gris claro con negro">
+                </div>
+
+                <div class="informacion">
+                    <h3>Tendido Queen (Gris claro con negro)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$120.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 21)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 22: TENDIDO KING BLANCO CON AZUL -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido king blanco con azul"
+                onclick="abrirProducto(22)">
+
+                <div class="imagen-producto">
+                    <img src="img/tendidoking1.png"
+                         alt="Tendido King Blanco con azul">
+                </div>
+
+                <div class="informacion">
+                    <h3>Tendido King (Blanco con azul)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$150.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 22)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 23: TENDIDO KING BLANCO + BEIGE CREMA -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido king blanco beige crema"
+                onclick="abrirProducto(23)">
+
+                <div class="imagen-producto">
+                    <img src="img/tendidoking3.png"
+                         alt="Tendido King Blanco + beige crema">
+                </div>
+
+                <div class="informacion">
+                    <h3>Tendido King (Blanco + beige crema)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$140.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 23)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 24: TENDIDO DOBLE BLANCO -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido doble blanco"
+                onclick="abrirProducto(24)">
+
+                <div class="imagen-producto">
+                    <img src="img/tendidoble1.png"
+                         alt="Tendido Doble Blanco">
+                </div>
+
+                <div class="informacion">
+                    <h3>Tendido Doble (Blanco)</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$170.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 24)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCTO 25: TENDIDO DOBLE ESTAMPADO -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido doble estampado"
+                onclick="abrirProducto(25)">
+
+                <div class="imagen-producto">
+                    <img src="img/tendido1.401.png"
+                         alt="Tendido Doble estampado">
+                </div>
+
+                <div class="informacion">
+                    <h3>Tendido Doble estampado</h3>
+
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p class="precio">$100.000</p>
+
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 25)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+        </div>
+
+
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="testimonios seccion reveal">
+
+        <h2>Lo que dicen nuestros clientes</h2>
+
+        <p class="subtitulo">
+            Historias reales de quienes ya compraron con nosotros
+        </p>
+
+        <div class="testimonios-grid">
+
+            <div class="testimonio">
+                <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                <p>El juego de ollas superó mis expectativas, llegó rapidísimo y la atención por WhatsApp fue muy amable.</p>
+                <strong>— Marcela G.</strong>
+            </div>
+
+            <div class="testimonio">
+                <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                <p>Compré el tendido de cama y la calidad de la tela es excelente. Ya voy por mi tercera compra.</p>
+                <strong>— Andrés R.</strong>
+            </div>
+
+            <div class="testimonio">
+                <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                <p>Los organizadores me ayudaron a ordenar toda la cocina. Precios justos y envío rápido a Palmira.</p>
+                <strong>— Luisa F.</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- OFERTA -->
+    <section id="ofertas" class="oferta reveal">
+
+        <div>
+
+            <span>🔥 OFERTA ESPECIAL</span>
+
+            <h2>
+                Productos para tu hogar
+                a precios increíbles
+            </h2>
+
+            <p>
+                Aprovecha nuestras promociones antes de que se terminen.
+            </p>
+
+            <a href="#productos" class="boton">
+                Comprar ahora
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer id="contacto">
+
+        <div class="footer-contenido">
+
+            <div>
+                <h2>Variedades KY</h2>
+
+                <p>
+                    Productos para hacer de tu hogar
+                    un lugar más cómodo y especial.
+                </p>
+
+                <div class="redes">
+                    <a href="https://wa.me/573113100317" target="_blank" aria-label="WhatsApp">💬</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Facebook">📘</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Enlaces</h3>
+
+                <a href="#">Inicio</a>
+                <a href="#productos">Productos</a>
+                <a href="#categorias">Categorías</a>
+            </div>
+
+            <div>
+                <h3>Contacto</h3>
+
+                <p>📱 WhatsApp 3113100317 </p>
+                <p>📍 Palmira, Valle</p>
+                <p>📧 Contacto</p>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 Variedades KY. Todos los derechos reservados.
+        </div>
+
+    </footer>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a class="whatsapp-flotante" href="https://wa.me/573113100317" target="_blank" aria-label="Escríbenos por WhatsApp">💬</a>
+
+    <!-- PANEL DE CARRITO -->
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="carrito-panel" id="carritoPanel">
+        <div class="carrito-header">
+            <h3>Tu carrito</h3>
+            <button class="cerrar-carrito" id="cerrarCarrito" aria-label="Cerrar carrito">&times;</button>
+        </div>
+
+        <div class="carrito-items" id="carritoItems">
+            <p class="carrito-vacio" id="carritoVacio">Tu carrito está vacío.</p>
+        </div>
+
+        <div class="carrito-footer">
+            <p class="carrito-total">Total: <span id="carritoTotal">$0</span></p>
+            <a href="#" class="boton" id="finalizarCompra">Finalizar compra por WhatsApp</a>
+        </div>
+    </aside>
+
+    <!-- MODAL DE PRODUCTO -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-producto">
+            <button class="cerrar-modal" id="cerrarModal" aria-label="Cerrar">&times;</button>
+            <div id="modalContenido"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
