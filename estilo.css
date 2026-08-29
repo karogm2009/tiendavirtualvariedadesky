@@ -615,6 +615,42 @@ header {
 }
 
 
+/* SELECTOR DE COLOR (variantes) */
+
+.selector-color {
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+.swatch {
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    border: 2px solid #e5e5e5;
+
+    cursor: pointer;
+
+    padding: 0;
+
+    transition: 0.2s;
+}
+
+.swatch:hover {
+    transform: scale(1.1);
+}
+
+.swatch.activo {
+    border-color: #ff7a00;
+
+    box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.25);
+}
+
+
 /* BOTÓN AGREGAR AL CARRITO */
 
 .btn-agregar {
