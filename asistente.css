@@ -1,0 +1,402 @@
+/* =========================================================
+   ASISTENTE KY — ESTILOS
+   Archivo nuevo e independiente de estilo.css. Usa los mismos
+   colores de marca de Variedades KY:
+   #1a1a5e (azul marino), #fdd400 (amarillo), #ff7a00 (naranja)
+========================================================== */
+
+/* =========================================================
+   BOTÓN FLOTANTE
+   Se ubica arriba del botón flotante de WhatsApp para que
+   no se encimen (ese está en bottom:25px / right:25px)
+========================================================== */
+.asistente-boton {
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #1a1a5e;
+    color: #ffffff;
+
+    padding: 12px 18px 12px 14px;
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+    z-index: 900;
+
+    transition: 0.2s;
+}
+
+.asistente-boton:hover {
+    transform: scale(1.05);
+    background: #24246e;
+}
+
+.asistente-boton-emoji {
+    font-size: 20px;
+}
+
+/* =========================================================
+   VENTANA DE CHAT
+   Oculta por defecto (display:none). Solo se muestra cuando
+   asistente.js le agrega la clase "asistente-abierta".
+   (Antes dependía del atributo "hidden", pero esta misma
+   regla de aquí abajo lo sobrescribía con display:flex y el
+   chat nunca llegaba a cerrarse — por eso la X no funcionaba)
+========================================================== */
+.asistente-ventana {
+    display: none;
+
+    position: fixed;
+    bottom: 155px;
+    right: 25px;
+
+    width: 370px;
+    max-width: 92vw;
+    height: 560px;
+    max-height: 75vh;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+    overflow: hidden;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+    flex-direction: column;
+
+    z-index: 1800;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.asistente-ventana.asistente-abierta {
+    display: flex;
+}
+
+.asistente-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    background: #1a1a5e;
+    color: #ffffff;
+
+    padding: 16px 16px;
+    flex-shrink: 0;
+}
+
+.asistente-avatar {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fdd400;
+    border-radius: 50%;
+
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.asistente-header-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.asistente-header-texto strong {
+    font-size: 15px;
+}
+
+.asistente-header-texto span {
+    font-size: 12px;
+    color: #b9e6c9;
+}
+
+.asistente-cerrar {
+    margin-left: auto;
+
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1;
+}
+
+/* =========================================================
+   ÁREA DE MENSAJES
+========================================================== */
+.asistente-mensajes {
+    flex: 1;
+    overflow-y: auto;
+
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background: #f7f7fb;
+}
+
+.asistente-msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 14px;
+
+    font-size: 13.5px;
+    line-height: 1.5;
+
+    white-space: pre-line;
+}
+
+.asistente-msg-bot {
+    align-self: flex-start;
+
+    background: #ffffff;
+    color: #222;
+
+    border: 1px solid #ececf3;
+    border-bottom-left-radius: 4px;
+}
+
+.asistente-msg-user {
+    align-self: flex-end;
+
+    background: #1a1a5e;
+    color: #ffffff;
+
+    border-bottom-right-radius: 4px;
+}
+
+/* =========================================================
+   TARJETAS DE PRODUCTO DENTRO DEL CHAT
+========================================================== */
+.asistente-tarjetas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: 4px;
+}
+
+.asistente-tarjeta {
+    display: flex;
+    gap: 10px;
+
+    background: #ffffff;
+    border: 1px solid #ececf3;
+    border-radius: 12px;
+
+    padding: 10px;
+}
+
+.asistente-tarjeta img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: #f5f5f5;
+}
+
+.asistente-tarjeta-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.asistente-tarjeta-info h4 {
+    font-size: 13px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.asistente-tarjeta-precio {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ff7a00;
+}
+
+.asistente-tarjeta-precio-anterior {
+    font-size: 12px;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 6px;
+    font-weight: normal;
+}
+
+.asistente-tarjeta-descuento {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #ffffff;
+    background: #ff7a00;
+    padding: 1px 6px;
+    border-radius: 6px;
+}
+
+.asistente-tarjeta-acciones {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.asistente-tarjeta-acciones button {
+    flex: 1;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 7px 6px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.asistente-btn-agregar {
+    background: #fdd400;
+    color: #1a1a5e;
+}
+.asistente-btn-agregar:hover { background: #f5c800; }
+
+.asistente-btn-whatsapp {
+    background: #25d366;
+    color: #ffffff;
+}
+.asistente-btn-whatsapp:hover { background: #1fb958; }
+
+/* =========================================================
+   BOTONES DE RESPUESTA RÁPIDA
+========================================================== */
+.asistente-opciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    padding: 0 16px 14px;
+    flex-shrink: 0;
+
+    background: #f7f7fb;
+}
+
+.asistente-opcion {
+    background: #ffffff;
+    color: #1a1a5e;
+
+    border: 1.5px solid #1a1a5e;
+    border-radius: 20px;
+
+    padding: 8px 14px;
+
+    font-size: 12.5px;
+    font-weight: bold;
+
+    transition: 0.15s;
+}
+
+.asistente-opcion:hover {
+    background: #1a1a5e;
+    color: #ffffff;
+}
+
+/* =========================================================
+   CAMPO DE TEXTO
+========================================================== */
+.asistente-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px;
+    border-top: 1px solid #ececf3;
+    background: #ffffff;
+    flex-shrink: 0;
+}
+
+.asistente-input input {
+    flex: 1;
+
+    border: 1px solid #e2e2ea;
+    border-radius: 20px;
+
+    padding: 10px 16px;
+
+    font-size: 13.5px;
+    outline: none;
+    font-family: inherit;
+}
+
+.asistente-input input:focus {
+    border-color: #1a1a5e;
+}
+
+.asistente-input button {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    background: #ff7a00;
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.asistente-input button:hover {
+    background: #e86d00;
+}
+
+/* =========================================================
+   RESPONSIVE — CELULAR
+   La ventana pasa a ocupar toda la pantalla para que no
+   tape botones importantes ni se salga del viewport
+========================================================== */
+@media (max-width: 500px) {
+
+    .asistente-ventana {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        max-height: 100%;
+
+        border-radius: 0;
+    }
+
+    .asistente-boton {
+        bottom: 85px;
+        right: 16px;
+
+        padding: 12px 14px;
+    }
+
+    .asistente-boton-texto {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .asistente-boton,
+    .asistente-opcion,
+    .asistente-input button {
+        transition: none;
+    }
+}
