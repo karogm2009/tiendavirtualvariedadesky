@@ -610,28 +610,31 @@
             </article>
 
 
-            <!-- PRODUCTO 18: TENDIDO QUEEN ROSADO -->
-            <article class="producto"
+            <!-- GRUPO: TENDIDO QUEEN (variantes de color) -->
+            <article class="producto producto-variantes"
                 data-categoria="habitacion"
-                data-nombre="tendido queen rosado"
-                onclick="abrirProducto(18)">
+                data-nombre="tendido queen rosado beige gris oscuro blanco gris claro negro"
+                data-grupo="tendido-queen"
+                onclick="event.stopPropagation(); abrirProducto(obtenerVarianteActual('tendido-queen'))">
 
                 <div class="imagen-producto">
-                    <img src="img/tendidoqueen1.png"
-                         alt="Tendido Queen Rosado">
+                    <img id="img-grupo-tendido-queen" src="img/tendidoqueen1.png"
+                         alt="Tendido Queen">
                 </div>
 
                 <div class="informacion">
-                    <h3>Tendido Queen (Rosado)</h3>
+                    <h3>Tendido Queen</h3>
 
                     <div class="estrellas">
                         ⭐⭐⭐⭐⭐
                     </div>
 
-                    <p class="precio">$160.000</p>
+                    <p class="precio" id="precio-grupo-tendido-queen">$160.000</p>
+
+                    <div class="selector-color" id="colores-grupo-tendido-queen"></div>
 
                     <button class="btn-agregar"
-                        onclick="agregarCarrito(event, 18)">
+                        onclick="event.stopPropagation(); agregarCarrito(event, obtenerVarianteActual('tendido-queen'))">
                         Agregar al carrito
                     </button>
                 </div>
@@ -639,144 +642,31 @@
             </article>
 
 
-            <!-- PRODUCTO 19: TENDIDO QUEEN BEIGE -->
-            <article class="producto"
+            <!-- GRUPO: TENDIDO KING (variantes de color) -->
+            <article class="producto producto-variantes"
                 data-categoria="habitacion"
-                data-nombre="tendido queen beige"
-                onclick="abrirProducto(19)">
+                data-nombre="tendido king blanco azul beige crema"
+                data-grupo="tendido-king"
+                onclick="event.stopPropagation(); abrirProducto(obtenerVarianteActual('tendido-king'))">
 
                 <div class="imagen-producto">
-                    <img src="img/tendidoqueen2.png"
-                         alt="Tendido Queen Beige">
+                    <img id="img-grupo-tendido-king" src="img/tendidoking1.png"
+                         alt="Tendido King">
                 </div>
 
                 <div class="informacion">
-                    <h3>Tendido Queen (Beige)</h3>
+                    <h3>Tendido King</h3>
 
                     <div class="estrellas">
                         ⭐⭐⭐⭐⭐
                     </div>
 
-                    <p class="precio">$120.000</p>
+                    <p class="precio" id="precio-grupo-tendido-king">$150.000</p>
+
+                    <div class="selector-color" id="colores-grupo-tendido-king"></div>
 
                     <button class="btn-agregar"
-                        onclick="agregarCarrito(event, 19)">
-                        Agregar al carrito
-                    </button>
-                </div>
-
-            </article>
-
-
-            <!-- PRODUCTO 20: TENDIDO QUEEN GRIS OSCURO CON BLANCO -->
-            <article class="producto"
-                data-categoria="habitacion"
-                data-nombre="tendido queen gris oscuro con blanco"
-                onclick="abrirProducto(20)">
-
-                <div class="imagen-producto">
-                    <img src="img/tendidoqueen2.png"
-                         alt="Tendido Queen Gris oscuro con blanco">
-                </div>
-
-                <div class="informacion">
-                    <h3>Tendido Queen (Gris oscuro con blanco)</h3>
-
-                    <div class="estrellas">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-
-                    <p class="precio">$120.000</p>
-
-                    <button class="btn-agregar"
-                        onclick="agregarCarrito(event, 20)">
-                        Agregar al carrito
-                    </button>
-                </div>
-
-            </article>
-
-
-            <!-- PRODUCTO 21: TENDIDO QUEEN GRIS CLARO CON NEGRO -->
-            <article class="producto"
-                data-categoria="habitacion"
-                data-nombre="tendido queen gris claro con negro"
-                onclick="abrirProducto(21)">
-
-                <div class="imagen-producto">
-                    <img src="img/tendidoqueen3.png"
-                         alt="Tendido Queen Gris claro con negro">
-                </div>
-
-                <div class="informacion">
-                    <h3>Tendido Queen (Gris claro con negro)</h3>
-
-                    <div class="estrellas">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-
-                    <p class="precio">$120.000</p>
-
-                    <button class="btn-agregar"
-                        onclick="agregarCarrito(event, 21)">
-                        Agregar al carrito
-                    </button>
-                </div>
-
-            </article>
-
-
-            <!-- PRODUCTO 22: TENDIDO KING BLANCO CON AZUL -->
-            <article class="producto"
-                data-categoria="habitacion"
-                data-nombre="tendido king blanco con azul"
-                onclick="abrirProducto(22)">
-
-                <div class="imagen-producto">
-                    <img src="img/tendidoking1.png"
-                         alt="Tendido King Blanco con azul">
-                </div>
-
-                <div class="informacion">
-                    <h3>Tendido King (Blanco con azul)</h3>
-
-                    <div class="estrellas">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-
-                    <p class="precio">$150.000</p>
-
-                    <button class="btn-agregar"
-                        onclick="agregarCarrito(event, 22)">
-                        Agregar al carrito
-                    </button>
-                </div>
-
-            </article>
-
-
-            <!-- PRODUCTO 23: TENDIDO KING BLANCO + BEIGE CREMA -->
-            <article class="producto"
-                data-categoria="habitacion"
-                data-nombre="tendido king blanco beige crema"
-                onclick="abrirProducto(23)">
-
-                <div class="imagen-producto">
-                    <img src="img/tendidoking3.png"
-                         alt="Tendido King Blanco + beige crema">
-                </div>
-
-                <div class="informacion">
-                    <h3>Tendido King (Blanco + beige crema)</h3>
-
-                    <div class="estrellas">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-
-                    <p class="precio">$140.000</p>
-
-                    <button class="btn-agregar"
-                        onclick="agregarCarrito(event, 23)">
+                        onclick="event.stopPropagation(); agregarCarrito(event, obtenerVarianteActual('tendido-king'))">
                         Agregar al carrito
                     </button>
                 </div>
@@ -918,8 +808,7 @@
 
                 <div class="redes">
                     <a href="https://wa.me/573113100317" target="_blank" aria-label="WhatsApp">💬</a>
-                    <a href="#" aria-label="Instagram">📷</a>
-                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="https://www.facebook.com/share/1JiaE2Zc4e/" target="_blank" aria-label="Facebook">📘</a>
                 </div>
             </div>
 
@@ -977,7 +866,41 @@
         </div>
     </div>
 
+    <!-- =========================================================
+         ASISTENTE KY (asistente de compra)
+         Botón flotante + ventana de chat. Todo el estilo vive en
+         asistente.css y toda la lógica en asistente.js (ambos
+         archivos nuevos, no tocan tu script.js ni estilo.css).
+    ========================================================== -->
+    <link rel="stylesheet" href="asistente.css">
+
+    <button class="asistente-boton" id="asistenteBoton" aria-label="Abrir Asistente KY">
+        <span class="asistente-boton-emoji">💗</span>
+        <span class="asistente-boton-texto">Asistente KY</span>
+    </button>
+
+    <div class="asistente-ventana" id="asistenteVentana" hidden>
+        <div class="asistente-header">
+            <div class="asistente-avatar">💗</div>
+            <div class="asistente-header-texto">
+                <strong>Asistente KY</strong>
+                <span>En línea</span>
+            </div>
+            <button class="asistente-cerrar" id="asistenteCerrar" aria-label="Cerrar asistente">&times;</button>
+        </div>
+
+        <div class="asistente-mensajes" id="asistenteMensajes"></div>
+
+        <div class="asistente-opciones" id="asistenteOpciones"></div>
+
+        <form class="asistente-input" id="asistenteForm">
+            <input type="text" id="asistenteTexto" placeholder="Escribe tu pregunta..." aria-label="Escribe tu pregunta">
+            <button type="submit" aria-label="Enviar">➤</button>
+        </form>
+    </div>
+
     <script src="script.js"></script>
+    <script src="asistente.js"></script>
 
 </body>
 
