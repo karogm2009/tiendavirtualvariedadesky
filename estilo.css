@@ -1,1605 +1,916 @@
-/* ================================
-   PALETA OFICIAL — Variedades KY
-   Azul + dorado. No usar rosa.
-   #0828FC #0D3E70 #044DFF #0080FF #2C73FF
-   #C9A346 #D8AF4B #D8AF6D #FFE04F #FFEBA1
-================================ */
-
-:root {
-    --azul-intenso: #0828FC;
-    --azul-oscuro: #0D3E70;
-    --azul-principal: #044DFF;
-    --azul-brillante: #0080FF;
-    --azul-medio: #2C73FF;
-    --dorado-principal: #C9A346;
-    --dorado: #D8AF4B;
-    --dorado-suave: #D8AF6D;
-    --amarillo: #FFE04F;
-    --amarillo-claro: #FFEBA1;
-    --fondo: #F8FAFF;
-    --texto: #243447;
-    --tarjeta: #FFFFFF;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* ================================
-   CONFIGURACIÓN GENERAL
-================================ */
+<title>Variedades KY | Productos para tu hogar</title>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
 
-html {
-    scroll-behavior: smooth;
-}
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #F8FAFF;
-    color: #243447;
-}
+    <!-- ENCABEZADO -->
+    <header>
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+        <div class="header-top">
 
-button {
-    font-family: inherit;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
+            <div class="logo">
+                <img src="img/logo.jpg" alt="Logo de Variedades KY">
+                <strong>Variedades KY</strong>
+            </div>
 
+            <div class="buscador">
+                <input type="text" id="inputBuscar" placeholder="Buscar productos, marcas y más...">
+                <button type="button" id="btnBuscar" aria-label="Buscar">&#128269;</button>
+            </div>
 
-/* ================================
-   ENCABEZADO
-================================ */
+            <div class="envio-gratis">
+                <span class="rotulo">ENVÍO GRATIS</span>
+                <span class="detalle">EN TU <strong>PRIMERA COMPRA</strong></span>
+            </div>
 
-header {
-    width: 100%;
+        </div>
 
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+        <nav class="header-menu">
 
+            <div class="menu-izquierda">
+                <a href="#" data-nav="inicio">Inicio</a>
+                <a href="#productos" data-nav="productos">Productos</a>
+                <a href="#categorias" data-nav="categorias">Categorías</a>
+                <a href="#ofertas" data-nav="ofertas">Ofertas</a>
+                <a href="#contacto" data-nav="contacto">Contacto</a>
+            </div>
 
-/* FRANJA SUPERIOR (logo, buscador, envío gratis) */
+            <div class="menu-derecha" id="menuDerecha">
+                <a href="#" class="carrito" id="btnCarrito" aria-label="Carrito">
+                    &#128722;
+                    <span class="carrito-contador" id="carritoContador">0</span>
+                </a>
+            </div>
 
-.header-top {
-    width: 100%;
+        </nav>
 
-    background: #0D3E70;
+    </header>
 
-    padding: 14px 4%;
+    <!-- BANNER PRINCIPAL -->
+    <section class="hero">
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+        <img class="hero-imagen" src="img/imageinicio.png" alt="Productos para tu hogar">
 
-    gap: 25px;
+        <div class="hero-texto">
+            <a href="#productos" class="boton">
+                Ver productos
+            </a>
 
-    flex-wrap: wrap;
-}
+        </div>
 
+    </section>
 
-/* LOGO */
+    <!-- CATEGORÍAS -->
+    <section id="categorias" class="seccion reveal">
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+        <h2>Compra por categorías</h2>
 
-    flex-shrink: 0;
-}
+        <p class="subtitulo">
+            Encuentra fácilmente lo que necesitas
+        </p>
 
-.logo img {
-    width: 44px;
-    height: 44px;
+        <div class="categorias">
 
-    display: block;
-    border-radius: 12px;
-    object-fit: cover;
-}
+            <div class="categoria" data-categoria="cocina">
+                <div class="icono">🍳</div>
+                <h3>Cocina</h3>
+            </div>
 
-.logo strong {
-    font-size: 18px;
-    color: #FFFFFF;
-}
+            <div class="categoria" data-categoria="habitacion">
+                <div class="icono">🛏️</div>
+                <h3>Habitación</h3>
+            </div>
 
+            <div class="categoria" data-categoria="usopersonal">
+                <div class="icono">🧺</div>
+                <h3>Para uso personal</h3>
+            </div>
 
-/* BUSCADOR */
+            <div class="categoria" data-categoria="electrodomesticos">
+                <div class="icono">☕</div>
+                <h3>Electrodomésticos</h3>
+            </div>
 
-.buscador {
-    flex: 1 1 400px;
-    max-width: 700px;
+            <div class="categoria" data-categoria="decoracion">
+                <div class="icono">🪴</div>
+                <h3>Decoración</h3>
+            </div>
 
-    display: flex;
-    align-items: center;
+            <div class="categoria" data-categoria="hogar">
+                <div class="icono">🏠</div>
+                <h3>Hogar</h3>
+            </div>
 
-    background: #ffffff;
+        </div>
 
-    border-radius: 6px;
+    </section>
 
-    overflow: hidden;
-}
+    <!-- PRODUCTOS -->
+    <section id="productos" class="seccion productos-seccion reveal">
 
-.buscador input {
-    flex: 1;
+        <div class="titulo-productos">
+            <h2>Nuestros productos</h2>
+            <a href="#" id="verTodos">Ver todos</a>
+        </div>
 
-    border: none;
-    outline: none;
+        <p class="sin-resultados" id="sinResultados">
+            No encontramos productos que coincidan con tu búsqueda.
+        </p>
 
-    padding: 12px 16px;
+        <div class="productos">
 
-    font-size: 15px;
-}
+            <!-- PRODUCTO 1: CAFETERA -->
+            <article class="producto"
+                data-categoria="electrodomesticos"
+                data-nombre="cafetera italiana"
+                onclick="abrirProducto(1)">
 
-.buscador button {
-    padding: 0 16px;
+                <div class="imagen-producto">
+                    <img src="img/cafeteraitaliana1.png"
+                         alt="Cafetera italiana">
+                </div>
 
-    height: 100%;
+                <div class="informacion">
+                    <h3>Cafetera italiana</h3>
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    color: #666;
+                    <p class="precio">$20.000</p>
 
-    font-size: 18px;
-}
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 1)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
+            </article>
 
-/* ENVÍO GRATIS */
 
-.envio-gratis {
-    display: flex;
-    align-items: center;
+            <!-- PRODUCTO 2: CUCHILLOS -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="juego de cuchillos cutlery"
+                onclick="abrirProducto(2)">
 
-    background: #ffffff;
+                <div class="imagen-producto">
+                    <img src="img/cuchilloscutlery1.png"
+                         alt="Juego de cuchillos Cutlery">
+                </div>
 
-    border-radius: 30px;
+                <div class="informacion">
+                    <h3>Juego de cuchillos Cutlery</h3>
 
-    overflow: hidden;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    font-size: 14px;
+                    <p class="precio">$89.000</p>
 
-    flex-shrink: 0;
-}
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 2)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-.envio-gratis .rotulo {
-    background: #044DFF;
-    color: #ffffff;
+            </article>
 
-    font-weight: bold;
 
-    padding: 10px 18px;
-}
+            <!-- PRODUCTO 3: EXPRIMIDOR -->
+            <article class="producto"
+                data-categoria="electrodomesticos"
+                data-nombre="exprimidor"
+                onclick="abrirProducto(3)">
 
-.envio-gratis .detalle {
-    padding: 10px 18px;
+                <div class="imagen-producto">
+                    <img src="img/exprimidor1.png"
+                         alt="Exprimidor">
+                </div>
 
-    color: #243447;
-}
+                <div class="informacion">
+                    <h3>Exprimidor</h3>
 
-.envio-gratis .detalle strong {
-    font-weight: bold;
-}
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
+                    <p class="precio">$120.000</p>
 
-/* FRANJA DE MENÚ */
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 3)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-.header-menu {
-    width: 100%;
+            </article>
 
-    background: #0D3E70;
 
-    padding: 8px 4% 14px;
+            <!-- PRODUCTO 4: OLLAS -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="ollas de acero inoxidable"
+                onclick="abrirProducto(4)">
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+                <div class="imagen-producto">
+                    <img src="img/ollasdeacero1.png"
+                         alt="Ollas de acero inoxidable">
+                </div>
 
-    flex-wrap: wrap;
+                <div class="informacion">
+                    <h3>Ollas de acero inoxidable</h3>
 
-    gap: 15px;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    position: relative;
+                    <p class="precio">$580.000</p>
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 4)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-.menu-izquierda,
-.menu-derecha {
-    display: flex;
-    align-items: center;
+            </article>
 
-    gap: 22px;
 
-    font-size: 14px;
-    font-weight: 600;
+            <!-- PRODUCTO 5: PLANCHA -->
+            <article class="producto"
+                data-categoria="hogar"
+                data-nombre="plancha para ropa"
+                onclick="abrirProducto(5)">
 
-    flex-wrap: wrap;
+                <div class="imagen-producto">
 
-    color: #FFFFFF;
-}
+                    <img src="img/plancha1.png"
+                         alt="Plancha para ropa">
 
-.menu-izquierda a,
-.menu-derecha a {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+                </div>
 
-    transition: 0.2s;
-}
+                <div class="informacion">
 
-.menu-izquierda a:hover,
-.menu-derecha a:hover {
-    opacity: 0.7;
-}
+                    <h3>Plancha para ropa</h3>
 
-.menu-izquierda a.activo {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    color: #FFE04F;
-}
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
+                    <p class="precio">$40.000</p>
 
-/* CARRITO (ícono) */
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 5)">
+                        Agregar al carrito
+                    </button>
 
-.carrito {
-    position: relative;
+                </div>
 
-    font-size: 18px;
-}
+            </article>
 
-.carrito-contador {
-    position: absolute;
 
-    top: -8px;
-    right: -10px;
+            <!-- PRODUCTO 6: TABLAS DE PICAR -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="set de tablas de picar"
+                onclick="abrirProducto(6)">
 
-    background: #044DFF;
-    color: #ffffff;
+                <div class="imagen-producto">
 
-    font-size: 10px;
-    font-weight: bold;
+                    <img src="img/tablasdepicar1.png"
+                         alt="Set de tablas de picar">
 
-    min-width: 16px;
-    height: 16px;
+                </div>
 
-    border-radius: 50%;
+                <div class="informacion">
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+                    <h3>Set de tablas de picar</h3>
 
-    padding: 0 3px;
-}
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
+                    <p class="precio">$30.000</p>
 
-/* MENÚ MÓVIL (hamburguesa) */
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 6)">
+                        Agregar al carrito
+                    </button>
 
-.menu-toggle {
-    display: none;
+                </div>
 
-    font-size: 22px;
-    color: #FFFFFF;
-}
+            </article>
+            <!-- PRODUCTO 7: CORTINAS -->
+            <article class="producto"
+                data-categoria="decoracion"
+                data-nombre="cortinas"
+                onclick="abrirProducto(7)">
 
+                <div class="imagen-producto">
+                    <img src="img/cortinas1.png"
+                         alt="Cortinas">
+                </div>
 
-/* ================================
-   BANNER PRINCIPAL
-================================ */
+                <div class="informacion">
+                    <h3>Cortinas</h3>
 
-.hero {
-    min-height: 500px;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    position: relative;
-    overflow: hidden;
+                    <p class="precio">$55.000</p>
 
-    display: flex;
-    align-items: center;
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 7)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    padding: 60px 8%;
+            </article>
 
-    background:
-        linear-gradient(
-            90deg,
-            #EAF1FF 0%,
-            #F8FAFF 65%
-        );
-}
 
-.hero-imagen {
-    position: absolute;
-    inset: 0 4% 0 auto;
-    width: min(76%, 1050px);
-    height: 100%;
-    object-fit: contain;
-    opacity: 1;
-}
+            <!-- PRODUCTO 8: SÁBANAS BAMBÚ DOBLE -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="sabanas de bambu lisas doble"
+                onclick="abrirProducto(8)">
 
-.hero-texto {
-    position: absolute;
-    left: 8%;
-    bottom: 44px;
-    z-index: 1;
-}
+                <div class="imagen-producto">
+                    <img src="img/sabanabambu1.401.png"
+                         alt="Sábanas de bambú lisas Doble">
+                </div>
 
-.etiqueta {
-    display: inline-block;
+                <div class="informacion">
+                    <h3>Sábanas de bambú lisas (1.40 m, Doble)</h3>
 
-    padding: 8px 15px;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    background: #FFE04F;
-    color: #0D3E70;
+                    <p class="precio">$75.000</p>
 
-    border-radius: 20px;
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 8)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    font-size: 13px;
-    font-weight: bold;
+            </article>
 
-    margin-bottom: 20px;
-}
 
-.hero h1 {
-    font-size: 52px;
-    line-height: 1.1;
+            <!-- PRODUCTO 10: SÁBANAS BAMBÚ KING -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="sabanas de bambu lisas king"
+                onclick="abrirProducto(10)">
 
-    margin-bottom: 20px;
+                <div class="imagen-producto">
+                    <img src="img/sabanabambu2x2.png"
+                         alt="Sábanas de bambú lisas King">
+                </div>
 
-    color: #0D3E70;
-}
+                <div class="informacion">
+                    <h3>Sábanas de bambú lisas (2 x 2 m, King)</h3>
 
-.hero p:not(.etiqueta) {
-    font-size: 18px;
-    line-height: 1.6;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    color: #666;
+                    <p class="precio">$85.000</p>
 
-    margin-bottom: 30px;
-}
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 10)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
+            </article>
 
-/* BOTÓN */
 
-.boton {
-    display: inline-block;
+            <!-- PRODUCTO 11: SÁBANAS BAMBÚ ESTAMPADAS QUEEN -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="sabanas de bambu estampadas queen"
+                onclick="abrirProducto(11)">
 
-    padding: 15px 30px;
+                <div class="imagen-producto">
+                    <img src="img/sabanabambu1.601.png"
+                         alt="Sábanas de bambú estampadas Queen">
+                </div>
 
-    background: #044DFF;
-    color: white;
+                <div class="informacion">
+                    <h3>Sábanas de bambú estampadas (1.60 m, Queen)</h3>
 
-    border-radius: 30px;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    font-weight: bold;
+                    <p class="precio">$85.000</p>
 
-    text-align: center;
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 11)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    transition: 0.3s;
-}
+            </article>
 
-.boton:hover {
-    background: #0080FF;
 
-    transform: translateY(-2px);
-}
+            <!-- PRODUCTO 12: SÁBANAS BAMBÚ ESTAMPADAS DOBLE -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="sabanas de bambu estampadas doble"
+                onclick="abrirProducto(12)">
 
+                <div class="imagen-producto">
+                    <img src="img/sabanabambuestampada1.401.png"
+                         alt="Sábanas de bambú estampadas Doble">
+                </div>
 
-/* ================================
-   SECCIONES
-================================ */
+                <div class="informacion">
+                    <h3>Sábanas de bambú estampadas (1.40 m, Doble)</h3>
 
-.seccion {
-    padding: 70px 7%;
-}
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-.seccion h2 {
-    font-size: 32px;
-    margin-bottom: 8px;
-    color: #0D3E70;
-}
+                    <p class="precio">$85.000</p>
 
-.subtitulo {
-    color: #777;
-    margin-bottom: 35px;
-}
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 12)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
+            </article>
 
-/* ANIMACIÓN AL HACER SCROLL */
 
-.reveal {
-    opacity: 1;
-    transform: translateY(25px);
+            <!-- PRODUCTO 13: LLAVE PARA JABÓN -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="llave para jabon"
+                onclick="abrirProducto(13)">
 
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
+                <div class="imagen-producto">
+                    <img src="img/llavejabon1.png"
+                         alt="Llave para jabón">
+                </div>
 
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+                <div class="informacion">
+                    <h3>Llave para jabón</h3>
 
-@media (prefers-reduced-motion: reduce) {
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
+                    <p class="precio">$40.000</p>
 
-}
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 13)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
+            </article>
 
-/* ================================
-   CATEGORÍAS
-================================ */
 
-.categorias {
-    display: grid;
+            <!-- PRODUCTO 14: TOALLA BEIGE CREMA -->
+            <article class="producto"
+                data-categoria="usopersonal"
+                data-nombre="toalla beige crema"
+                onclick="abrirProducto(14)">
 
-    grid-template-columns:
-        repeat(5, 1fr);
+                <div class="imagen-producto">
+                    <img src="img/toalla2.png"
+                         alt="Toalla Beige crema">
+                </div>
 
-    gap: 20px;
-}
+                <div class="informacion">
+                    <h3>Toalla (Beige crema)</h3>
 
-.categoria {
-    padding: 25px;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    text-align: center;
+                    <p class="precio">$48.000</p>
 
-    background: #ffffff;
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 14)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    border: 1px solid #eeeeee;
+            </article>
 
-    border-radius: 15px;
 
-    cursor: pointer;
+            <!-- PRODUCTO 15: TOALLA GRIS CON DORADO -->
+            <article class="producto"
+                data-categoria="usopersonal"
+                data-nombre="toalla gris con dorado"
+                onclick="abrirProducto(15)">
 
-    transition: 0.3s;
-}
+                <div class="imagen-producto">
+                    <img src="img/toalla1.png"
+                         alt="Toalla Gris con dorado">
+                </div>
 
-.categoria:hover {
-    transform: translateY(-5px);
+                <div class="informacion">
+                    <h3>Toalla (Gris con dorado)</h3>
 
-    border-color: #044DFF;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    box-shadow:
-        0 10px 30px
-        rgba(4, 77, 255, 0.12);
-}
+                    <p class="precio">$55.000</p>
 
-.icono {
-    font-size: 38px;
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 15)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    margin-bottom: 12px;
-}
+            </article>
 
-.categoria h3 {
-    font-size: 16px;
-    color: #0D3E70;
-}
 
+            <!-- PRODUCTO 16: TOALLA DE PLAYA -->
+            <article class="producto"
+                data-categoria="usopersonal"
+                data-nombre="toalla de playa"
+                onclick="abrirProducto(16)">
 
-/* ================================
-   PRODUCTOS
-================================ */
+                <div class="imagen-producto">
+                    <img src="img/toalla3.png"
+                         alt="Toalla de playa">
+                </div>
 
-.productos-seccion {
-    background: #fafbff;
-}
+                <div class="informacion">
+                    <h3>Toalla de playa</h3>
 
-.titulo-productos {
-    display: flex;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    justify-content: space-between;
-    align-items: center;
+                    <p class="precio">$57.000</p>
 
-    margin-bottom: 30px;
-}
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 16)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-.titulo-productos > a {
-    color: #044DFF;
+            </article>
 
-    font-weight: bold;
-}
 
+            <!-- PRODUCTO 17: COBIJA TÉRMICA -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="cobija termica"
+                onclick="abrirProducto(17)">
 
-/* GRID */
+                <div class="imagen-producto">
+                    <img src="img/cobijatermica1.png"
+                         alt="Cobija térmica">
+                </div>
 
-.productos {
-    display: grid;
+                <div class="informacion">
+                    <h3>Cobija térmica</h3>
 
-    grid-template-columns:
-        repeat(4, 1fr);
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    gap: 25px;
-}
+                    <p class="precio">$85.000</p>
 
-.sin-resultados {
-    display: none;
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 17)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    color: #777;
+            </article>
 
-    margin-bottom: 20px;
-}
 
+            <!-- GRUPO: TENDIDO QUEEN (variantes de color) -->
+            <article class="producto producto-variantes"
+                data-categoria="habitacion"
+                data-nombre="tendido queen rosado beige gris oscuro blanco gris claro negro"
+                data-grupo="tendido-queen"
+                onclick="event.stopPropagation(); abrirProducto(obtenerVarianteActual('tendido-queen'))">
 
-/* TARJETA */
+                <div class="imagen-producto">
+                    <img id="img-grupo-tendido-queen" src="img/tendidoqueen1.png"
+                         alt="Tendido Queen">
+                </div>
 
-.producto {
-    background: white;
+                <div class="informacion">
+                    <h3>Tendido Queen</h3>
 
-    border-radius: 15px;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    overflow: hidden;
+                    <p class="precio" id="precio-grupo-tendido-queen">$160.000</p>
 
-    cursor: pointer;
+                    <div class="selector-color" id="colores-grupo-tendido-queen" onclick="event.stopPropagation()"></div>
 
-    border: 1px solid #eeeeee;
+                    <button class="btn-agregar"
+                        onclick="event.stopPropagation(); agregarCarrito(event, obtenerVarianteActual('tendido-queen'))">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    transition: 0.3s;
+            </article>
 
-    display: flex;
-    flex-direction: column;
-}
 
-.producto:hover {
-    transform: translateY(-6px);
+            <!-- GRUPO: TENDIDO KING (variantes de color) -->
+            <article class="producto producto-variantes"
+                data-categoria="habitacion"
+                data-nombre="tendido king blanco azul beige crema"
+                data-grupo="tendido-king"
+                onclick="event.stopPropagation(); abrirProducto(obtenerVarianteActual('tendido-king'))">
 
-    box-shadow:
-        0 12px 30px
-        rgba(13, 62, 112, 0.15);
-}
+                <div class="imagen-producto">
+                    <img id="img-grupo-tendido-king" src="img/tendidoking1.png"
+                         alt="Tendido King">
+                </div>
 
+                <div class="informacion">
+                    <h3>Tendido King</h3>
 
-/* IMAGEN */
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-.imagen-producto {
-    height: 260px;
+                    <p class="precio" id="precio-grupo-tendido-king">$150.000</p>
 
-    position: relative;
+                    <div class="selector-color" id="colores-grupo-tendido-king" onclick="event.stopPropagation()"></div>
 
-    display: flex;
+                    <button class="btn-agregar"
+                        onclick="event.stopPropagation(); agregarCarrito(event, obtenerVarianteActual('tendido-king'))">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    align-items: center;
-    justify-content: center;
+            </article>
 
-    background: #f5f5f5;
 
-    overflow: hidden;
-}
+            <!-- PRODUCTO 24: TENDIDO DOBLE BLANCO -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido doble blanco"
+                onclick="abrirProducto(24)">
 
-.imagen-producto img {
-    width: 100%;
-    height: 100%;
+                <div class="imagen-producto">
+                    <img src="img/tendidoble1.png"
+                         alt="Tendido Doble Blanco">
+                </div>
 
-    object-fit: cover;
+                <div class="informacion">
+                    <h3>Tendido Doble (Blanco)</h3>
 
-    transition: 0.4s;
-}
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-.producto:hover
-.imagen-producto img {
-    transform: scale(1.05);
-}
+                    <p class="precio">$170.000</p>
 
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 24)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-/* DESCUENTO */
+            </article>
 
-.descuento {
-    position: absolute;
 
-    top: 12px;
-    left: 12px;
+            <!-- PRODUCTO 25: TENDIDO DOBLE ESTAMPADO -->
+            <article class="producto"
+                data-categoria="habitacion"
+                data-nombre="tendido doble estampado"
+                onclick="abrirProducto(25)">
 
-    padding: 6px 10px;
+                <div class="imagen-producto">
+                    <img src="img/tendido1.401.png"
+                         alt="Tendido Doble estampado">
+                </div>
 
-    background: #FFE04F;
-    color: #0D3E70;
+                <div class="informacion">
+                    <h3>Tendido Doble estampado</h3>
 
-    border-radius: 6px;
+                    <div class="estrellas">
+                        ⭐⭐⭐⭐⭐
+                    </div>
 
-    font-size: 12px;
+                    <p class="precio">$100.000</p>
 
-    font-weight: bold;
+                    <button class="btn-agregar"
+                        onclick="agregarCarrito(event, 25)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    z-index: 2;
-}
+            </article>
 
+            <!-- PRODUCTO 26: PROCESADOR DE ALIMENTOS ELÉCTRICO -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="procesador de alimentos electrico"
+                onclick="abrirProducto(26)">
 
-/* INFORMACIÓN */
+                <div class="imagen-producto">
+                    <img src="img/picatodo1.png" alt="Procesador de alimentos eléctrico">
+                </div>
 
-.informacion {
-    padding: 18px;
+                <div class="informacion">
+                    <h3>Procesador de alimentos eléctrico</h3>
+                    <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                    <p class="precio">$70.000</p>
+                    <button class="btn-agregar" onclick="agregarCarrito(event, 26)">
+                        Agregar al carrito
+                    </button>
+                </div>
 
-    display: flex;
-    flex-direction: column;
+            </article>
 
-    flex: 1;
-}
+        </div>
 
-.informacion h3 {
-    font-size: 16px;
 
-    line-height: 1.4;
+    </section>
 
-    min-height: 45px;
+    <!-- TESTIMONIOS -->
+    <section class="testimonios seccion reveal">
 
-    margin-bottom: 10px;
+        <h2>Lo que dicen nuestros clientes</h2>
 
-    color: #243447;
-}
+        <p class="subtitulo">
+            Historias reales de quienes ya compraron con nosotros
+        </p>
 
-.estrellas {
-    font-size: 13px;
+        <div class="testimonios-grid">
 
-    margin-bottom: 10px;
-}
+            <div class="testimonio">
+                <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                <p>El juego de ollas superó mis expectativas, llegó rapidísimo y la atención por WhatsApp fue muy amable.</p>
+                <strong>— Marcela G.</strong>
+            </div>
 
-.precio {
-    font-size: 22px;
+            <div class="testimonio">
+                <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                <p>Compré el tendido de cama y la calidad de la tela es excelente. Ya voy por mi tercera compra.</p>
+                <strong>— Andrés R.</strong>
+            </div>
 
-    font-weight: bold;
+            <div class="testimonio">
+                <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                <p>Los organizadores me ayudaron a ordenar toda la cocina. Precios justos y envío rápido a Palmira.</p>
+                <strong>— Luisa F.</strong>
+            </div>
 
-    color: #C9A346;
+        </div>
 
-    margin-bottom: 12px;
-}
+    </section>
 
+    <!-- OFERTA -->
+    <section id="ofertas" class="oferta reveal">
 
-/* BOTÓN AGREGAR AL CARRITO */
+        <div>
 
-.btn-agregar {
-    margin-top: auto;
+            <span>🔥 OFERTA ESPECIAL</span>
 
-    padding: 10px;
+            <h2>
+                Productos para tu hogar
+                a precios increíbles
+            </h2>
 
-    background: #FFE04F;
-    color: #0D3E70;
+            <p>
+                Aprovecha nuestras promociones antes de que se terminen.
+            </p>
 
-    border-radius: 8px;
+            <a href="#productos" class="boton">
+                Comprar ahora
+            </a>
 
-    font-weight: bold;
-    font-size: 13px;
+        </div>
 
-    transition: 0.2s;
-}
+    </section>
 
-.btn-agregar:hover {
-    background: #FFEBA1;
-}
+    <!-- PIE DE PÁGINA -->
+    <footer id="contacto">
 
-.selector-color {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 12px;
-}
+        <div class="footer-contenido">
 
-.swatch-color {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-    box-shadow: 0 0 0 1px #cccccc;
-    padding: 0;
-    flex-shrink: 0;
-}
+            <div>
+                <h2>Variedades KY</h2>
 
-.swatch-color:hover {
-    transform: scale(1.1);
-}
+                <p>
+                    Productos para hacer de tu hogar
+                    un lugar más cómodo y especial.
+                </p>
 
-.swatch-color.activo {
-    box-shadow: 0 0 0 2px #044DFF;
-}
+                <div class="redes">
+                    <a href="https://wa.me/573113100317" target="_blank" aria-label="WhatsApp">💬</a>
+                    <a class="facebook-enlace" href="https://www.facebook.com/share/1JiaE2Zc4e/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">F</a>
+                </div>
+            </div>
 
+            <div>
+                <h3>Enlaces</h3>
 
-/* ================================
-   TESTIMONIOS
-================================ */
+                <a href="#">Inicio</a>
+                <a href="#productos">Productos</a>
+                <a href="#categorias">Categorías</a>
+            </div>
 
-.testimonios-grid {
-    display: grid;
+            <div>
+                <h3>Contacto</h3>
 
-    grid-template-columns:
-        repeat(3, 1fr);
+                <p>📱 WhatsApp 3113100317 </p>
+                <p>📍 Palmira, Valle</p>
+                <p>📧 Contacto</p>
+            </div>
 
-    gap: 25px;
-}
+        </div>
 
-.testimonio {
-    padding: 25px;
+        <div class="copyright">
+            © 2026 Variedades KY. Todos los derechos reservados.
+        </div>
 
-    background: #fafbff;
+    </footer>
 
-    border: 1px solid #eeeeee;
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a class="whatsapp-flotante" href="https://wa.me/573113100317" target="_blank" aria-label="Escríbenos por WhatsApp">💬</a>
 
-    border-radius: 15px;
-}
+    <!-- PANEL DE CARRITO -->
+    <div class="overlay" id="overlay"></div>
 
-.testimonio p {
-    color: #555;
+    <aside class="carrito-panel" id="carritoPanel">
+        <div class="carrito-header">
+            <h3>Tu carrito</h3>
+            <button class="cerrar-carrito" id="cerrarCarrito" aria-label="Cerrar carrito">&times;</button>
+        </div>
 
-    line-height: 1.6;
+        <div class="carrito-items" id="carritoItems">
+            <p class="carrito-vacio" id="carritoVacio">Tu carrito está vacío.</p>
+        </div>
 
-    margin: 10px 0 15px;
-}
+        <div class="carrito-footer">
+            <p class="carrito-total">Total: <span id="carritoTotal">$0</span></p>
+            <a href="#" class="boton" id="finalizarCompra">Finalizar compra por WhatsApp</a>
+        </div>
+    </aside>
 
-.testimonio strong {
-    color: #0D3E70;
+    <!-- MODAL DE PRODUCTO -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-producto">
+            <button class="cerrar-modal" id="cerrarModal" aria-label="Cerrar">&times;</button>
+            <div id="modalContenido"></div>
+        </div>
+    </div>
 
-    font-size: 14px;
-}
+    <!-- =========================================================
+         ASISTENTE KY (asistente de compra)
+         Botón flotante + ventana de chat. Todo el estilo vive en
+         asistente.css y toda la lógica en asistente.js (ambos
+         archivos nuevos, no tocan tu script.js ni estilo.css).
+    ========================================================== -->
+    <link rel="stylesheet" href="asistente.css">
 
+    <button class="asistente-boton" id="asistenteBoton" aria-label="Abrir Asistente KY">
+        <span class="asistente-boton-emoji">🔵</span>
+        <span class="asistente-boton-texto">Asistente KY</span>
+    </button>
 
-/* ================================
-   OFERTA
-================================ */
+    <div class="asistente-ventana" id="asistenteVentana" hidden>
+        <div class="asistente-header">
+            <div class="asistente-avatar">🔵</div>
+            <div class="asistente-header-texto">
+                <strong>Asistente KY</strong>
+                <span>En línea</span>
+            </div>
+            <button class="asistente-cerrar" id="asistenteCerrar" aria-label="Cerrar asistente">&times;</button>
+        </div>
 
-.oferta {
-    margin: 50px 7%;
+        <div class="asistente-mensajes" id="asistenteMensajes"></div>
 
-    padding: 60px;
+        <div class="asistente-opciones" id="asistenteOpciones"></div>
 
-    border-radius: 20px;
+        <form class="asistente-input" id="asistenteForm">
+            <input type="text" id="asistenteTexto" placeholder="Escribe tu pregunta..." aria-label="Escribe tu pregunta">
+            <button type="submit" aria-label="Enviar">➤</button>
+        </form>
+    </div>
 
-    background: #FFE04F;
+    <script src="script.js?v=5"></script>
+    <script src="asistente.js?v=3"></script>
 
-    color: #0D3E70;
-}
+</body>
 
-.oferta > div {
-    max-width: 650px;
-}
-
-.oferta span {
-    font-size: 14px;
-
-    font-weight: bold;
-}
-
-.oferta h2 {
-    font-size: 38px;
-
-    margin: 15px 0;
-
-    color: #0D3E70;
-}
-
-.oferta p {
-    margin-bottom: 25px;
-
-    font-size: 17px;
-}
-
-.oferta .boton {
-    background: #044DFF;
-
-    color: #FFFFFF;
-}
-
-.oferta .boton:hover {
-    background: #0080FF;
-}
-
-
-/* ================================
-   FOOTER
-================================ */
-
-footer {
-    background: #0D3E70;
-
-    color: white;
-
-    padding: 60px 7% 20px;
-}
-
-.footer-contenido {
-    display: grid;
-
-    grid-template-columns:
-        2fr 1fr 1fr;
-
-    gap: 50px;
-
-    margin-bottom: 40px;
-}
-
-.footer-contenido h2 {
-    margin-bottom: 15px;
-}
-
-.footer-contenido h3 {
-    margin-bottom: 15px;
-}
-
-.footer-contenido p {
-    color: #cdd9ec;
-
-    line-height: 1.6;
-}
-
-.footer-contenido a {
-    display: block;
-
-    color: #cdd9ec;
-
-    margin-bottom: 10px;
-
-    transition: 0.3s;
-}
-
-.footer-contenido a:hover {
-    color: #FFE04F;
-}
-
-.redes {
-    display: flex;
-
-    gap: 12px;
-
-    margin-top: 15px;
-}
-
-.redes a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 38px;
-    height: 38px;
-
-    background: rgba(255, 255, 255, 0.1);
-
-    border-radius: 50%;
-
-    font-size: 17px;
-
-    margin-bottom: 0;
-}
-
-.redes a:hover {
-    background: #044DFF;
-}
-
-.redes a.facebook-enlace {
-    background: transparent;
-    color: #FFFFFF;
-    font-size: 28px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.redes a.facebook-enlace:hover {
-    background: transparent;
-    color: #FFE04F;
-}
-
-.copyright {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-
-    padding-top: 20px;
-
-    text-align: center;
-
-    color: #a9bdd8;
-
-    font-size: 13px;
-}
-
-
-/* ================================
-   BOTÓN FLOTANTE WHATSAPP
-================================ */
-
-.whatsapp-flotante {
-    position: fixed;
-
-    bottom: 25px;
-    right: 25px;
-
-    width: 56px;
-    height: 56px;
-
-    background: #25d366;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 26px;
-
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-
-    z-index: 900;
-
-    transition: 0.2s;
-}
-
-.whatsapp-flotante:hover {
-    transform: scale(1.08);
-}
-
-
-/* ================================
-   PANEL DE CARRITO
-================================ */
-
-.overlay {
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(13, 62, 112, 0.45);
-
-    z-index: 1500;
-}
-
-.overlay.visible {
-    display: block;
-}
-
-.carrito-panel {
-    position: fixed;
-
-    top: 0;
-    right: -100%;
-
-    width: 380px;
-    max-width: 90%;
-    height: 100%;
-
-    background: #ffffff;
-
-    z-index: 1600;
-
-    display: flex;
-    flex-direction: column;
-
-    box-shadow: -10px 0 30px rgba(13, 62, 112, 0.2);
-
-    transition: right 0.3s ease;
-}
-
-.carrito-panel.abierto {
-    right: 0;
-}
-
-.carrito-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 20px;
-
-    border-bottom: 1px solid #eeeeee;
-}
-
-.carrito-header h3 {
-    color: #0D3E70;
-}
-
-.cerrar-carrito,
-.cerrar-modal {
-    font-size: 24px;
-
-    color: #777;
-
-    line-height: 1;
-}
-
-.carrito-items {
-    flex: 1;
-
-    overflow-y: auto;
-
-    padding: 20px;
-}
-
-.carrito-vacio {
-    color: #777;
-
-    text-align: center;
-
-    margin-top: 30px;
-}
-
-.carrito-item {
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 12px 0;
-
-    border-bottom: 1px solid #f2f2f2;
-}
-
-.carrito-item-info h4 {
-    font-size: 14px;
-
-    margin-bottom: 4px;
-
-    color: #243447;
-}
-
-.carrito-item-info span {
-    font-size: 13px;
-
-    color: #777;
-}
-
-.carrito-item-acciones {
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-}
-
-.carrito-item-acciones button {
-    width: 26px;
-    height: 26px;
-
-    background: #f0f4ff;
-
-    border-radius: 6px;
-
-    font-size: 14px;
-
-    color: #0D3E70;
-}
-
-.carrito-item-eliminar {
-    color: #d33;
-
-    font-size: 18px;
-}
-
-.carrito-footer {
-    padding: 20px;
-
-    border-top: 1px solid #eeeeee;
-}
-
-.carrito-total {
-    font-size: 18px;
-    font-weight: bold;
-
-    margin-bottom: 15px;
-
-    color: #0D3E70;
-}
-
-.carrito-footer .boton {
-    width: 100%;
-
-    text-align: center;
-}
-
-
-/* ================================
-   MODAL DE PRODUCTO
-================================ */
-
-.modal-overlay {
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(13, 62, 112, 0.55);
-
-    z-index: 1700;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-}
-
-.modal-overlay.visible {
-    display: flex;
-}
-
-.modal-producto {
-    position: relative;
-
-    background: #ffffff;
-
-    max-width: 980px;
-    width: 100%;
-    max-height: 85vh;
-
-    overflow-y: auto;
-
-    border-radius: 15px;
-
-    padding: 30px;
-}
-
-.modal-galeria {
-    min-width: 0;
-}
-
-.modal-imagen-principal {
-    display: block;
-}
-
-.modal-miniatura.activa {
-    border-color: #044DFF;
-}
-
-.modal-detalles .estrellas {
-    color: #C9A346;
-    font-size: 20px;
-}
-
-.resumen-calificacion {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    color: #666;
-    font-size: 14px;
-}
-
-.calificacion-estrellas {
-    color: #C9A346;
-    font-size: 20px;
-    letter-spacing: 1px;
-}
-
-.calificacion-promedio {
-    font-size: 13px;
-}
-
-.calificacion-sin-resenas {
-    color: #777;
-}
-
-.modal-acciones {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.modal-acciones button {
-    flex: 1 1 180px;
-}
-
-.resenas-seccion {
-    margin-top: 30px;
-    padding-top: 24px;
-    border-top: 1px solid #e6eaf2;
-}
-
-.resenas-seccion h3 {
-    color: #0D3E70;
-    margin-bottom: 6px;
-}
-
-.resenas-seccion > p {
-    color: #666;
-    margin-bottom: 18px;
-}
-
-.formulario-resena {
-    display: grid;
-    gap: 14px;
-    padding: 18px;
-    background: #f8faff;
-    border: 1px solid #e6eaf2;
-    border-radius: 10px;
-}
-
-.formulario-resena label,
-.formulario-resena legend {
-    display: grid;
-    gap: 6px;
-    color: #243447;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.formulario-resena input[type="text"],
-.formulario-resena textarea {
-    width: 100%;
-    border: 1px solid #d7deeb;
-    border-radius: 6px;
-    padding: 10px;
-    font: inherit;
-    font-weight: normal;
-    resize: vertical;
-}
-
-.formulario-resena input:focus,
-.formulario-resena textarea:focus {
-    outline: 2px solid rgba(4, 77, 255, 0.2);
-    border-color: #044DFF;
-}
-
-.formulario-resena fieldset {
-    border: 0;
-    padding: 0;
-}
-
-.selector-estrellas {
-    display: flex;
-    gap: 4px;
-}
-
-.selector-estrellas label {
-    display: block;
-}
-
-.selector-estrellas input {
-    position: absolute;
-    opacity: 0;
-}
-
-.selector-estrellas span {
-    display: block;
-    padding: 5px 9px;
-    color: #C9A346;
-    border: 1px solid #d8af4b;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.selector-estrellas input:checked + span,
-.selector-estrellas span:hover {
-    background: #FFE04F;
-    color: #0D3E70;
-}
-
-.formulario-resena .boton {
-    justify-self: start;
-    border: 0;
-}
-
-.lista-resenas {
-    display: grid;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.resena {
-    padding: 14px;
-    border: 1px solid #e6eaf2;
-    border-radius: 8px;
-}
-
-.resena-cabecera {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.resena-fecha,
-.resenas-vacias {
-    color: #777;
-    font-size: 13px;
-}
-
-.resena-estrellas {
-    color: #C9A346;
-    margin: 6px 0;
-}
-
-.resena p {
-    color: #4b5563;
-    line-height: 1.5;
-}
-
-.resena-acciones {
-    display: flex;
-    gap: 12px;
-    margin-top: 10px;
-}
-
-.resena-acciones button {
-    color: #044DFF;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.modal-producto img {
-    width: 100%;
-    height: 320px;
-
-    object-fit: contain;
-
-    background: #f5f5f5;
-
-    border-radius: 12px;
-
-    margin-bottom: 20px;
-}
-
-.modal-producto h2 {
-    font-size: 24px;
-
-    margin-bottom: 10px;
-
-    color: #0D3E70;
-}
-
-.modal-producto .precio {
-    font-size: 26px;
-}
-
-.modal-producto p.descripcion {
-    color: #555;
-
-    line-height: 1.6;
-
-    margin: 15px 0 20px;
-}
-
-.modal-producto .precio-anterior {
-    display: inline-block;
-
-    margin-left: 10px;
-
-    font-size: 16px;
-    font-weight: normal;
-
-    color: #999;
-
-    text-decoration: line-through;
-}
-
-.modal-miniaturas {
-    display: flex;
-
-    gap: 10px;
-
-    margin: -10px 0 20px;
-
-    overflow-x: auto;
-}
-
-.modal-miniatura {
-    width: 70px;
-    height: 70px;
-
-    object-fit: cover;
-
-    border-radius: 8px;
-
-    border: 2px solid transparent;
-
-    cursor: pointer;
-
-    flex-shrink: 0;
-
-    transition: 0.2s;
-
-    /* Sobrescribe el margin-bottom por defecto de las imágenes del modal */
-    margin-bottom: 0;
-}
-
-.modal-miniatura:hover {
-    border-color: #044DFF;
-}
-
-.cerrar-modal {
-    position: absolute;
-
-    top: 15px;
-    right: 15px;
-}
-
-
-/* ================================
-   RESPONSIVE - TABLET
-================================ */
-
-@media (max-width: 1000px) {
-
-    .header-menu {
-        font-size: 13px;
-    }
-
-    .menu-izquierda,
-    .menu-derecha {
-        gap: 15px;
-    }
-
-    .hero h1 {
-        font-size: 42px;
-    }
-
-    .categorias {
-        grid-template-columns:
-            repeat(3, 1fr);
-    }
-
-    .productos {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .testimonios-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-
-/* ================================
-   RESPONSIVE - CELULAR
-================================ */
-
-@media (max-width: 650px) {
-
-    .header-top {
-        padding: 12px 5%;
-    }
-
-    .logo strong {
-        font-size: 15px;
-    }
-
-    .envio-gratis {
-        font-size: 12px;
-    }
-
-    .envio-gratis .rotulo,
-    .envio-gratis .detalle {
-        padding: 8px 12px;
-    }
-
-    .header-menu {
-        justify-content: flex-start;
-
-        overflow-x: visible;
-    }
-
-    .menu-izquierda {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-    }
-
-    .menu-izquierda a {
-        white-space: nowrap;
-    }
-
-    .menu-toggle {
-        display: none;
-    }
-
-    .menu-derecha {
-        display: flex;
-        margin-left: auto;
-    }
-
-    .hero {
-        min-height: 450px;
-
-        padding: 50px 7%;
-    }
-
-    .hero-imagen {
-        right: -8%;
-        width: 88%;
-    }
-
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    .hero p:not(.etiqueta) {
-        font-size: 16px;
-    }
-
-    .seccion {
-        padding: 50px 5%;
-    }
-
-    .seccion h2 {
-        font-size: 27px;
-    }
-
-    .categorias {
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 12px;
-    }
-
-    .productos {
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 12px;
-    }
-
-    .imagen-producto {
-        height: 190px;
-    }
-
-    .informacion {
-        padding: 12px;
-    }
-
-    .informacion h3 {
-        font-size: 14px;
-    }
-
-    .precio {
-        font-size: 18px;
-    }
-
-    .titulo-productos {
-        align-items: flex-start;
-    }
-
-    .oferta {
-        margin: 30px 5%;
-
-        padding: 40px 25px;
-    }
-
-    .oferta h2 {
-        font-size: 28px;
-    }
-
-    .footer-contenido {
-        grid-template-columns: 1fr;
-
-        gap: 30px;
-    }
-
-    .whatsapp-flotante {
-        bottom: 18px;
-        right: 18px;
-
-        width: 50px;
-        height: 50px;
-
-        font-size: 22px;
-    }
-
-    .carrito-panel {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .modal-overlay {
-        padding: 0;
-    }
-
-    .modal-producto {
-        max-height: 100vh;
-        height: 100%;
-        border-radius: 0;
-        padding: 56px 18px 24px;
-    }
-
-    .modal-producto img.modal-imagen-principal {
-        height: 260px;
-    }
-
-}
-
-.categoria.activa {
-    border-color: #044DFF;
-    box-shadow: 0 10px 30px rgba(4, 77, 255, 0.12);
-}
+</html>
