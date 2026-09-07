@@ -30,7 +30,7 @@ const ASISTENTE_CATEGORIA = {
     8: "habitacion", 10: "habitacion", 11: "habitacion", 12: "habitacion",
     13: "cocina", 14: "usopersonal", 15: "usopersonal", 16: "usopersonal",
     17: "habitacion", 18: "habitacion", 19: "habitacion", 20: "habitacion",
-    21: "habitacion", 22: "habitacion", 23: "habitacion", 24: "habitacion", 25: "habitacion"
+    21: "habitacion", 22: "habitacion", 23: "habitacion", 24: "habitacion", 25: "habitacion", 26: "cocina"
 };
 
 const ASISTENTE_ETIQUETAS = {
@@ -58,7 +58,8 @@ const ASISTENTE_ETIQUETAS = {
     22: ["tendido", "king", "azul"],
     23: ["tendido", "king", "beige"],
     24: ["tendido", "doble", "blanco"],
-    25: ["tendido", "doble", "estampado"]
+    25: ["tendido", "doble", "estampado"],
+    26: ["procesador", "alimentos", "electrico", "electrica", "cocina"]
 };
 
 // Grupos de subcategoría usados en "Ayúdame a elegir"
@@ -163,6 +164,7 @@ function asistenteTarjetasProductos(ids) {
                     <h4>${p.nombre}</h4>
                     <div class="asistente-tarjeta-precio">${precioHtml}</div>
                     <div class="asistente-tarjeta-acciones">
+                        <button class="asistente-btn-ver" onclick="abrirProducto(${id})">Ver detalles</button>
                         <button class="asistente-btn-agregar" onclick="asistenteAgregarCarrito(${id})">🛒 Agregar</button>
                         <button class="asistente-btn-whatsapp" onclick="asistenteConsultarWhatsapp(${id})">💬 WhatsApp</button>
                     </div>
@@ -380,6 +382,14 @@ function asistenteParsearPresupuesto(texto) {
 
 function asistenteBuscarLibre(textoOriginal) {
     const texto = textoOriginal.toLowerCase();
+
+    const coincidenciasDirectas = buscarProductos(textoOriginal);
+    if (coincidenciasDirectas.length > 0) {
+        asistenteMensajeBot("⭐ Encontré este producto:");
+        asistenteTarjetasProductos(coincidenciasDirectas);
+        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
+        return;
+    }
 
     // Detecta intención de regalo directamente por texto libre
     if (texto.includes("regalo")) {
