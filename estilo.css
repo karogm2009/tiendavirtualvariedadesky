@@ -1,4 +1,27 @@
 /* ================================
+   PALETA OFICIAL — Variedades KY
+   Azul + dorado. No usar rosa.
+   #0828FC #0D3E70 #044DFF #0080FF #2C73FF
+   #C9A346 #D8AF4B #D8AF6D #FFE04F #FFEBA1
+================================ */
+
+:root {
+    --azul-intenso: #0828FC;
+    --azul-oscuro: #0D3E70;
+    --azul-principal: #044DFF;
+    --azul-brillante: #0080FF;
+    --azul-medio: #2C73FF;
+    --dorado-principal: #C9A346;
+    --dorado: #D8AF4B;
+    --dorado-suave: #D8AF6D;
+    --amarillo: #FFE04F;
+    --amarillo-claro: #FFEBA1;
+    --fondo: #F8FAFF;
+    --texto: #243447;
+    --tarjeta: #FFFFFF;
+}
+
+/* ================================
    CONFIGURACIÓN GENERAL
 ================================ */
 
@@ -14,8 +37,8 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #ffffff;
-    color: #222;
+    background: #F8FAFF;
+    color: #243447;
 }
 
 a {
@@ -49,7 +72,7 @@ header {
 .header-top {
     width: 100%;
 
-    background: #fdd400;
+    background: #0D3E70;
 
     padding: 14px 4%;
 
@@ -81,8 +104,8 @@ header {
     align-items: center;
     justify-content: center;
 
-    background: #1a1a5e;
-    color: white;
+    background: #FFFFFF;
+    color: #0D3E70;
 
     border-radius: 12px;
 
@@ -92,7 +115,7 @@ header {
 
 .logo strong {
     font-size: 18px;
-    color: #222;
+    color: #FFFFFF;
 }
 
 
@@ -156,7 +179,7 @@ header {
 }
 
 .envio-gratis .rotulo {
-    background: #1a1a5e;
+    background: #044DFF;
     color: #ffffff;
 
     font-weight: bold;
@@ -167,7 +190,7 @@ header {
 .envio-gratis .detalle {
     padding: 10px 18px;
 
-    color: #222;
+    color: #243447;
 }
 
 .envio-gratis .detalle strong {
@@ -180,7 +203,7 @@ header {
 .header-menu {
     width: 100%;
 
-    background: #fdd400;
+    background: #0D3E70;
 
     padding: 8px 4% 14px;
 
@@ -194,7 +217,7 @@ header {
 
     position: relative;
 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .menu-izquierda,
@@ -208,6 +231,8 @@ header {
     font-weight: 600;
 
     flex-wrap: wrap;
+
+    color: #FFFFFF;
 }
 
 .menu-izquierda a,
@@ -227,6 +252,7 @@ header {
 .menu-izquierda a.activo {
     text-decoration: underline;
     text-underline-offset: 4px;
+    color: #FFE04F;
 }
 
 
@@ -244,7 +270,7 @@ header {
     top: -8px;
     right: -10px;
 
-    background: #1a1a5e;
+    background: #044DFF;
     color: #ffffff;
 
     font-size: 10px;
@@ -269,7 +295,7 @@ header {
     display: none;
 
     font-size: 22px;
-    color: #222;
+    color: #FFFFFF;
 }
 
 
@@ -288,8 +314,8 @@ header {
     background:
         linear-gradient(
             90deg,
-            #fff3e7 0%,
-            #ffffff 65%
+            #EAF1FF 0%,
+            #F8FAFF 65%
         );
 }
 
@@ -302,8 +328,8 @@ header {
 
     padding: 8px 15px;
 
-    background: #ff7a00;
-    color: white;
+    background: #FFE04F;
+    color: #0D3E70;
 
     border-radius: 20px;
 
@@ -318,6 +344,8 @@ header {
     line-height: 1.1;
 
     margin-bottom: 20px;
+
+    color: #0D3E70;
 }
 
 .hero p:not(.etiqueta) {
@@ -337,7 +365,7 @@ header {
 
     padding: 15px 30px;
 
-    background: #ff7a00;
+    background: #044DFF;
     color: white;
 
     border-radius: 30px;
@@ -350,7 +378,7 @@ header {
 }
 
 .boton:hover {
-    background: #e86d00;
+    background: #0080FF;
 
     transform: translateY(-2px);
 }
@@ -367,6 +395,7 @@ header {
 .seccion h2 {
     font-size: 32px;
     margin-bottom: 8px;
+    color: #0D3E70;
 }
 
 .subtitulo {
@@ -432,11 +461,11 @@ header {
 .categoria:hover {
     transform: translateY(-5px);
 
-    border-color: #ff7a00;
+    border-color: #044DFF;
 
     box-shadow:
         0 10px 30px
-        rgba(0, 0, 0, 0.08);
+        rgba(4, 77, 255, 0.12);
 }
 
 .icono {
@@ -447,6 +476,7 @@ header {
 
 .categoria h3 {
     font-size: 16px;
+    color: #0D3E70;
 }
 
 
@@ -455,7 +485,7 @@ header {
 ================================ */
 
 .productos-seccion {
-    background: #fafafa;
+    background: #fafbff;
 }
 
 .titulo-productos {
@@ -468,7 +498,7 @@ header {
 }
 
 .titulo-productos > a {
-    color: #ff7a00;
+    color: #044DFF;
 
     font-weight: bold;
 }
@@ -518,7 +548,7 @@ header {
 
     box-shadow:
         0 12px 30px
-        rgba(0, 0, 0, 0.12);
+        rgba(13, 62, 112, 0.15);
 }
 
 
@@ -564,8 +594,8 @@ header {
 
     padding: 6px 10px;
 
-    background: #ff7a00;
-    color: white;
+    background: #FFE04F;
+    color: #0D3E70;
 
     border-radius: 6px;
 
@@ -596,6 +626,8 @@ header {
     min-height: 45px;
 
     margin-bottom: 10px;
+
+    color: #243447;
 }
 
 .estrellas {
@@ -609,45 +641,9 @@ header {
 
     font-weight: bold;
 
-    color: #ff7a00;
+    color: #C9A346;
 
     margin-bottom: 12px;
-}
-
-
-/* SELECTOR DE COLOR (variantes) */
-
-.selector-color {
-    display: flex;
-
-    gap: 8px;
-
-    margin-bottom: 14px;
-}
-
-.swatch {
-    width: 22px;
-    height: 22px;
-
-    border-radius: 50%;
-
-    border: 2px solid #e5e5e5;
-
-    cursor: pointer;
-
-    padding: 0;
-
-    transition: 0.2s;
-}
-
-.swatch:hover {
-    transform: scale(1.1);
-}
-
-.swatch.activo {
-    border-color: #ff7a00;
-
-    box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.25);
 }
 
 
@@ -658,8 +654,8 @@ header {
 
     padding: 10px;
 
-    background: #fdd400;
-    color: #1a1a5e;
+    background: #FFE04F;
+    color: #0D3E70;
 
     border-radius: 8px;
 
@@ -670,7 +666,32 @@ header {
 }
 
 .btn-agregar:hover {
-    background: #f5c800;
+    background: #FFEBA1;
+}
+
+.selector-color {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.swatch-color {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 1px #cccccc;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.swatch-color:hover {
+    transform: scale(1.1);
+}
+
+.swatch-color.activo {
+    box-shadow: 0 0 0 2px #044DFF;
 }
 
 
@@ -690,7 +711,7 @@ header {
 .testimonio {
     padding: 25px;
 
-    background: #fafafa;
+    background: #fafbff;
 
     border: 1px solid #eeeeee;
 
@@ -706,7 +727,7 @@ header {
 }
 
 .testimonio strong {
-    color: #222;
+    color: #0D3E70;
 
     font-size: 14px;
 }
@@ -723,9 +744,9 @@ header {
 
     border-radius: 20px;
 
-    background: #ff7a00;
+    background: #FFE04F;
 
-    color: white;
+    color: #0D3E70;
 }
 
 .oferta > div {
@@ -742,6 +763,8 @@ header {
     font-size: 38px;
 
     margin: 15px 0;
+
+    color: #0D3E70;
 }
 
 .oferta p {
@@ -751,13 +774,13 @@ header {
 }
 
 .oferta .boton {
-    background: white;
+    background: #044DFF;
 
-    color: #ff7a00;
+    color: #FFFFFF;
 }
 
 .oferta .boton:hover {
-    background: #f5f5f5;
+    background: #0080FF;
 }
 
 
@@ -766,7 +789,7 @@ header {
 ================================ */
 
 footer {
-    background: #202020;
+    background: #0D3E70;
 
     color: white;
 
@@ -793,7 +816,7 @@ footer {
 }
 
 .footer-contenido p {
-    color: #bbbbbb;
+    color: #cdd9ec;
 
     line-height: 1.6;
 }
@@ -801,7 +824,7 @@ footer {
 .footer-contenido a {
     display: block;
 
-    color: #bbbbbb;
+    color: #cdd9ec;
 
     margin-bottom: 10px;
 
@@ -809,7 +832,7 @@ footer {
 }
 
 .footer-contenido a:hover {
-    color: #ff7a00;
+    color: #FFE04F;
 }
 
 .redes {
@@ -828,7 +851,7 @@ footer {
     width: 38px;
     height: 38px;
 
-    background: #2c2c2c;
+    background: rgba(255, 255, 255, 0.1);
 
     border-radius: 50%;
 
@@ -838,17 +861,17 @@ footer {
 }
 
 .redes a:hover {
-    background: #ff7a00;
+    background: #044DFF;
 }
 
 .copyright {
-    border-top: 1px solid #444;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 
     padding-top: 20px;
 
     text-align: center;
 
-    color: #999;
+    color: #a9bdd8;
 
     font-size: 13px;
 }
@@ -900,7 +923,7 @@ footer {
 
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(13, 62, 112, 0.45);
 
     z-index: 1500;
 }
@@ -926,7 +949,7 @@ footer {
     display: flex;
     flex-direction: column;
 
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+    box-shadow: -10px 0 30px rgba(13, 62, 112, 0.2);
 
     transition: right 0.3s ease;
 }
@@ -943,6 +966,10 @@ footer {
     padding: 20px;
 
     border-bottom: 1px solid #eeeeee;
+}
+
+.carrito-header h3 {
+    color: #0D3E70;
 }
 
 .cerrar-carrito,
@@ -987,6 +1014,8 @@ footer {
     font-size: 14px;
 
     margin-bottom: 4px;
+
+    color: #243447;
 }
 
 .carrito-item-info span {
@@ -1006,11 +1035,13 @@ footer {
     width: 26px;
     height: 26px;
 
-    background: #f5f5f5;
+    background: #f0f4ff;
 
     border-radius: 6px;
 
     font-size: 14px;
+
+    color: #0D3E70;
 }
 
 .carrito-item-eliminar {
@@ -1030,6 +1061,8 @@ footer {
     font-weight: bold;
 
     margin-bottom: 15px;
+
+    color: #0D3E70;
 }
 
 .carrito-footer .boton {
@@ -1050,7 +1083,7 @@ footer {
 
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(13, 62, 112, 0.55);
 
     z-index: 1700;
 
@@ -1097,6 +1130,8 @@ footer {
     font-size: 24px;
 
     margin-bottom: 10px;
+
+    color: #0D3E70;
 }
 
 .modal-producto .precio {
@@ -1155,7 +1190,7 @@ footer {
 }
 
 .modal-miniatura:hover {
-    border-color: #ff7a00;
+    border-color: #044DFF;
 }
 
 .cerrar-modal {
@@ -1265,9 +1300,11 @@ footer {
 
         border-radius: 10px;
 
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 10px 25px rgba(13, 62, 112, 0.2);
 
         z-index: 1001;
+
+        color: #0D3E70;
     }
 
     .menu-derecha.abierto {
