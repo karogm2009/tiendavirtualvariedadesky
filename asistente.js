@@ -26,7 +26,7 @@
 ========================================================== */
 const ASISTENTE_CATEGORIA = {
     1: "electrodomesticos", 2: "cocina", 3: "electrodomesticos", 4: "cocina",
-    5: "hogar", 6: "cocina", 7: "decoracion", 9: "cocina",
+    5: "hogar", 6: "cocina", 7: "decoracion",
     8: "habitacion", 10: "habitacion", 11: "habitacion", 12: "habitacion",
     13: "cocina", 14: "usopersonal", 15: "usopersonal", 16: "usopersonal",
     17: "habitacion", 18: "habitacion", 19: "habitacion", 20: "habitacion",
@@ -42,7 +42,6 @@ const ASISTENTE_ETIQUETAS = {
     6: ["tabla", "tablas", "picar"],
     7: ["cortina", "cortinas"],
     8: ["sabana", "sábana", "sabanas", "doble", "1.40"],
-    9: ["molino", "picador", "picatodo", "pica todo", "muele", "picadora"],
     10: ["sabana", "sábana", "sabanas", "king", "2x2", "2 x 2"],
     11: ["sabana", "sábana", "sabanas", "queen", "1.60", "estampada"],
     12: ["sabana", "sábana", "sabanas", "doble", "estampada", "1.40"],
