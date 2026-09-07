@@ -194,6 +194,20 @@ function buscarProductos(texto) {
     });
 }
 
+function ejecutarBusqueda() {
+    const entrada = document.getElementById("inputBuscar");
+    if (!entrada) return;
+    const consulta = normalizarTexto(entrada.value);
+    const tarjetas = [...document.querySelectorAll(".producto")];
+    tarjetas.forEach(tarjeta => {
+        const nombre = normalizarTexto(tarjeta.dataset.nombre || tarjeta.querySelector("h3")?.textContent || "");
+        tarjeta.hidden = Boolean(consulta) && !nombre.includes(consulta);
+    });
+    const hayResultados = tarjetas.some(tarjeta => !tarjeta.hidden);
+    const sinResultados = document.getElementById("sinResultados");
+    if (sinResultados) sinResultados.style.display = hayResultados ? "none" : "block";
+}
+
 function iniciarTienda() {
     actualizarContadorCarrito(); actualizarGruposVariantes(); renderizarCarrito();
     const secciones = document.querySelectorAll(".reveal");
@@ -221,12 +235,13 @@ function iniciarTienda() {
         const detalle = obtenerCarrito().map(item => `${productos[item.id].nombre} x${item.cantidad}`).join(", ");
         if (detalle) window.open(`https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(`Hola, quiero comprar: ${detalle}`)}`, "_blank");
     });
-    document.getElementById("inputBuscar")?.addEventListener("input", evento => {
-        const consulta = normalizarTexto(evento.target.value);
-        document.querySelectorAll(".producto").forEach(tarjeta => { tarjeta.hidden = Boolean(consulta) && !normalizarTexto(tarjeta.dataset.nombre || "").includes(consulta); });
-        const hayResultados = [...document.querySelectorAll(".producto")].some(tarjeta => !tarjeta.hidden);
-        const sinResultados = document.getElementById("sinResultados");
-        if (sinResultados) sinResultados.style.display = hayResultados ? "none" : "block";
+    document.getElementById("inputBuscar")?.addEventListener("input", ejecutarBusqueda);
+    document.getElementById("inputBuscar")?.addEventListener("keydown", evento => {
+        if (evento.key === "Enter") {
+            evento.preventDefault();
+            ejecutarBusqueda();
+        }
     });
+    document.getElementById("btnBuscar")?.addEventListener("click", ejecutarBusqueda);
 }
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciarTienda); else iniciarTienda();
