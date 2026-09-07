@@ -44,11 +44,7 @@
                 <a href="#contacto" data-nav="contacto">Contacto</a>
             </div>
 
-            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de cuenta">&#9776;</button>
-
             <div class="menu-derecha" id="menuDerecha">
-                <a href="#">Crea tu cuenta</a>
-                <a href="#">Ingresa</a>
                 <a href="#" class="carrito" id="btnCarrito" aria-label="Carrito">
                     &#128722;
                     <span class="carrito-contador" id="carritoContador">0</span>
@@ -62,20 +58,9 @@
     <!-- BANNER PRINCIPAL -->
     <section class="hero">
 
+        <img class="hero-imagen" src="img/imageinicio.png" alt="Productos para tu hogar">
+
         <div class="hero-texto">
-
-            <p class="etiqueta">✨ OFERTAS ESPECIALES</p>
-
-            <h1>
-                Todo lo que necesitas
-                para tu hogar
-            </h1>
-
-            <p>
-                Encuentra productos para tu cocina,
-                dormitorio, organización y mucho más.
-            </p>
-
             <a href="#productos" class="boton">
                 Ver productos
             </a>
@@ -325,7 +310,7 @@
     onclick="abrirProducto(9)">
 
     <div class="imagen-producto">
-        <img src="img/picatodo1.png"
+        <img src="img/imageinicio.png"
              alt="Molino picador eléctrico">
     </div>
 
@@ -509,7 +494,7 @@
                         ⭐⭐⭐⭐⭐
                     </div>
 
-                    <p class="precio">$20.000</p>
+                    <p class="precio">$40.000</p>
 
                     <button class="btn-agregar"
                         onclick="agregarCarrito(event, 13)">
@@ -751,6 +736,27 @@
 
                     <button class="btn-agregar"
                         onclick="agregarCarrito(event, 25)">
+                        Agregar al carrito
+                    </button>
+                </div>
+
+            </article>
+
+            <!-- PRODUCTO 26: PROCESADOR DE ALIMENTOS ELÉCTRICO -->
+            <article class="producto"
+                data-categoria="cocina"
+                data-nombre="procesador de alimentos electrico"
+                onclick="abrirProducto(26)">
+
+                <div class="imagen-producto">
+                    <img src="img/imageinicio.png" alt="Procesador de alimentos eléctrico">
+                </div>
+
+                <div class="informacion">
+                    <h3>Procesador de alimentos eléctrico</h3>
+                    <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                    <p class="precio">$70.000</p>
+                    <button class="btn-agregar" onclick="agregarCarrito(event, 26)">
                         Agregar al carrito
                     </button>
                 </div>
