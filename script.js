@@ -1,32 +1,31 @@
 const numeroWhatsapp = "573113100317";
 
 const productos = {
-    1: { nombre: "Cafetera italiana", precio: 20000, categoria: "electrodomesticos", imagenes: ["img/cafeteraitaliana1.png", "img/cafeteraitaliana2.png", "img/cafeteraitaliana3.png"], descripcion: "Cafetera italiana practica para preparar cafe en casa." },
-    2: { nombre: "Juego de cuchillos Cutlery", precio: 89000, categoria: "cocina", imagenes: ["img/cuchilloscutlery1.png", "img/cuchilloscutlery2.png", "img/cuchilloscutlery3.png"], descripcion: "Juego de cuchillos para las tareas diarias de cocina." },
-    3: { nombre: "Exprimidor", precio: 120000, categoria: "electrodomesticos", imagenes: ["img/exprimidor1.png", "img/exprimidor2.png", "img/exprimidor3.png"], descripcion: "Exprimidor practico para preparar jugos frescos." },
-    4: { nombre: "Ollas de acero inoxidable", precio: 580000, categoria: "cocina", imagenes: ["img/ollasdeacero1.png", "img/ollasdeacero2.png"], descripcion: "Juego de ollas de acero inoxidable para tu cocina." },
-    5: { nombre: "Plancha para ropa", precio: 40000, categoria: "hogar", imagenes: ["img/plancha1.png", "img/plancha2.png", "img/plancha3.png"], descripcion: "Plancha para mantener tu ropa impecable." },
-    6: { nombre: "Set de tablas de picar", precio: 30000, categoria: "cocina", imagenes: ["img/tablasdepicar1.png", "img/tablasdepicar2.png", "img/tablasdepicar3.png"], descripcion: "Set de tablas para preparar tus alimentos con comodidad." },
-    7: { nombre: "Cortinas", precio: 55000, categoria: "decoracion", imagenes: ["img/cortinas1.png", "img/cortinas2.png", "img/cortinas3.png"], descripcion: "Cortinas para renovar y complementar tus espacios." },
-    8: { nombre: "Sabanas de bambu lisas (1.40 m, Doble)", precio: 75000, categoria: "habitacion", imagenes: ["img/sabanabambu1.401.png", "img/sabanabambu1.402.png", "img/sabanabambu1.403.png", "img/sabanabambu1.404.png", "img/sabanabambu1.405.png"], descripcion: "Sabanas de bambu lisas en tamano doble." },
-    9: { nombre: "Molino picador electrico", precio: 74000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Molino picador electrico practico para preparar tus alimentos." },
-    10: { nombre: "Sabanas de bambu lisas (2 x 2 m, King)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambu2x2.png", "img/sabanabambu2x25.png"], descripcion: "Sabanas de bambu lisas en tamano King." },
-    11: { nombre: "Sabanas de bambu estampadas (1.60 m, Queen)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambu1.601.png", "img/sabanabambu1.602.png"], descripcion: "Sabanas de bambu estampadas en tamano Queen." },
-    12: { nombre: "Sabanas de bambu estampadas (1.40 m, Doble)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambuestampada1.401.png", "img/sabanabambuestampada1.402.png", "img/sabanabambuestampada1.403.png", "img/sabanabambuestampada1.404.png", "img/sabanabambuestampada1.405.png", "img/sabanabambuestampada1.406.png", "img/sabanabambuestampada1.407.png", "img/sabanabambuestampada1.408.png"], descripcion: "Sabanas de bambu estampadas en tamano doble." },
-    13: { nombre: "Llave para jabon", precio: 40000, categoria: "cocina", imagenes: ["img/llavejabon1.png", "img/llavejabon2.png", "img/llavejabon3.png"], descripcion: "Llave para jabon practica y funcional para tu cocina." },
-    14: { nombre: "Toalla (Beige crema)", precio: 48000, categoria: "usopersonal", imagenes: ["img/toalla2.png"], descripcion: "Toalla suave en tono beige crema." },
-    15: { nombre: "Toalla (Gris con dorado)", precio: 55000, categoria: "usopersonal", imagenes: ["img/toalla1.png"], descripcion: "Toalla suave con acabado gris y dorado." },
-    16: { nombre: "Toalla de playa", precio: 57000, categoria: "usopersonal", imagenes: ["img/toalla3.png"], descripcion: "Toalla amplia para disfrutar tus dias de playa." },
-    17: { nombre: "Cobija termica", precio: 85000, categoria: "habitacion", imagenes: ["img/cobijatermica1.png"], descripcion: "Cobija termica para descansar con mayor abrigo." },
-    18: { nombre: "Tendido Queen (Rosado)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen1.png"], descripcion: "Tendido Queen en color rosado." },
-    19: { nombre: "Tendido Queen (Beige)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen2.png"], descripcion: "Tendido Queen en color beige." },
-    20: { nombre: "Tendido Queen (Gris oscuro)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen3.png"], descripcion: "Tendido Queen en color gris oscuro." },
-    21: { nombre: "Tendido Queen (Gris claro y negro)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen4.png"], descripcion: "Tendido Queen en color gris claro y negro." },
-    22: { nombre: "Tendido King (Azul)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking1.png"], descripcion: "Tendido King en color azul." },
-    23: { nombre: "Tendido King (Beige crema)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking2.png"], descripcion: "Tendido King en color beige crema." },
-    24: { nombre: "Tendido Doble (Blanco)", precio: 170000, categoria: "habitacion", imagenes: ["img/tendidoble1.png"], descripcion: "Tendido doble en color blanco." },
-    25: { nombre: "Tendido Doble estampado", precio: 100000, categoria: "habitacion", imagenes: ["img/tendido1.401.png", "img/tendido1.402.png"], descripcion: "Tendido doble con estampado." },
-    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Procesador de alimentos eléctrico para agilizar la preparacion de tus recetas." }
+    1: { nombre: "Cafetera italiana", precio: 20000, categoria: "electrodomesticos", imagenes: ["img/cafeteraitaliana1.png", "img/cafeteraitaliana2.png", "img/cafeteraitaliana3.png"], descripcion: "Cafetera práctica y elegante, ideal para preparar café de manera sencilla en casa. Su diseño permite disfrutar de un café con buen sabor y aroma." },
+    2: { nombre: "Juego de cuchillos Cutlery", precio: 89000, categoria: "cocina", imagenes: ["img/cuchilloscutlery1.png", "img/cuchilloscutlery2.png", "img/cuchilloscutlery3.png"], descripcion: "Juego de cuchillos práctico y versátil, ideal para cortar, picar y preparar diferentes alimentos en la cocina." },
+    3: { nombre: "Exprimidor", precio: 120000, categoria: "electrodomesticos", imagenes: ["img/exprimidor1.png", "img/exprimidor2.png", "img/exprimidor3.png"], descripcion: "Exprimidor funcional para preparar jugos frescos de manera rápida y sencilla. Ideal para disfrutar bebidas naturales en casa." },
+    4: { nombre: "Ollas de acero inoxidable", precio: 580000, categoria: "cocina", imagenes: ["img/ollasdeacero1.png", "img/ollasdeacero2.png"], descripcion: "Set de ollas de acero inoxidable pensado para facilitar la preparación de diferentes comidas. Su diseño combina funcionalidad, resistencia y una apariencia moderna." },
+    5: { nombre: "Plancha para ropa", precio: 40000, categoria: "hogar", imagenes: ["img/plancha1.png", "img/plancha2.png", "img/plancha3.png"], descripcion: "Plancha práctica para eliminar arrugas y mantener tu ropa impecable. Una ayuda esencial para el cuidado diario de tus prendas." },
+    6: { nombre: "Set de tablas de picar", precio: 30000, categoria: "cocina", imagenes: ["img/tablasdepicar1.png", "img/tablasdepicar2.png", "img/tablasdepicar3.png"], descripcion: "Set de tablas de picar ideal para organizar la preparación de alimentos y trabajar cómodamente en la cocina." },
+    7: { nombre: "Cortinas", precio: 55000, categoria: "decoracion", imagenes: ["img/cortinas1.png", "img/cortinas2.png", "img/cortinas3.png"], descripcion: "Cortinas decorativas que ayudan a renovar tus espacios, aportar privacidad y complementar el estilo de tu hogar." },
+    8: { nombre: "Sabanas de bambu lisas (1.40 m, Doble)", precio: 75000, categoria: "habitacion", imagenes: ["img/sabanabambu1.401.png", "img/sabanabambu1.402.png", "img/sabanabambu1.403.png", "img/sabanabambu1.404.png", "img/sabanabambu1.405.png"], descripcion: "Sábanas suaves y agradables al tacto, ideales para disfrutar de mayor comodidad durante el descanso. Disponibles en diferentes tamaños y diseños." },
+    10: { nombre: "Sabanas de bambu lisas (2 x 2 m, King)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambu2x2.png", "img/sabanabambu2x25.png"], descripcion: "Sábanas suaves y agradables al tacto, ideales para disfrutar de mayor comodidad durante el descanso. Disponibles en diferentes tamaños y diseños." },
+    11: { nombre: "Sabanas de bambu estampadas (1.60 m, Queen)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambu1.601.png", "img/sabanabambu1.602.png"], descripcion: "Sábanas suaves y agradables al tacto, ideales para disfrutar de mayor comodidad durante el descanso. Disponibles en diferentes tamaños y diseños." },
+    12: { nombre: "Sabanas de bambu estampadas (1.40 m, Doble)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambuestampada1.401.png", "img/sabanabambuestampada1.402.png", "img/sabanabambuestampada1.403.png", "img/sabanabambuestampada1.404.png", "img/sabanabambuestampada1.405.png", "img/sabanabambuestampada1.406.png", "img/sabanabambuestampada1.407.png", "img/sabanabambuestampada1.408.png"], descripcion: "Sábanas suaves y agradables al tacto, ideales para disfrutar de mayor comodidad durante el descanso. Disponibles en diferentes tamaños y diseños." },
+    13: { nombre: "Llave para jabon", precio: 40000, categoria: "cocina", imagenes: ["img/llavejabon1.png", "img/llavejabon2.png", "img/llavejabon3.png"], descripcion: "Llave para jabón práctica y funcional, ideal para mantener el jabón líquido disponible y facilitar las tareas diarias de la cocina." },
+    14: { nombre: "Toalla (Beige crema)", precio: 48000, categoria: "usopersonal", imagenes: ["img/toalla2.png"], descripcion: "Toallas suaves y cómodas, ideales para el uso diario en el hogar. Disponibles en diferentes colores y estilos para complementar tu baño." },
+    15: { nombre: "Toalla (Gris con dorado)", precio: 55000, categoria: "usopersonal", imagenes: ["img/toalla1.png"], descripcion: "Toallas suaves y cómodas, ideales para el uso diario en el hogar. Disponibles en diferentes colores y estilos para complementar tu baño." },
+    16: { nombre: "Toalla de playa", precio: 57000, categoria: "usopersonal", imagenes: ["img/toalla3.png"], descripcion: "Toallas suaves y cómodas, ideales para el uso diario en el hogar. Disponibles en diferentes colores y estilos para complementar tu baño." },
+    17: { nombre: "Cobija termica", precio: 85000, categoria: "habitacion", imagenes: ["img/cobijatermica1.png"], descripcion: "Cobija diseñada para brindar una sensación cálida y confortable, ideal para complementar la habitación y disfrutar de momentos de descanso." },
+    18: { nombre: "Tendido Queen (Rosado)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen1.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
+    19: { nombre: "Tendido Queen (Beige)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen2.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
+    20: { nombre: "Tendido Queen (Gris oscuro)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen3.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
+    21: { nombre: "Tendido Queen (Gris claro y negro)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen4.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
+    22: { nombre: "Tendido King (Azul)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking1.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
+    23: { nombre: "Tendido King (Beige crema)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking2.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
+    24: { nombre: "Tendido Doble (Blanco)", precio: 170000, categoria: "habitacion", imagenes: ["img/tendidoble1.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
+    25: { nombre: "Tendido Doble estampado", precio: 100000, categoria: "habitacion", imagenes: ["img/tendido1.401.png", "img/tendido1.402.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
+    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Práctico procesador de alimentos eléctrico, ideal para facilitar diferentes tareas en la cocina. Una opción funcional para preparar y procesar alimentos de manera rápida y sencilla." }
 };
 
 const variantes = { "tendido-queen": [18, 19, 20, 21], "tendido-king": [22, 23] };
@@ -99,12 +98,87 @@ function abrirCarrito() { document.getElementById("carritoPanel")?.classList.add
 function cerrarCarrito() { document.getElementById("carritoPanel")?.classList.remove("abierto"); document.getElementById("overlay")?.classList.remove("visible"); }
 
 function cerrarProducto() { document.getElementById("modalOverlay")?.classList.remove("visible"); document.body.classList.remove("modal-abierto"); }
+
+function escaparHtml(texto) {
+    return String(texto).replace(/[&<>'"]/g, caracter => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", "\"": "&quot;" }[caracter]));
+}
+
+function obtenerResenas(id) {
+    return JSON.parse(localStorage.getItem(`ky-resenas-${id}`) || "[]");
+}
+
+function obtenerIdentificadorResenador() {
+    let identificador = localStorage.getItem("ky-identificador-resenador");
+    if (!identificador) {
+        identificador = `resenador-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        localStorage.setItem("ky-identificador-resenador", identificador);
+    }
+    return identificador;
+}
+
+function formatearEstrellas(cantidad) {
+    return `${"★".repeat(cantidad)}${"☆".repeat(5 - cantidad)}`;
+}
+
+function renderizarResenas(id) {
+    const lista = document.getElementById("listaResenas");
+    if (!lista) return;
+    const resenas = obtenerResenas(id);
+    const identificador = obtenerIdentificadorResenador();
+    lista.innerHTML = resenas.length ? resenas.map(resena => `<article class="resena"><div class="resena-cabecera"><strong>${escaparHtml(resena.nombre)}</strong><span class="resena-fecha">${escaparHtml(resena.fecha)}</span></div><div class="resena-estrellas" aria-label="${resena.calificacion} de 5 estrellas">${formatearEstrellas(resena.calificacion)}</div><p>${escaparHtml(resena.comentario)}</p>${resena.autor === identificador ? `<div class="resena-acciones"><button type="button" onclick="editarResena(${id}, '${resena.id}')">Editar</button><button type="button" onclick="eliminarResena(${id}, '${resena.id}')">Eliminar</button></div>` : ""}</article>`).join("") : '<p class="resenas-vacias">Sé la primera persona en opinar sobre este producto.</p>';
+}
+
+function guardarResena(id, resenaId = null) {
+    const formulario = document.getElementById("formularioResena");
+    if (!formulario) return;
+    const datos = new FormData(formulario);
+    const nombre = String(datos.get("nombre") || "").trim();
+    const comentario = String(datos.get("comentario") || "").trim();
+    const calificacion = Number(datos.get("calificacion"));
+    if (!nombre || !comentario || calificacion < 1 || calificacion > 5) return;
+    const resenas = obtenerResenas(id);
+    const fecha = new Date().toLocaleDateString("es-CO", { year: "numeric", month: "long", day: "numeric" });
+    if (resenaId) {
+        const resena = resenas.find(elemento => elemento.id === resenaId && elemento.autor === obtenerIdentificadorResenador());
+        if (resena) { resena.nombre = nombre; resena.comentario = comentario; resena.calificacion = calificacion; resena.fecha = fecha; }
+    } else {
+        resenas.unshift({ id: `resena-${Date.now()}`, nombre, comentario, calificacion, fecha, autor: obtenerIdentificadorResenador() });
+    }
+    localStorage.setItem(`ky-resenas-${id}`, JSON.stringify(resenas));
+    formulario.reset();
+    formulario.querySelector('input[name="calificacion"][value="5"]').checked = true;
+    formulario.dataset.editando = "";
+    formulario.querySelector("button[type=submit]").textContent = "Publicar opinión";
+    renderizarResenas(id);
+}
+
+function editarResena(id, resenaId) {
+    const resena = obtenerResenas(id).find(elemento => elemento.id === resenaId && elemento.autor === obtenerIdentificadorResenador());
+    const formulario = document.getElementById("formularioResena");
+    if (!resena || !formulario) return;
+    formulario.nombre.value = resena.nombre;
+    formulario.comentario.value = resena.comentario;
+    formulario.querySelector(`input[name="calificacion"][value="${resena.calificacion}"]`).checked = true;
+    formulario.dataset.editando = resenaId;
+    formulario.querySelector("button[type=submit]").textContent = "Guardar cambios";
+    formulario.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function eliminarResena(id, resenaId) {
+    const resenas = obtenerResenas(id).filter(resena => !(resena.id === resenaId && resena.autor === obtenerIdentificadorResenador()));
+    localStorage.setItem(`ky-resenas-${id}`, JSON.stringify(resenas));
+    renderizarResenas(id);
+}
+
 function abrirProducto(id) {
     const producto = productos[id];
     const modal = document.getElementById("modalOverlay");
     const contenido = document.getElementById("modalContenido");
     if (!producto || !modal || !contenido) return;
-    contenido.innerHTML = `<div class="modal-galeria"><img id="modalImagenPrincipal" class="modal-imagen-principal" src="${imagenPrincipal(producto)}" alt="${producto.nombre}"><div class="modal-miniaturas">${producto.imagenes.map((imagen, indice) => `<img class="modal-miniatura${indice === 0 ? " activa" : ""}" src="${imagen}" alt="${producto.nombre} ${indice + 1}" onclick="cambiarImagenModal('${imagen}', this)">`).join("")}</div></div><div class="modal-detalles"><h2>${producto.nombre}</h2><div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div><p class="descripcion">${producto.descripcion}</p><p class="precio">${formatearPrecio(producto.precio)}</p><div class="modal-acciones"><button type="button" class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button><button type="button" class="boton" onclick="comprarYa(${id})">Comprar ya</button></div></div>`;
+    contenido.innerHTML = `<div class="modal-galeria"><img id="modalImagenPrincipal" class="modal-imagen-principal" src="${imagenPrincipal(producto)}" alt="${producto.nombre}"><div class="modal-miniaturas">${producto.imagenes.map((imagen, indice) => `<img class="modal-miniatura${indice === 0 ? " activa" : ""}" src="${imagen}" alt="${producto.nombre} ${indice + 1}" onclick="cambiarImagenModal('${imagen}', this)">`).join("")}</div></div><div class="modal-detalles"><h2>${producto.nombre}</h2><div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div><p class="descripcion">${producto.descripcion}</p><p class="precio">${formatearPrecio(producto.precio)}</p><div class="modal-acciones"><button type="button" class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button><button type="button" class="boton" onclick="comprarYa(${id})">Comprar ya</button></div></div><section class="resenas-seccion"><h3>¿Ya compraste este producto?</h3><p>Escribe tu opinión</p><form class="formulario-resena" id="formularioResena"><label>Tu nombre<input name="nombre" type="text" maxlength="60" required></label><fieldset><legend>Calificación</legend><div class="selector-estrellas">${[1, 2, 3, 4, 5].map(valor => `<label><input type="radio" name="calificacion" value="${valor}"${valor === 5 ? " checked" : ""}><span>${valor}</span></label>`).join("")}</div></fieldset><label>Tu comentario<textarea name="comentario" rows="4" maxlength="500" required></textarea></label><button type="submit" class="boton">Publicar opinión</button></form><div class="lista-resenas" id="listaResenas"></div></section>`;
+    const formulario = document.getElementById("formularioResena");
+    formulario.addEventListener("submit", evento => { evento.preventDefault(); guardarResena(id, formulario.dataset.editando || null); });
+    renderizarResenas(id);
     modal.classList.add("visible"); document.body.classList.add("modal-abierto");
 }
 function cambiarImagenModal(src, miniatura) { const imagen = document.getElementById("modalImagenPrincipal"); if (imagen) imagen.src = src; document.querySelectorAll(".modal-miniatura").forEach(elemento => elemento.classList.remove("activa")); miniatura.classList.add("activa"); }
