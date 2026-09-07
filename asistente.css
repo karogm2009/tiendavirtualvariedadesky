@@ -270,12 +270,6 @@
 }
 .asistente-btn-agregar:hover { background: #FFEBA1; }
 
-.asistente-btn-ver {
-    background: #044DFF;
-    color: #ffffff;
-}
-.asistente-btn-ver:hover { background: #0080FF; }
-
 .asistente-btn-whatsapp {
     background: #25d366;
     color: #ffffff;
