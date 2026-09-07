@@ -120,9 +120,18 @@ function formatearEstrellas(cantidad) {
     return `${"★".repeat(cantidad)}${"☆".repeat(5 - cantidad)}`;
 }
 
+function resumenCalificacion(id) {
+    const resenas = obtenerResenas(id);
+    if (!resenas.length) return '<span class="calificacion-sin-resenas">Sin calificaciones todavía</span>';
+    const promedio = resenas.reduce((total, resena) => total + resena.calificacion, 0) / resenas.length;
+    return `<span class="calificacion-estrellas">${formatearEstrellas(Math.round(promedio))}</span><span class="calificacion-promedio">${promedio.toFixed(1)} / 5 (${resenas.length} ${resenas.length === 1 ? "opinión" : "opiniones"})</span>`;
+}
+
 function renderizarResenas(id) {
     const lista = document.getElementById("listaResenas");
     if (!lista) return;
+    const resumen = document.querySelector(".resumen-calificacion");
+    if (resumen) resumen.innerHTML = resumenCalificacion(id);
     const resenas = obtenerResenas(id);
     const identificador = obtenerIdentificadorResenador();
     lista.innerHTML = resenas.length ? resenas.map(resena => `<article class="resena"><div class="resena-cabecera"><strong>${escaparHtml(resena.nombre)}</strong><span class="resena-fecha">${escaparHtml(resena.fecha)}</span></div><div class="resena-estrellas" aria-label="${resena.calificacion} de 5 estrellas">${formatearEstrellas(resena.calificacion)}</div><p>${escaparHtml(resena.comentario)}</p>${resena.autor === identificador ? `<div class="resena-acciones"><button type="button" onclick="editarResena(${id}, '${resena.id}')">Editar</button><button type="button" onclick="eliminarResena(${id}, '${resena.id}')">Eliminar</button></div>` : ""}</article>`).join("") : '<p class="resenas-vacias">Sé la primera persona en opinar sobre este producto.</p>';
@@ -175,7 +184,7 @@ function abrirProducto(id) {
     const modal = document.getElementById("modalOverlay");
     const contenido = document.getElementById("modalContenido");
     if (!producto || !modal || !contenido) return;
-    contenido.innerHTML = `<div class="modal-galeria"><img id="modalImagenPrincipal" class="modal-imagen-principal" src="${imagenPrincipal(producto)}" alt="${producto.nombre}"><div class="modal-miniaturas">${producto.imagenes.map((imagen, indice) => `<img class="modal-miniatura${indice === 0 ? " activa" : ""}" src="${imagen}" alt="${producto.nombre} ${indice + 1}" onclick="cambiarImagenModal('${imagen}', this)">`).join("")}</div></div><div class="modal-detalles"><h2>${producto.nombre}</h2><div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div><p class="descripcion">${producto.descripcion}</p><p class="precio">${formatearPrecio(producto.precio)}</p><div class="modal-acciones"><button type="button" class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button><button type="button" class="boton" onclick="comprarYa(${id})">Comprar ya</button></div></div><section class="resenas-seccion"><h3>¿Ya compraste este producto?</h3><p>Escribe tu opinión</p><form class="formulario-resena" id="formularioResena"><label>Tu nombre<input name="nombre" type="text" maxlength="60" required></label><fieldset><legend>Calificación</legend><div class="selector-estrellas">${[1, 2, 3, 4, 5].map(valor => `<label><input type="radio" name="calificacion" value="${valor}"${valor === 5 ? " checked" : ""}><span>${valor}</span></label>`).join("")}</div></fieldset><label>Tu comentario<textarea name="comentario" rows="4" maxlength="500" required></textarea></label><button type="submit" class="boton">Publicar opinión</button></form><div class="lista-resenas" id="listaResenas"></div></section>`;
+    contenido.innerHTML = `<div class="modal-galeria"><img id="modalImagenPrincipal" class="modal-imagen-principal" src="${imagenPrincipal(producto)}" alt="${producto.nombre}"><div class="modal-miniaturas">${producto.imagenes.map((imagen, indice) => `<img class="modal-miniatura${indice === 0 ? " activa" : ""}" src="${imagen}" alt="${producto.nombre} ${indice + 1}" onclick="cambiarImagenModal('${imagen}', this)">`).join("")}</div></div><div class="modal-detalles"><h2>${producto.nombre}</h2><div class="resumen-calificacion" aria-live="polite">${resumenCalificacion(id)}</div><p class="descripcion">${producto.descripcion}</p><p class="precio">${formatearPrecio(producto.precio)}</p><div class="modal-acciones"><button type="button" class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button><button type="button" class="boton" onclick="comprarYa(${id})">Comprar ya</button></div></div><section class="resenas-seccion"><h3>¿Ya compraste este producto?</h3><p>Escribe tu opinión</p><form class="formulario-resena" id="formularioResena"><label>Tu nombre<input name="nombre" type="text" maxlength="60" required></label><fieldset><legend>Calificación</legend><div class="selector-estrellas">${[1, 2, 3, 4, 5].map(valor => `<label><input type="radio" name="calificacion" value="${valor}"${valor === 5 ? " checked" : ""}><span>${valor}</span></label>`).join("")}</div></fieldset><label>Tu comentario<textarea name="comentario" rows="4" maxlength="500" required></textarea></label><button type="submit" class="boton">Publicar opinión</button></form><div class="lista-resenas" id="listaResenas"></div></section>`;
     const formulario = document.getElementById("formularioResena");
     formulario.addEventListener("submit", evento => { evento.preventDefault(); guardarResena(id, formulario.dataset.editando || null); });
     renderizarResenas(id);
@@ -194,6 +203,8 @@ function buscarProductos(texto) {
     });
 }
 
+let categoriaSeleccionada = "";
+
 function ejecutarBusqueda() {
     const entrada = document.getElementById("inputBuscar");
     if (!entrada) return;
@@ -201,11 +212,32 @@ function ejecutarBusqueda() {
     const tarjetas = [...document.querySelectorAll(".producto")];
     tarjetas.forEach(tarjeta => {
         const nombre = normalizarTexto(tarjeta.dataset.nombre || tarjeta.querySelector("h3")?.textContent || "");
-        tarjeta.hidden = Boolean(consulta) && !nombre.includes(consulta);
+        const categoria = tarjeta.dataset.categoria || "";
+        const coincideTexto = !consulta || nombre.includes(consulta) || consulta.split(" ").filter(Boolean).every(palabra => nombre.includes(palabra));
+        const coincideCategoria = !categoriaSeleccionada || categoria === categoriaSeleccionada;
+        tarjeta.hidden = !(coincideTexto && coincideCategoria);
     });
     const hayResultados = tarjetas.some(tarjeta => !tarjeta.hidden);
     const sinResultados = document.getElementById("sinResultados");
     if (sinResultados) sinResultados.style.display = hayResultados ? "none" : "block";
+}
+
+function seleccionarCategoria(categoria) {
+    categoriaSeleccionada = categoria;
+    document.querySelectorAll(".categoria").forEach(elemento => {
+        elemento.classList.toggle("activa", elemento.dataset.categoria === categoria);
+    });
+    ejecutarBusqueda();
+    document.getElementById("productos")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function mostrarTodosLosProductos(evento) {
+    evento?.preventDefault();
+    categoriaSeleccionada = "";
+    document.querySelectorAll(".categoria").forEach(elemento => elemento.classList.remove("activa"));
+    const entrada = document.getElementById("inputBuscar");
+    if (entrada) entrada.value = "";
+    ejecutarBusqueda();
 }
 
 function iniciarTienda() {
@@ -243,5 +275,9 @@ function iniciarTienda() {
         }
     });
     document.getElementById("btnBuscar")?.addEventListener("click", ejecutarBusqueda);
+    document.querySelectorAll(".categoria").forEach(elemento => {
+        elemento.addEventListener("click", () => seleccionarCategoria(elemento.dataset.categoria));
+    });
+    document.getElementById("verTodos")?.addEventListener("click", mostrarTodosLosProductos);
 }
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciarTienda); else iniciarTienda();
