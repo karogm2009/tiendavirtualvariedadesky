@@ -1150,6 +1150,29 @@ footer {
     font-size: 20px;
 }
 
+.resumen-calificacion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+.calificacion-estrellas {
+    color: #C9A346;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.calificacion-promedio {
+    font-size: 13px;
+}
+
+.calificacion-sin-resenas {
+    color: #777;
+}
+
 .modal-acciones {
     display: flex;
     gap: 12px;
@@ -1574,4 +1597,9 @@ footer {
         height: 260px;
     }
 
+}
+
+.categoria.activa {
+    border-color: #044DFF;
+    box-shadow: 0 10px 30px rgba(4, 77, 255, 0.12);
 }
