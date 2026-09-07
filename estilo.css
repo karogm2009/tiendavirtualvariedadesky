@@ -96,21 +96,13 @@ header {
     flex-shrink: 0;
 }
 
-.logo span {
+.logo img {
     width: 44px;
     height: 44px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #FFFFFF;
-    color: #0D3E70;
-
+    display: block;
     border-radius: 12px;
-
-    font-size: 16px;
-    font-weight: bold;
+    object-fit: cover;
 }
 
 .logo strong {
@@ -879,6 +871,19 @@ footer {
     background: #044DFF;
 }
 
+.redes a.facebook-enlace {
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.redes a.facebook-enlace:hover {
+    background: transparent;
+    color: #FFE04F;
+}
+
 .copyright {
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 
@@ -1153,6 +1158,142 @@ footer {
 
 .modal-acciones button {
     flex: 1 1 180px;
+}
+
+.resenas-seccion {
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid #e6eaf2;
+}
+
+.resenas-seccion h3 {
+    color: #0D3E70;
+    margin-bottom: 6px;
+}
+
+.resenas-seccion > p {
+    color: #666;
+    margin-bottom: 18px;
+}
+
+.formulario-resena {
+    display: grid;
+    gap: 14px;
+    padding: 18px;
+    background: #f8faff;
+    border: 1px solid #e6eaf2;
+    border-radius: 10px;
+}
+
+.formulario-resena label,
+.formulario-resena legend {
+    display: grid;
+    gap: 6px;
+    color: #243447;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.formulario-resena input[type="text"],
+.formulario-resena textarea {
+    width: 100%;
+    border: 1px solid #d7deeb;
+    border-radius: 6px;
+    padding: 10px;
+    font: inherit;
+    font-weight: normal;
+    resize: vertical;
+}
+
+.formulario-resena input:focus,
+.formulario-resena textarea:focus {
+    outline: 2px solid rgba(4, 77, 255, 0.2);
+    border-color: #044DFF;
+}
+
+.formulario-resena fieldset {
+    border: 0;
+    padding: 0;
+}
+
+.selector-estrellas {
+    display: flex;
+    gap: 4px;
+}
+
+.selector-estrellas label {
+    display: block;
+}
+
+.selector-estrellas input {
+    position: absolute;
+    opacity: 0;
+}
+
+.selector-estrellas span {
+    display: block;
+    padding: 5px 9px;
+    color: #C9A346;
+    border: 1px solid #d8af4b;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.selector-estrellas input:checked + span,
+.selector-estrellas span:hover {
+    background: #FFE04F;
+    color: #0D3E70;
+}
+
+.formulario-resena .boton {
+    justify-self: start;
+    border: 0;
+}
+
+.lista-resenas {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.resena {
+    padding: 14px;
+    border: 1px solid #e6eaf2;
+    border-radius: 8px;
+}
+
+.resena-cabecera {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.resena-fecha,
+.resenas-vacias {
+    color: #777;
+    font-size: 13px;
+}
+
+.resena-estrellas {
+    color: #C9A346;
+    margin: 6px 0;
+}
+
+.resena p {
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+.resena-acciones {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.resena-acciones button {
+    color: #044DFF;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .modal-producto img {
