@@ -9,7 +9,7 @@ const productos = {
     6: { nombre: "Set de tablas de picar", precio: 30000, categoria: "cocina", imagenes: ["img/tablasdepicar1.png", "img/tablasdepicar2.png", "img/tablasdepicar3.png"], descripcion: "Set de tablas para preparar tus alimentos con comodidad." },
     7: { nombre: "Cortinas", precio: 55000, categoria: "decoracion", imagenes: ["img/cortinas1.png", "img/cortinas2.png", "img/cortinas3.png"], descripcion: "Cortinas para renovar y complementar tus espacios." },
     8: { nombre: "Sabanas de bambu lisas (1.40 m, Doble)", precio: 75000, categoria: "habitacion", imagenes: ["img/sabanabambu1.401.png", "img/sabanabambu1.402.png", "img/sabanabambu1.403.png", "img/sabanabambu1.404.png", "img/sabanabambu1.405.png"], descripcion: "Sabanas de bambu lisas en tamano doble." },
-    9: { nombre: "Molino picador electrico", precio: 74000, categoria: "cocina", imagenes: ["img/imageinicio.png"], descripcion: "Molino picador electrico practico para preparar tus alimentos." },
+    9: { nombre: "Molino picador electrico", precio: 74000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Molino picador electrico practico para preparar tus alimentos." },
     10: { nombre: "Sabanas de bambu lisas (2 x 2 m, King)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambu2x2.png", "img/sabanabambu2x25.png"], descripcion: "Sabanas de bambu lisas en tamano King." },
     11: { nombre: "Sabanas de bambu estampadas (1.60 m, Queen)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambu1.601.png", "img/sabanabambu1.602.png"], descripcion: "Sabanas de bambu estampadas en tamano Queen." },
     12: { nombre: "Sabanas de bambu estampadas (1.40 m, Doble)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambuestampada1.401.png", "img/sabanabambuestampada1.402.png", "img/sabanabambuestampada1.403.png", "img/sabanabambuestampada1.404.png", "img/sabanabambuestampada1.405.png", "img/sabanabambuestampada1.406.png", "img/sabanabambuestampada1.407.png", "img/sabanabambuestampada1.408.png"], descripcion: "Sabanas de bambu estampadas en tamano doble." },
@@ -26,7 +26,7 @@ const productos = {
     23: { nombre: "Tendido King (Beige crema)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking2.png"], descripcion: "Tendido King en color beige crema." },
     24: { nombre: "Tendido Doble (Blanco)", precio: 170000, categoria: "habitacion", imagenes: ["img/tendidoble1.png"], descripcion: "Tendido doble en color blanco." },
     25: { nombre: "Tendido Doble estampado", precio: 100000, categoria: "habitacion", imagenes: ["img/tendido1.401.png", "img/tendido1.402.png"], descripcion: "Tendido doble con estampado." },
-    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/imageinicio.png"], descripcion: "Procesador de alimentos eléctrico para agilizar la preparacion de tus recetas." }
+    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Procesador de alimentos eléctrico para agilizar la preparacion de tus recetas." }
 };
 
 const variantes = { "tendido-queen": [18, 19, 20, 21], "tendido-king": [22, 23] };
