@@ -318,7 +318,33 @@
                 </div>
 
             </article>
+<!-- PRODUCTO 9: MOLINO PICADOR ELÉCTRICO -->
+<article class="producto"
+    data-categoria="cocina"
+    data-nombre="molino picador electrico picatodo"
+    onclick="abrirProducto(9)">
 
+    <div class="imagen-producto">
+        <img src="img/picatodo1.png"
+             alt="Molino picador eléctrico">
+    </div>
+
+    <div class="informacion">
+        <h3>Molino picador eléctrico</h3>
+
+        <div class="estrellas">
+            ⭐⭐⭐⭐⭐
+        </div>
+
+        <p class="precio">$74.000</p>
+
+        <button class="btn-agregar"
+            onclick="agregarCarrito(event, 9)">
+            Agregar al carrito
+        </button>
+    </div>
+
+</article>
 
             <!-- PRODUCTO 7: CORTINAS -->
             <article class="producto"
@@ -631,7 +657,7 @@
 
                     <p class="precio" id="precio-grupo-tendido-queen">$160.000</p>
 
-                    <div class="selector-color" id="colores-grupo-tendido-queen"></div>
+                    <div class="selector-color" id="colores-grupo-tendido-queen" onclick="event.stopPropagation()"></div>
 
                     <button class="btn-agregar"
                         onclick="event.stopPropagation(); agregarCarrito(event, obtenerVarianteActual('tendido-queen'))">
@@ -663,7 +689,7 @@
 
                     <p class="precio" id="precio-grupo-tendido-king">$150.000</p>
 
-                    <div class="selector-color" id="colores-grupo-tendido-king"></div>
+                    <div class="selector-color" id="colores-grupo-tendido-king" onclick="event.stopPropagation()"></div>
 
                     <button class="btn-agregar"
                         onclick="event.stopPropagation(); agregarCarrito(event, obtenerVarianteActual('tendido-king'))">
@@ -875,13 +901,13 @@
     <link rel="stylesheet" href="asistente.css">
 
     <button class="asistente-boton" id="asistenteBoton" aria-label="Abrir Asistente KY">
-        <span class="asistente-boton-emoji">💗</span>
+        <span class="asistente-boton-emoji">🔵</span>
         <span class="asistente-boton-texto">Asistente KY</span>
     </button>
 
     <div class="asistente-ventana" id="asistenteVentana" hidden>
         <div class="asistente-header">
-            <div class="asistente-avatar">💗</div>
+            <div class="asistente-avatar">🔵</div>
             <div class="asistente-header-texto">
                 <strong>Asistente KY</strong>
                 <span>En línea</span>
