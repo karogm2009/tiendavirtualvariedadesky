@@ -1,486 +1,158 @@
-/* =========================================================
-   ASISTENTE KY — ASISTENTE DE COMPRA INTELIGENTE
-   Este archivo NO modifica script.js. Reutiliza lo que ya
-   existe ahí: el objeto "productos", "agregarCarrito",
-   "formatearPrecio" y "numeroWhatsapp".
+const numeroWhatsapp = "573113100317";
 
-   ÍNDICE DE ESTE ARCHIVO:
-   1. Mapa de categorías y palabras clave por producto
-   2. Estado de la conversación
-   3. Funciones para dibujar mensajes y tarjetas de producto
-   4. Flujo del menú principal
-   5. Flujo "Ayúdame a elegir" (preguntas progresivas)
-   6. Flujo "Busco un regalo"
-   7. Ofertas
-   8. Búsqueda libre (cuando el usuario escribe texto)
-   9. Abrir/cerrar y arranque
-========================================================== */
-
-
-/* =========================================================
-   1. MAPA DE CATEGORÍAS Y PALABRAS CLAVE
-   Como "productos" (en script.js) no guarda la categoría,
-   aquí se define aparte para que el asistente pueda filtrar.
-   Si agregas un producto nuevo en script.js, agrégalo también
-   aquí con su categoría y sus palabras clave de búsqueda.
-========================================================== */
-const ASISTENTE_CATEGORIA = {
-    1: "electrodomesticos", 2: "cocina", 3: "electrodomesticos", 4: "cocina",
-    5: "hogar", 6: "cocina", 7: "decoracion", 9: "cocina",
-    8: "habitacion", 10: "habitacion", 11: "habitacion", 12: "habitacion",
-    13: "cocina", 14: "usopersonal", 15: "usopersonal", 16: "usopersonal",
-    17: "habitacion", 18: "habitacion", 19: "habitacion", 20: "habitacion",
-    21: "habitacion", 22: "habitacion", 23: "habitacion", 24: "habitacion", 25: "habitacion"
+const productos = {
+    1: { nombre: "Cafetera italiana", precio: 20000, categoria: "electrodomesticos", imagenes: ["img/cafeteraitaliana1.png", "img/cafeteraitaliana2.png", "img/cafeteraitaliana3.png"], descripcion: "Cafetera italiana practica para preparar cafe en casa." },
+    2: { nombre: "Juego de cuchillos Cutlery", precio: 89000, categoria: "cocina", imagenes: ["img/cuchilloscutlery1.png", "img/cuchilloscutlery2.png", "img/cuchilloscutlery3.png"], descripcion: "Juego de cuchillos para las tareas diarias de cocina." },
+    3: { nombre: "Exprimidor", precio: 120000, categoria: "electrodomesticos", imagenes: ["img/exprimidor1.png", "img/exprimidor2.png", "img/exprimidor3.png"], descripcion: "Exprimidor practico para preparar jugos frescos." },
+    4: { nombre: "Ollas de acero inoxidable", precio: 580000, categoria: "cocina", imagenes: ["img/ollasdeacero1.png", "img/ollasdeacero2.png"], descripcion: "Juego de ollas de acero inoxidable para tu cocina." },
+    5: { nombre: "Plancha para ropa", precio: 40000, categoria: "hogar", imagenes: ["img/plancha1.png", "img/plancha2.png", "img/plancha3.png"], descripcion: "Plancha para mantener tu ropa impecable." },
+    6: { nombre: "Set de tablas de picar", precio: 30000, categoria: "cocina", imagenes: ["img/tablasdepicar1.png", "img/tablasdepicar2.png", "img/tablasdepicar3.png"], descripcion: "Set de tablas para preparar tus alimentos con comodidad." },
+    7: { nombre: "Cortinas", precio: 55000, categoria: "decoracion", imagenes: ["img/cortinas1.png", "img/cortinas2.png", "img/cortinas3.png"], descripcion: "Cortinas para renovar y complementar tus espacios." },
+    8: { nombre: "Sabanas de bambu lisas (1.40 m, Doble)", precio: 75000, categoria: "habitacion", imagenes: ["img/sabanabambu1.401.png", "img/sabanabambu1.402.png", "img/sabanabambu1.403.png", "img/sabanabambu1.404.png", "img/sabanabambu1.405.png"], descripcion: "Sabanas de bambu lisas en tamano doble." },
+    9: { nombre: "Molino picador electrico", precio: 74000, categoria: "cocina", imagenes: ["img/imageinicio.png"], descripcion: "Molino picador electrico practico para preparar tus alimentos." },
+    10: { nombre: "Sabanas de bambu lisas (2 x 2 m, King)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambu2x2.png", "img/sabanabambu2x25.png"], descripcion: "Sabanas de bambu lisas en tamano King." },
+    11: { nombre: "Sabanas de bambu estampadas (1.60 m, Queen)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambu1.601.png", "img/sabanabambu1.602.png"], descripcion: "Sabanas de bambu estampadas en tamano Queen." },
+    12: { nombre: "Sabanas de bambu estampadas (1.40 m, Doble)", precio: 85000, categoria: "habitacion", imagenes: ["img/sabanabambuestampada1.401.png", "img/sabanabambuestampada1.402.png", "img/sabanabambuestampada1.403.png", "img/sabanabambuestampada1.404.png", "img/sabanabambuestampada1.405.png", "img/sabanabambuestampada1.406.png", "img/sabanabambuestampada1.407.png", "img/sabanabambuestampada1.408.png"], descripcion: "Sabanas de bambu estampadas en tamano doble." },
+    13: { nombre: "Llave para jabon", precio: 40000, categoria: "cocina", imagenes: ["img/llavejabon1.png", "img/llavejabon2.png", "img/llavejabon3.png"], descripcion: "Llave para jabon practica y funcional para tu cocina." },
+    14: { nombre: "Toalla (Beige crema)", precio: 48000, categoria: "usopersonal", imagenes: ["img/toalla2.png"], descripcion: "Toalla suave en tono beige crema." },
+    15: { nombre: "Toalla (Gris con dorado)", precio: 55000, categoria: "usopersonal", imagenes: ["img/toalla1.png"], descripcion: "Toalla suave con acabado gris y dorado." },
+    16: { nombre: "Toalla de playa", precio: 57000, categoria: "usopersonal", imagenes: ["img/toalla3.png"], descripcion: "Toalla amplia para disfrutar tus dias de playa." },
+    17: { nombre: "Cobija termica", precio: 85000, categoria: "habitacion", imagenes: ["img/cobijatermica1.png"], descripcion: "Cobija termica para descansar con mayor abrigo." },
+    18: { nombre: "Tendido Queen (Rosado)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen1.png"], descripcion: "Tendido Queen en color rosado." },
+    19: { nombre: "Tendido Queen (Beige)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen2.png"], descripcion: "Tendido Queen en color beige." },
+    20: { nombre: "Tendido Queen (Gris oscuro)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen3.png"], descripcion: "Tendido Queen en color gris oscuro." },
+    21: { nombre: "Tendido Queen (Gris claro y negro)", precio: 160000, categoria: "habitacion", imagenes: ["img/tendidoqueen4.png"], descripcion: "Tendido Queen en color gris claro y negro." },
+    22: { nombre: "Tendido King (Azul)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking1.png"], descripcion: "Tendido King en color azul." },
+    23: { nombre: "Tendido King (Beige crema)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking2.png"], descripcion: "Tendido King en color beige crema." },
+    24: { nombre: "Tendido Doble (Blanco)", precio: 170000, categoria: "habitacion", imagenes: ["img/tendidoble1.png"], descripcion: "Tendido doble en color blanco." },
+    25: { nombre: "Tendido Doble estampado", precio: 100000, categoria: "habitacion", imagenes: ["img/tendido1.401.png", "img/tendido1.402.png"], descripcion: "Tendido doble con estampado." },
+    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/imageinicio.png"], descripcion: "Procesador de alimentos eléctrico para agilizar la preparacion de tus recetas." }
 };
 
-const ASISTENTE_ETIQUETAS = {
-    1: ["cafetera", "café", "cafe"],
-    2: ["cuchillo", "cuchillos", "cutlery"],
-    3: ["exprimidor", "jugo", "citricos", "naranja"],
-    4: ["olla", "ollas", "acero"],
-    5: ["plancha", "ropa"],
-    6: ["tabla", "tablas", "picar"],
-    7: ["cortina", "cortinas"],
-    8: ["sabana", "sábana", "sabanas", "doble", "1.40"],
-    9: ["molino", "picador", "picatodo", "pica todo", "muele", "picadora"],
-    10: ["sabana", "sábana", "sabanas", "king", "2x2", "2 x 2"],
-    11: ["sabana", "sábana", "sabanas", "queen", "1.60", "estampada"],
-    12: ["sabana", "sábana", "sabanas", "doble", "estampada", "1.40"],
-    13: ["jabon", "jabón", "llave"],
-    14: ["toalla", "beige"],
-    15: ["toalla", "gris", "dorado"],
-    16: ["toalla", "playa"],
-    17: ["cobija", "termica", "térmica", "frio", "frío", "abrigo"],
-    18: ["tendido", "queen", "rosado"],
-    19: ["tendido", "queen", "beige"],
-    20: ["tendido", "queen", "gris oscuro"],
-    21: ["tendido", "queen", "gris claro", "negro"],
-    22: ["tendido", "king", "azul"],
-    23: ["tendido", "king", "beige"],
-    24: ["tendido", "doble", "blanco"],
-    25: ["tendido", "doble", "estampado"]
-};
+const variantes = { "tendido-queen": [18, 19, 20, 21], "tendido-king": [22, 23] };
+const varianteSeleccionada = { "tendido-queen": 18, "tendido-king": 22 };
 
-// Grupos de subcategoría usados en "Ayúdame a elegir"
-const ASISTENTE_SUBCATEGORIAS = {
-    cocina: [
-        { texto: "🥘 Ollas y sartenes", palabra: "olla" },
-        { texto: "🔪 Cuchillos", palabra: "cuchillo" },
-        { texto: "☕ Cafeteras", palabra: "cafetera" },
-        { texto: "🍊 Exprimidores", palabra: "exprimidor" },
-        { texto: "🧅 Molinos y picadores", palabra: "molino" },
-        { texto: "🍳 Otros utensilios", palabra: "" }
-    ],
-    habitacion: [
-        { texto: "🛏️ Sábanas", palabra: "sabana" },
-        { texto: "🛌 Tendidos", palabra: "tendido" },
-        { texto: "🧺 Otros productos", palabra: "" }
-    ]
-};
+function formatearPrecio(precio) { return `$${Number(precio).toLocaleString("es-CO")}`; }
+function imagenPrincipal(producto) { return producto?.imagenes?.[0] || "img/imageinicio.png"; }
+function obtenerVarianteActual(grupo) { return varianteSeleccionada[grupo] || variantes[grupo][0]; }
 
-
-/* =========================================================
-   2. ESTADO DE LA CONVERSACIÓN
-========================================================== */
-const estadoAsistente = {
-    flujo: null,      // "ayudame" | "regalo" | null
-    categoria: null,
-    subcategoria: null
-};
-
-const elMensajes = document.getElementById("asistenteMensajes");
-const elOpciones = document.getElementById("asistenteOpciones");
-const elVentana = document.getElementById("asistenteVentana");
-const elBoton = document.getElementById("asistenteBoton");
-
-
-/* =========================================================
-   3. DIBUJAR MENSAJES Y TARJETAS
-========================================================== */
-function asistenteScrollAbajo() {
-    elMensajes.scrollTop = elMensajes.scrollHeight;
-}
-
-// texto: puede incluir HTML (nosotros lo generamos, no viene del usuario)
-function asistenteMensajeBot(html) {
-    const div = document.createElement("div");
-    div.className = "asistente-msg asistente-msg-bot";
-    div.innerHTML = html;
-    elMensajes.appendChild(div);
-    asistenteScrollAbajo();
-}
-
-// El texto del usuario sí puede venir de un input, se inserta como texto plano
-function asistenteMensajeUsuario(texto) {
-    const div = document.createElement("div");
-    div.className = "asistente-msg asistente-msg-user";
-    div.textContent = texto;
-    elMensajes.appendChild(div);
-    asistenteScrollAbajo();
-}
-
-// botones: [{ texto: "Cocina", accion: function }]
-function asistenteMostrarOpciones(botones) {
-    elOpciones.innerHTML = "";
-    botones.forEach(b => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "asistente-opcion";
-        btn.textContent = b.texto;
-        btn.addEventListener("click", () => {
-            asistenteMensajeUsuario(b.texto);
-            elOpciones.innerHTML = "";
-            b.accion();
-        });
-        elOpciones.appendChild(btn);
+function actualizarGruposVariantes() {
+    Object.keys(variantes).forEach(grupo => {
+        const id = obtenerVarianteActual(grupo);
+        const producto = productos[id];
+        const imagen = document.getElementById(`img-grupo-${grupo}`);
+        const precio = document.getElementById(`precio-grupo-${grupo}`);
+        if (imagen) imagen.src = imagenPrincipal(producto);
+        if (precio) precio.textContent = formatearPrecio(producto.precio);
+        const contenedor = document.getElementById(`colores-grupo-${grupo}`);
+        if (contenedor) contenedor.innerHTML = variantes[grupo].map(variante => `<button type="button" class="swatch-color${variante === id ? " activo" : ""}" aria-label="${productos[variante].nombre}" style="background-image:url('${imagenPrincipal(productos[variante])}');background-size:cover" onclick="event.stopPropagation(); seleccionarVariante('${grupo}', ${variante})"></button>`).join("");
     });
 }
+function seleccionarVariante(grupo, id) { varianteSeleccionada[grupo] = id; actualizarGruposVariantes(); }
 
-function asistenteLimpiarOpciones() {
-    elOpciones.innerHTML = "";
+function actualizarContadorCarrito() {
+    const contador = document.getElementById("carritoContador");
+    const carrito = JSON.parse(localStorage.getItem("ky-carrito") || "[]");
+    if (contador) contador.textContent = carrito.reduce((total, item) => total + item.cantidad, 0);
 }
+function obtenerCarrito() { return JSON.parse(localStorage.getItem("ky-carrito") || "[]"); }
 
-// Dibuja hasta 3 productos como tarjetas dentro de un mensaje del bot
-function asistenteTarjetasProductos(ids) {
-    const lista = ids.slice(0, 3);
-
-    const tarjetasHtml = lista.map(id => {
-        const p = productos[id];
-        if (!p) return "";
-
-        const img = imagenPrincipal(p);
-
-        const precioHtml = p.descuento && p.precioAnterior
-            ? `${formatearPrecio(p.precio)}
-               <span class="asistente-tarjeta-precio-anterior">${formatearPrecio(p.precioAnterior)}</span>
-               <span class="asistente-tarjeta-descuento">OFERTA</span>`
-            : formatearPrecio(p.precio);
-
-        return `
-            <div class="asistente-tarjeta">
-                <img src="${img}" alt="${p.nombre}">
-                <div class="asistente-tarjeta-info">
-                    <h4>${p.nombre}</h4>
-                    <div class="asistente-tarjeta-precio">${precioHtml}</div>
-                    <div class="asistente-tarjeta-acciones">
-                        <button class="asistente-btn-agregar" onclick="asistenteAgregarCarrito(${id})">🛒 Agregar</button>
-                        <button class="asistente-btn-whatsapp" onclick="asistenteConsultarWhatsapp(${id})">💬 WhatsApp</button>
-                    </div>
-                </div>
-            </div>
-        `;
+function agregarCarrito(evento, id) {
+    evento?.stopPropagation();
+    if (!productos[id]) return;
+    const carrito = obtenerCarrito();
+    const existente = carrito.find(item => item.id === id);
+    if (existente) existente.cantidad += 1;
+    else carrito.push({ id, cantidad: 1 });
+    localStorage.setItem("ky-carrito", JSON.stringify(carrito));
+    actualizarContadorCarrito();
+    renderizarCarrito();
+}
+function cambiarCantidad(id, cambio) {
+    const carrito = obtenerCarrito();
+    const item = carrito.find(elemento => elemento.id === id);
+    if (!item) return;
+    item.cantidad += cambio;
+    localStorage.setItem("ky-carrito", JSON.stringify(carrito.filter(elemento => elemento.cantidad > 0)));
+    actualizarContadorCarrito(); renderizarCarrito();
+}
+function eliminarDelCarrito(id) {
+    localStorage.setItem("ky-carrito", JSON.stringify(obtenerCarrito().filter(item => item.id !== id)));
+    actualizarContadorCarrito(); renderizarCarrito();
+}
+function renderizarCarrito() {
+    const contenedor = document.getElementById("carritoItems");
+    const totalElemento = document.getElementById("carritoTotal");
+    if (!contenedor || !totalElemento) return;
+    let total = 0;
+    const carrito = obtenerCarrito();
+    if (!carrito.length) { contenedor.innerHTML = '<p class="carrito-vacio">Tu carrito está vacío.</p>'; totalElemento.textContent = "$0"; return; }
+    contenedor.innerHTML = carrito.map(item => {
+        const producto = productos[item.id];
+        if (!producto) return "";
+        total += producto.precio * item.cantidad;
+        return `<div class="carrito-item"><div class="carrito-item-info"><h4>${producto.nombre}</h4><span>${formatearPrecio(producto.precio)} x ${item.cantidad}</span></div><div class="carrito-item-acciones"><button type="button" onclick="cambiarCantidad(${item.id}, -1)">−</button><button type="button" onclick="cambiarCantidad(${item.id}, 1)">+</button><button type="button" class="carrito-item-eliminar" aria-label="Eliminar" onclick="eliminarDelCarrito(${item.id})">×</button></div></div>`;
     }).join("");
+    totalElemento.textContent = formatearPrecio(total);
+}
+function abrirCarrito() { document.getElementById("carritoPanel")?.classList.add("abierto"); document.getElementById("overlay")?.classList.add("visible"); renderizarCarrito(); }
+function cerrarCarrito() { document.getElementById("carritoPanel")?.classList.remove("abierto"); document.getElementById("overlay")?.classList.remove("visible"); }
 
-    asistenteMensajeBot(`<div class="asistente-tarjetas">${tarjetasHtml}</div>`);
+function cerrarProducto() { document.getElementById("modalOverlay")?.classList.remove("visible"); document.body.classList.remove("modal-abierto"); }
+function abrirProducto(id) {
+    const producto = productos[id];
+    const modal = document.getElementById("modalOverlay");
+    const contenido = document.getElementById("modalContenido");
+    if (!producto || !modal || !contenido) return;
+    contenido.innerHTML = `<div class="modal-galeria"><img id="modalImagenPrincipal" class="modal-imagen-principal" src="${imagenPrincipal(producto)}" alt="${producto.nombre}"><div class="modal-miniaturas">${producto.imagenes.map((imagen, indice) => `<img class="modal-miniatura${indice === 0 ? " activa" : ""}" src="${imagen}" alt="${producto.nombre} ${indice + 1}" onclick="cambiarImagenModal('${imagen}', this)">`).join("")}</div></div><div class="modal-detalles"><h2>${producto.nombre}</h2><div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div><p class="descripcion">${producto.descripcion}</p><p class="precio">${formatearPrecio(producto.precio)}</p><div class="modal-acciones"><button type="button" class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button><button type="button" class="boton" onclick="comprarYa(${id})">Comprar ya</button></div></div>`;
+    modal.classList.add("visible"); document.body.classList.add("modal-abierto");
+}
+function cambiarImagenModal(src, miniatura) { const imagen = document.getElementById("modalImagenPrincipal"); if (imagen) imagen.src = src; document.querySelectorAll(".modal-miniatura").forEach(elemento => elemento.classList.remove("activa")); miniatura.classList.add("activa"); }
+function comprarYa(id) { agregarCarrito(null, id); cerrarProducto(); abrirCarrito(); }
+
+function normalizarTexto(texto) { return String(texto).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
+function buscarProductos(texto) {
+    const consulta = normalizarTexto(texto);
+    const palabras = consulta.split(" ").filter(palabra => palabra.length > 2);
+    return Object.keys(productos).map(Number).filter(id => {
+        const nombre = normalizarTexto(productos[id].nombre);
+        return nombre.includes(consulta) || palabras.every(palabra => nombre.includes(palabra));
+    });
 }
 
-function asistenteAgregarCarrito(id) {
-    agregarCarrito(null, id);
-    asistenteMensajeBot("✓ Producto agregado al carrito");
-    asistenteMostrarOpciones([
-        { texto: "Ver carrito", accion: () => { cerrarAsistente(); abrirCarrito(); } },
-        { texto: "Seguir buscando", accion: asistenteMenuPrincipal }
-    ]);
-}
-
-function asistenteConsultarWhatsapp(id) {
-    const p = productos[id];
-    if (!p) return;
-    const mensaje = encodeURIComponent(`Hola, estoy interesado/a en ${p.nombre}. ¿Me pueden brindar más información?`);
-    window.open(`https://wa.me/${numeroWhatsapp}?text=${mensaje}`, "_blank");
-}
-
-
-/* =========================================================
-   4. MENÚ PRINCIPAL
-========================================================== */
-function asistenteMenuPrincipal() {
-    estadoAsistente.flujo = null;
-    estadoAsistente.categoria = null;
-    estadoAsistente.subcategoria = null;
-
-    asistenteMensajeBot("¿En qué te puedo ayudar hoy?");
-    asistenteMostrarOpciones([
-        { texto: "🍳 Cocina", accion: () => asistenteMostrarCategoria("cocina") },
-        { texto: "🛏️ Dormitorio", accion: () => asistenteMostrarCategoria("habitacion") },
-        { texto: "🏠 Hogar", accion: () => asistenteMostrarCategoria("hogar") },
-        { texto: "🎁 Busco un regalo", accion: asistenteIniciarRegalo },
-        { texto: "🔥 Quiero ver ofertas", accion: asistenteMostrarOfertas },
-        { texto: "❓ No sé qué necesito", accion: asistenteIniciarAyudame },
-        { texto: "✨ Ayúdame a elegir", accion: asistenteIniciarAyudame }
-    ]);
-}
-
-function asistenteIdsPorCategoria(categoria) {
-    return Object.keys(ASISTENTE_CATEGORIA)
-        .map(Number)
-        .filter(id => ASISTENTE_CATEGORIA[id] === categoria);
-}
-
-function asistenteMostrarCategoria(categoria) {
-    const ids = asistenteIdsPorCategoria(categoria);
-    if (ids.length === 0) {
-        asistenteMensajeBot("No encontré productos en esa categoría todavía.");
-        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
-        return;
-    }
-    asistenteMensajeBot("Estas son algunas opciones que tenemos:");
-    asistenteTarjetasProductos(ids);
-    asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
-}
-
-
-/* =========================================================
-   5. FLUJO "AYÚDAME A ELEGIR" (preguntas progresivas)
-========================================================== */
-function asistenteIniciarAyudame() {
-    estadoAsistente.flujo = "ayudame";
-    asistenteMensajeBot("¿Qué estás buscando?");
-    asistenteMostrarOpciones([
-        { texto: "🍳 Cocina", accion: () => asistentePreguntaSubcategoria("cocina") },
-        { texto: "🛏️ Dormitorio", accion: () => asistentePreguntaSubcategoria("habitacion") },
-        { texto: "🏠 Hogar", accion: () => asistentePreguntaPresupuesto("hogar", "") },
-        { texto: "🎁 Regalo", accion: asistenteIniciarRegalo },
-        { texto: "🤷 No estoy seguro", accion: asistenteMenuPrincipal }
-    ]);
-}
-
-function asistentePreguntaSubcategoria(categoria) {
-    estadoAsistente.categoria = categoria;
-    const opciones = ASISTENTE_SUBCATEGORIAS[categoria] || [];
-
-    asistenteMensajeBot("¿Qué necesitas?");
-    asistenteMostrarOpciones(
-        opciones.map(o => ({
-            texto: o.texto,
-            accion: () => {
-                if (o.palabra === "sabana") {
-                    asistentePreguntaTamano(categoria);
-                } else {
-                    asistentePreguntaPresupuesto(categoria, o.palabra);
+function iniciarTienda() {
+    actualizarContadorCarrito(); actualizarGruposVariantes(); renderizarCarrito();
+    const secciones = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+        const observador = new IntersectionObserver(elementos => {
+            elementos.forEach(elemento => {
+                if (elemento.isIntersecting) {
+                    elemento.target.classList.add("visible");
+                    observador.unobserve(elemento.target);
                 }
-            }
-        }))
-    );
-}
-
-function asistentePreguntaTamano(categoria) {
-    asistenteMensajeBot("¿Qué tamaño necesitas?");
-    asistenteMostrarOpciones([
-        { texto: "1.40 m – Doble", accion: () => asistenteMostrarResultado([8]) },
-        { texto: "1.60 m – Queen", accion: () => asistenteMostrarResultado([11]) },
-        { texto: "2 x 2 m – King", accion: () => asistenteMostrarResultado([10]) },
-        { texto: "No estoy seguro", accion: () => asistentePreguntaPresupuesto(categoria, "sabana") }
-    ]);
-}
-
-function asistentePreguntaPresupuesto(categoria, palabra) {
-    estadoAsistente.subcategoria = palabra;
-
-    asistenteMensajeBot("¿Cuál es tu presupuesto aproximado?");
-    asistenteMostrarOpciones([
-        { texto: "💰 Menos de $50.000", accion: () => asistenteFiltrarYMostrar(categoria, palabra, 0, 50000) },
-        { texto: "💵 $50.000 – $100.000", accion: () => asistenteFiltrarYMostrar(categoria, palabra, 50000, 100000) },
-        { texto: "💎 Más de $100.000", accion: () => asistenteFiltrarYMostrar(categoria, palabra, 100000, Infinity) },
-        { texto: "🤷 No tengo presupuesto definido", accion: () => asistenteFiltrarYMostrar(categoria, palabra, 0, Infinity) }
-    ]);
-}
-
-function asistenteFiltrarYMostrar(categoria, palabra, min, max) {
-    let ids = asistenteIdsPorCategoria(categoria).filter(id => {
-        const p = productos[id];
-        return p && p.precio >= min && p.precio <= max;
-    });
-
-    if (palabra) {
-        ids = ids.filter(id => (ASISTENTE_ETIQUETAS[id] || []).includes(palabra));
-    }
-
-    asistenteMostrarResultado(ids, categoria, min, max);
-}
-
-function asistenteMostrarResultado(ids, categoriaFallback, min, max) {
-    if (ids.length === 0) {
-        asistenteMensajeBot("No encontré exactamente eso, pero estas opciones podrían servirte:");
-        const alternativas = categoriaFallback ? asistenteIdsPorCategoria(categoriaFallback) : Object.keys(productos).map(Number);
-        asistenteTarjetasProductos(alternativas);
+            });
+        }, { threshold: 0.08 });
+        secciones.forEach(seccion => observador.observe(seccion));
     } else {
-        asistenteMensajeBot("⭐ Te recomiendo:");
-        asistenteTarjetasProductos(ids);
+        secciones.forEach(seccion => seccion.classList.add("visible"));
     }
-    asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
-}
-
-
-/* =========================================================
-   6. FLUJO "BUSCO UN REGALO"
-========================================================== */
-function asistenteIniciarRegalo() {
-    estadoAsistente.flujo = "regalo";
-    asistenteMensajeBot("🎁 ¿Para quién es el regalo?");
-    asistenteMostrarOpciones([
-        { texto: "🏠 Alguien que ama su hogar", accion: () => asistenteRegaloPresupuesto("habitacion") },
-        { texto: "👩‍🍳 Alguien que disfruta cocinar", accion: () => asistenteRegaloPresupuesto("cocina") },
-        { texto: "🛏️ Alguien que disfruta decorar", accion: () => asistenteRegaloPresupuesto("decoracion") },
-        { texto: "🎁 No estoy seguro", accion: () => asistenteRegaloPresupuesto("") }
-    ]);
-}
-
-function asistenteRegaloPresupuesto(categoria) {
-    estadoAsistente.categoria = categoria;
-    asistenteMensajeBot("¿Cuánto quieres gastar?");
-    asistenteMostrarOpciones([
-        { texto: "💰 Menos de $50.000", accion: () => asistenteMostrarRegalo(categoria, 0, 50000) },
-        { texto: "💵 $50.000 – $100.000", accion: () => asistenteMostrarRegalo(categoria, 50000, 100000) },
-        { texto: "💎 Más de $100.000", accion: () => asistenteMostrarRegalo(categoria, 100000, Infinity) }
-    ]);
-}
-
-function asistenteMostrarRegalo(categoria, min, max) {
-    const base = categoria ? asistenteIdsPorCategoria(categoria) : Object.keys(productos).map(Number);
-    const ids = base.filter(id => productos[id] && productos[id].precio >= min && productos[id].precio <= max);
-    asistenteMostrarResultado(ids, categoria, min, max);
-}
-
-
-/* =========================================================
-   7. OFERTAS
-   Solo muestra productos que YA tienen "descuento: true" en
-   script.js. Nunca inventa precios ni descuentos.
-========================================================== */
-function asistenteMostrarOfertas() {
-    const ids = Object.keys(productos).map(Number).filter(id => productos[id].descuento);
-
-    if (ids.length === 0) {
-        asistenteMensajeBot("En este momento no tenemos ofertas activas, ¡pero vuelve pronto! 🔥");
-    } else {
-        asistenteMensajeBot("🔥 Estas son nuestras ofertas activas:");
-        asistenteTarjetasProductos(ids);
-    }
-    asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
-}
-
-
-/* =========================================================
-   8. BÚSQUEDA LIBRE (el usuario escribe texto)
-========================================================== */
-function asistenteParsearPresupuesto(texto) {
-    // Busca frases como "menos de 50.000" o "máximo 100000"
-    const numeros = (texto.match(/[\d.]{4,}/g) || []).map(n => Number(n.replace(/\./g, "")));
-    if (numeros.length === 0) return null;
-
-    if (/menos de|máximo|maximo|hasta/.test(texto)) {
-        return { min: 0, max: numeros[0] };
-    }
-    if (/más de|mas de|desde/.test(texto)) {
-        return { min: numeros[0], max: Infinity };
-    }
-    return { min: 0, max: numeros[0] };
-}
-
-function asistenteBuscarLibre(textoOriginal) {
-    const texto = textoOriginal.toLowerCase();
-
-    // Detecta intención de regalo directamente por texto libre
-    if (texto.includes("regalo")) {
-        asistenteIniciarRegalo();
-        return;
-    }
-
-    // Detecta intención de ofertas
-    if (texto.includes("oferta") || texto.includes("descuento")) {
-        asistenteMostrarOfertas();
-        return;
-    }
-
-    // Detecta tamaño de sábana mencionado directamente
-    if (texto.includes("1.60") || texto.includes("1,60")) {
-        asistenteMensajeBot("🛏️ ¡Perfecto! Para una cama de 1.60 m necesitas una opción Queen.\n\n⭐ Te recomiendo:");
-        asistenteTarjetasProductos([11]);
-        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
-        return;
-    }
-    if (texto.includes("1.40") || texto.includes("1,40")) {
-        asistenteMensajeBot("🛏️ Para una cama de 1.40 m necesitas una opción Doble.\n\n⭐ Te recomiendo:");
-        asistenteTarjetasProductos([8]);
-        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
-        return;
-    }
-    if (texto.includes("2x2") || texto.includes("2 x 2") || texto.includes("king")) {
-        asistenteMensajeBot("🛏️ Para una cama King necesitas esta opción:\n\n⭐ Te recomiendo:");
-        asistenteTarjetasProductos([10]);
-        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
-        return;
-    }
-
-    // Búsqueda por palabras clave de producto
-    let ids = Object.keys(ASISTENTE_ETIQUETAS)
-        .map(Number)
-        .filter(id => ASISTENTE_ETIQUETAS[id].some(palabra => texto.includes(palabra)));
-
-    // Si el texto trae un presupuesto, se aplica como filtro adicional
-    const presupuesto = asistenteParsearPresupuesto(texto);
-    if (presupuesto) {
-        const candidatos = ids.length > 0 ? ids : Object.keys(productos).map(Number);
-        ids = candidatos.filter(id => productos[id].precio >= presupuesto.min && productos[id].precio <= presupuesto.max);
-    }
-
-    if (ids.length === 0) {
-        asistenteMensajeBot("No encontré exactamente ese producto, pero estas opciones podrían servirte:");
-        asistenteTarjetasProductos(Object.keys(productos).map(Number).filter(id => productos[id].descuento).length
-            ? Object.keys(productos).map(Number).slice(0, 3)
-            : Object.keys(productos).map(Number).slice(0, 3));
-    } else {
-        asistenteMensajeBot("⭐ Te recomiendo:");
-        asistenteTarjetasProductos(ids);
-    }
-
-    asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
-}
-
-
-/* =========================================================
-   9. ABRIR / CERRAR Y ARRANQUE
-========================================================== */
-function abrirAsistente() {
-    elVentana.classList.add("asistente-abierta");
-    elVentana.removeAttribute("hidden");
-    if (elMensajes.childElementCount === 0) {
-        asistenteMensajeBot("🔵 ¡Hola! Soy el Asistente KY.\nEstoy aquí para ayudarte a encontrar el producto ideal para tu hogar.");
-        asistenteMenuPrincipal();
-    }
-    document.getElementById("asistenteTexto").focus();
-}
-
-function cerrarAsistente() {
-    elVentana.classList.remove("asistente-abierta");
-    elVentana.setAttribute("hidden", "");
-}
-
-function asistenteEstaAbierto() {
-    return elVentana.classList.contains("asistente-abierta");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    elBoton.addEventListener("click", () => {
-        if (asistenteEstaAbierto()) {
-            cerrarAsistente();
-        } else {
-            abrirAsistente();
-        }
+    document.getElementById("btnCarrito")?.addEventListener("click", evento => { evento.preventDefault(); abrirCarrito(); });
+    document.getElementById("cerrarCarrito")?.addEventListener("click", cerrarCarrito);
+    document.getElementById("overlay")?.addEventListener("click", cerrarCarrito);
+    document.getElementById("cerrarModal")?.addEventListener("click", cerrarProducto);
+    document.getElementById("modalOverlay")?.addEventListener("click", evento => { if (evento.target.id === "modalOverlay") cerrarProducto(); });
+    document.addEventListener("keydown", evento => { if (evento.key === "Escape") { cerrarProducto(); cerrarCarrito(); } });
+    document.getElementById("finalizarCompra")?.addEventListener("click", evento => {
+        evento.preventDefault();
+        const detalle = obtenerCarrito().map(item => `${productos[item.id].nombre} x${item.cantidad}`).join(", ");
+        if (detalle) window.open(`https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(`Hola, quiero comprar: ${detalle}`)}`, "_blank");
     });
-
-    document.getElementById("asistenteCerrar").addEventListener("click", cerrarAsistente);
-
-    document.getElementById("asistenteForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const input = document.getElementById("asistenteTexto");
-        const texto = input.value.trim();
-        if (!texto) return;
-
-        asistenteMensajeUsuario(texto);
-        input.value = "";
-        asistenteLimpiarOpciones();
-        asistenteBuscarLibre(texto);
+    document.getElementById("inputBuscar")?.addEventListener("input", evento => {
+        const consulta = normalizarTexto(evento.target.value);
+        document.querySelectorAll(".producto").forEach(tarjeta => { tarjeta.hidden = Boolean(consulta) && !normalizarTexto(tarjeta.dataset.nombre || "").includes(consulta); });
+        const hayResultados = [...document.querySelectorAll(".producto")].some(tarjeta => !tarjeta.hidden);
+        const sinResultados = document.getElementById("sinResultados");
+        if (sinResultados) sinResultados.style.display = hayResultados ? "none" : "block";
     });
-});
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciarTienda); else iniciarTienda();
