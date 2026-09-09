@@ -1,413 +1,495 @@
 /* =========================================================
-   ASISTENTE KY — ESTILOS
-   Archivo nuevo e independiente de estilo.css. Usa los colores
-   oficiales de marca de Variedades KY (paleta azul y dorado):
-   #0D3E70 encabezado, #2C73FF botón flotante, #044DFF botones,
-   #0080FF hover, #FFE04F detalles, #C9A346 precios.
+   ASISTENTE KY — ASISTENTE DE COMPRA INTELIGENTE
+   Este archivo NO modifica script.js. Reutiliza lo que ya
+   existe ahí: el objeto "productos", "agregarCarrito",
+   "formatearPrecio" y "numeroWhatsapp".
+
+   ÍNDICE DE ESTE ARCHIVO:
+   1. Mapa de categorías y palabras clave por producto
+   2. Estado de la conversación
+   3. Funciones para dibujar mensajes y tarjetas de producto
+   4. Flujo del menú principal
+   5. Flujo "Ayúdame a elegir" (preguntas progresivas)
+   6. Flujo "Busco un regalo"
+   7. Ofertas
+   8. Búsqueda libre (cuando el usuario escribe texto)
+   9. Abrir/cerrar y arranque
 ========================================================== */
+
 
 /* =========================================================
-   BOTÓN FLOTANTE
-   Se ubica arriba del botón flotante de WhatsApp para que
-   no se encimen (ese está en bottom:25px / right:25px)
+   1. MAPA DE CATEGORÍAS Y PALABRAS CLAVE
+   Como "productos" (en script.js) no guarda la categoría,
+   aquí se define aparte para que el asistente pueda filtrar.
+   Si agregas un producto nuevo en script.js, agrégalo también
+   aquí con su categoría y sus palabras clave de búsqueda.
 ========================================================== */
-.asistente-boton {
-    position: fixed;
-    bottom: 95px;
-    right: 25px;
+const ASISTENTE_CATEGORIA = {
+    1: "electrodomesticos", 2: "cocina", 3: "electrodomesticos", 4: "cocina",
+    5: "hogar", 6: "cocina", 7: "decoracion",
+    8: "habitacion", 10: "habitacion", 11: "habitacion", 12: "habitacion",
+    13: "cocina", 14: "usopersonal", 15: "usopersonal", 16: "usopersonal",
+    17: "habitacion", 18: "habitacion", 19: "habitacion", 20: "habitacion",
+    21: "habitacion", 22: "habitacion", 23: "habitacion", 24: "habitacion", 25: "habitacion", 26: "cocina"
+};
 
-    display: flex;
-    align-items: center;
-    gap: 8px;
+const ASISTENTE_ETIQUETAS = {
+    1: ["cafetera", "café", "cafe"],
+    2: ["cuchillo", "cuchillos", "cutlery"],
+    3: ["exprimidor", "jugo", "citricos", "naranja"],
+    4: ["olla", "ollas", "acero"],
+    5: ["plancha", "ropa"],
+    6: ["tabla", "tablas", "picar"],
+    7: ["cortina", "cortinas"],
+    8: ["sabana", "sábana", "sabanas", "doble", "1.40"],
+    10: ["sabana", "sábana", "sabanas", "king", "2x2", "2 x 2"],
+    11: ["sabana", "sábana", "sabanas", "queen", "1.60", "estampada"],
+    12: ["sabana", "sábana", "sabanas", "doble", "estampada", "1.40"],
+    13: ["jabon", "jabón", "llave"],
+    14: ["toalla", "beige"],
+    15: ["toalla", "gris", "dorado"],
+    16: ["toalla", "playa"],
+    17: ["cobija", "termica", "térmica", "frio", "frío", "abrigo"],
+    18: ["tendido", "queen", "rosado"],
+    19: ["tendido", "queen", "beige"],
+    20: ["tendido", "queen", "gris oscuro"],
+    21: ["tendido", "queen", "gris claro", "negro"],
+    22: ["tendido", "king", "azul"],
+    23: ["tendido", "king", "beige"],
+    24: ["tendido", "doble", "blanco"],
+    25: ["tendido", "doble", "estampado"],
+    26: ["procesador", "alimentos", "electrico", "electrica", "cocina"]
+};
 
-    background: #2C73FF;
-    color: #ffffff;
+// Grupos de subcategoría usados en "Ayúdame a elegir"
+const ASISTENTE_SUBCATEGORIAS = {
+    cocina: [
+        { texto: "🥘 Ollas y sartenes", palabra: "olla" },
+        { texto: "🔪 Cuchillos", palabra: "cuchillo" },
+        { texto: "☕ Cafeteras", palabra: "cafetera" },
+        { texto: "🍊 Exprimidores", palabra: "exprimidor" },
+        { texto: "🧅 Molinos y picadores", palabra: "molino" },
+        { texto: "🍳 Otros utensilios", palabra: "" }
+    ],
+    habitacion: [
+        { texto: "🛏️ Sábanas", palabra: "sabana" },
+        { texto: "🛌 Tendidos", palabra: "tendido" },
+        { texto: "🧺 Otros productos", palabra: "" }
+    ]
+};
 
-    padding: 12px 18px 12px 14px;
-    border-radius: 30px;
-
-    font-size: 14px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-
-    box-shadow: 0 6px 20px rgba(44, 115, 255, 0.4);
-
-    cursor: pointer;
-    z-index: 900;
-
-    transition: 0.2s;
-}
-
-.asistente-boton:hover {
-    transform: scale(1.05);
-    background: #0080FF;
-}
-
-.asistente-boton-emoji {
-    font-size: 20px;
-}
 
 /* =========================================================
-   VENTANA DE CHAT
-   Oculta por defecto (display:none). Solo se muestra cuando
-   asistente.js le agrega la clase "asistente-abierta".
-   (Antes dependía del atributo "hidden", pero esta misma
-   regla de aquí abajo lo sobrescribía con display:flex y el
-   chat nunca llegaba a cerrarse — por eso la X no funcionaba)
+   2. ESTADO DE LA CONVERSACIÓN
 ========================================================== */
-.asistente-ventana {
-    display: none;
+const estadoAsistente = {
+    flujo: null,      // "ayudame" | "regalo" | null
+    categoria: null,
+    subcategoria: null
+};
 
-    position: fixed;
-    bottom: 155px;
-    right: 25px;
+const elMensajes = document.getElementById("asistenteMensajes");
+const elOpciones = document.getElementById("asistenteOpciones");
+const elVentana = document.getElementById("asistenteVentana");
+const elBoton = document.getElementById("asistenteBoton");
 
-    width: 370px;
-    max-width: 92vw;
-    height: 560px;
-    max-height: 75vh;
-
-    background: #ffffff;
-
-    border-radius: 18px;
-    overflow: hidden;
-
-    box-shadow: 0 20px 50px rgba(13, 62, 112, 0.3);
-
-    flex-direction: column;
-
-    z-index: 1800;
-
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.asistente-ventana.asistente-abierta {
-    display: flex;
-}
-
-.asistente-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    background: #0D3E70;
-    color: #ffffff;
-
-    padding: 16px 16px;
-    flex-shrink: 0;
-}
-
-.asistente-avatar {
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #FFE04F;
-    border-radius: 50%;
-
-    font-size: 18px;
-    flex-shrink: 0;
-}
-
-.asistente-header-texto {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.3;
-}
-
-.asistente-header-texto strong {
-    font-size: 15px;
-}
-
-.asistente-header-texto span {
-    font-size: 12px;
-    color: #A9CBFF;
-}
-
-.asistente-cerrar {
-    margin-left: auto;
-
-    color: #ffffff;
-    font-size: 22px;
-    line-height: 1;
-}
 
 /* =========================================================
-   ÁREA DE MENSAJES
+   3. DIBUJAR MENSAJES Y TARJETAS
 ========================================================== */
-.asistente-mensajes {
-    flex: 1;
-    overflow-y: auto;
-
-    padding: 16px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    background: #F8FAFF;
+function asistenteScrollAbajo() {
+    elMensajes.scrollTop = elMensajes.scrollHeight;
 }
 
-.asistente-msg {
-    max-width: 85%;
-    padding: 10px 14px;
-    border-radius: 14px;
-
-    font-size: 13.5px;
-    line-height: 1.5;
-
-    white-space: pre-line;
+// texto: puede incluir HTML (nosotros lo generamos, no viene del usuario)
+function asistenteMensajeBot(html) {
+    const div = document.createElement("div");
+    div.className = "asistente-msg asistente-msg-bot";
+    div.innerHTML = html;
+    elMensajes.appendChild(div);
+    asistenteScrollAbajo();
 }
 
-.asistente-msg-bot {
-    align-self: flex-start;
-
-    background: #ffffff;
-    color: #243447;
-
-    border: 1px solid #ececf3;
-    border-bottom-left-radius: 4px;
+// El texto del usuario sí puede venir de un input, se inserta como texto plano
+function asistenteMensajeUsuario(texto) {
+    const div = document.createElement("div");
+    div.className = "asistente-msg asistente-msg-user";
+    div.textContent = texto;
+    elMensajes.appendChild(div);
+    asistenteScrollAbajo();
 }
 
-.asistente-msg-user {
-    align-self: flex-end;
-
-    background: #044DFF;
-    color: #ffffff;
-
-    border-bottom-right-radius: 4px;
+// botones: [{ texto: "Cocina", accion: function }]
+function asistenteMostrarOpciones(botones) {
+    elOpciones.innerHTML = "";
+    botones.forEach(b => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "asistente-opcion";
+        btn.textContent = b.texto;
+        btn.addEventListener("click", () => {
+            asistenteMensajeUsuario(b.texto);
+            elOpciones.innerHTML = "";
+            b.accion();
+        });
+        elOpciones.appendChild(btn);
+    });
 }
+
+function asistenteLimpiarOpciones() {
+    elOpciones.innerHTML = "";
+}
+
+// Dibuja hasta 3 productos como tarjetas dentro de un mensaje del bot
+function asistenteTarjetasProductos(ids) {
+    const lista = ids.slice(0, 3);
+
+    const tarjetasHtml = lista.map(id => {
+        const p = productos[id];
+        if (!p) return "";
+
+        const img = imagenPrincipal(p);
+
+        const precioHtml = p.descuento && p.precioAnterior
+            ? `${formatearPrecio(p.precio)}
+               <span class="asistente-tarjeta-precio-anterior">${formatearPrecio(p.precioAnterior)}</span>
+               <span class="asistente-tarjeta-descuento">OFERTA</span>`
+            : formatearPrecio(p.precio);
+
+        return `
+            <div class="asistente-tarjeta">
+                <img src="${img}" alt="${p.nombre}">
+                <div class="asistente-tarjeta-info">
+                    <h4>${p.nombre}</h4>
+                    <div class="asistente-tarjeta-precio">${precioHtml}</div>
+                    <div class="asistente-tarjeta-acciones">
+                        <button class="asistente-btn-ver" onclick="abrirProducto(${id})">Ver detalles</button>
+                        <button class="asistente-btn-agregar" onclick="asistenteAgregarCarrito(${id})">🛒 Agregar</button>
+                        <button class="asistente-btn-whatsapp" onclick="asistenteConsultarWhatsapp(${id})">💬 WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    asistenteMensajeBot(`<div class="asistente-tarjetas">${tarjetasHtml}</div>`);
+}
+
+function asistenteAgregarCarrito(id) {
+    agregarCarrito(null, id);
+    asistenteMensajeBot("✓ Producto agregado al carrito");
+    asistenteMostrarOpciones([
+        { texto: "Ver carrito", accion: () => { cerrarAsistente(); abrirCarrito(); } },
+        { texto: "Seguir buscando", accion: asistenteMenuPrincipal }
+    ]);
+}
+
+function asistenteConsultarWhatsapp(id) {
+    const p = productos[id];
+    if (!p) return;
+    const mensaje = encodeURIComponent(`Hola, estoy interesado/a en ${p.nombre}. ¿Me pueden brindar más información?`);
+    window.open(`https://wa.me/${numeroWhatsapp}?text=${mensaje}`, "_blank");
+}
+
 
 /* =========================================================
-   TARJETAS DE PRODUCTO DENTRO DEL CHAT
+   4. MENÚ PRINCIPAL
 ========================================================== */
-.asistente-tarjetas {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+function asistenteMenuPrincipal() {
+    estadoAsistente.flujo = null;
+    estadoAsistente.categoria = null;
+    estadoAsistente.subcategoria = null;
 
-    margin-top: 4px;
+    asistenteMensajeBot("¿En qué te puedo ayudar hoy?");
+    asistenteMostrarOpciones([
+        { texto: "🍳 Cocina", accion: () => asistenteMostrarCategoria("cocina") },
+        { texto: "🛏️ Dormitorio", accion: () => asistenteMostrarCategoria("habitacion") },
+        { texto: "🏠 Hogar", accion: () => asistenteMostrarCategoria("hogar") },
+        { texto: "🎁 Busco un regalo", accion: asistenteIniciarRegalo },
+        { texto: "🔥 Quiero ver ofertas", accion: asistenteMostrarOfertas },
+        { texto: "❓ No sé qué necesito", accion: asistenteIniciarAyudame },
+        { texto: "✨ Ayúdame a elegir", accion: asistenteIniciarAyudame }
+    ]);
 }
 
-.asistente-tarjeta {
-    display: flex;
-    gap: 10px;
-
-    background: #ffffff;
-    border: 1px solid #ececf3;
-    border-radius: 12px;
-
-    padding: 10px;
+function asistenteIdsPorCategoria(categoria) {
+    return Object.keys(ASISTENTE_CATEGORIA)
+        .map(Number)
+        .filter(id => ASISTENTE_CATEGORIA[id] === categoria);
 }
 
-.asistente-tarjeta img {
-    width: 64px;
-    height: 64px;
-    object-fit: cover;
-    border-radius: 8px;
-    flex-shrink: 0;
-    background: #f5f5f5;
+function asistenteMostrarCategoria(categoria) {
+    const ids = asistenteIdsPorCategoria(categoria);
+    if (ids.length === 0) {
+        asistenteMensajeBot("No encontré productos en esa categoría todavía.");
+        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
+        return;
+    }
+    asistenteMensajeBot("Estas son algunas opciones que tenemos:");
+    asistenteTarjetasProductos(ids);
+    asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
 }
 
-.asistente-tarjeta-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.asistente-tarjeta-info h4 {
-    font-size: 13px;
-    line-height: 1.3;
-    margin-bottom: 4px;
-    color: #0D3E70;
-}
-
-.asistente-tarjeta-precio {
-    font-size: 14px;
-    font-weight: bold;
-    color: #C9A346;
-}
-
-.asistente-tarjeta-precio-anterior {
-    font-size: 12px;
-    color: #999;
-    text-decoration: line-through;
-    margin-left: 6px;
-    font-weight: normal;
-}
-
-.asistente-tarjeta-descuento {
-    display: inline-block;
-    margin-left: 6px;
-    font-size: 11px;
-    font-weight: bold;
-    color: #ffffff;
-    background: #C9A346;
-    padding: 1px 6px;
-    border-radius: 6px;
-}
-
-.asistente-tarjeta-acciones {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
-}
-
-.asistente-tarjeta-acciones button {
-    flex: 1;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 7px 6px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.asistente-btn-agregar {
-    background: #FFE04F;
-    color: #0D3E70;
-}
-.asistente-btn-agregar:hover { background: #FFEBA1; }
-
-.asistente-btn-ver {
-    background: #044DFF;
-    color: #ffffff;
-}
-
-.asistente-btn-ver:hover {
-    background: #0080FF;
-}
-
-.asistente-btn-whatsapp {
-    background: #25d366;
-    color: #ffffff;
-}
-.asistente-btn-whatsapp:hover { background: #1fb958; }
 
 /* =========================================================
-   BOTONES DE RESPUESTA RÁPIDA
+   5. FLUJO "AYÚDAME A ELEGIR" (preguntas progresivas)
 ========================================================== */
-.asistente-opciones {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    padding: 0 16px 14px;
-    flex-shrink: 0;
-
-    background: #F8FAFF;
+function asistenteIniciarAyudame() {
+    estadoAsistente.flujo = "ayudame";
+    asistenteMensajeBot("¿Qué estás buscando?");
+    asistenteMostrarOpciones([
+        { texto: "🍳 Cocina", accion: () => asistentePreguntaSubcategoria("cocina") },
+        { texto: "🛏️ Dormitorio", accion: () => asistentePreguntaSubcategoria("habitacion") },
+        { texto: "🏠 Hogar", accion: () => asistentePreguntaPresupuesto("hogar", "") },
+        { texto: "🎁 Regalo", accion: asistenteIniciarRegalo },
+        { texto: "🤷 No estoy seguro", accion: asistenteMenuPrincipal }
+    ]);
 }
 
-.asistente-opcion {
-    background: #ffffff;
-    color: #044DFF;
+function asistentePreguntaSubcategoria(categoria) {
+    estadoAsistente.categoria = categoria;
+    const opciones = ASISTENTE_SUBCATEGORIAS[categoria] || [];
 
-    border: 1.5px solid #044DFF;
-    border-radius: 20px;
-
-    padding: 8px 14px;
-
-    font-size: 12.5px;
-    font-weight: bold;
-
-    transition: 0.15s;
+    asistenteMensajeBot("¿Qué necesitas?");
+    asistenteMostrarOpciones(
+        opciones.map(o => ({
+            texto: o.texto,
+            accion: () => {
+                if (o.palabra === "sabana") {
+                    asistentePreguntaTamano(categoria);
+                } else {
+                    asistentePreguntaPresupuesto(categoria, o.palabra);
+                }
+            }
+        }))
+    );
 }
 
-.asistente-opcion:hover {
-    background: #044DFF;
-    color: #ffffff;
+function asistentePreguntaTamano(categoria) {
+    asistenteMensajeBot("¿Qué tamaño necesitas?");
+    asistenteMostrarOpciones([
+        { texto: "1.40 m – Doble", accion: () => asistenteMostrarResultado([8]) },
+        { texto: "1.60 m – Queen", accion: () => asistenteMostrarResultado([11]) },
+        { texto: "2 x 2 m – King", accion: () => asistenteMostrarResultado([10]) },
+        { texto: "No estoy seguro", accion: () => asistentePreguntaPresupuesto(categoria, "sabana") }
+    ]);
 }
 
-/* =========================================================
-   CAMPO DE TEXTO
-========================================================== */
-.asistente-input {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+function asistentePreguntaPresupuesto(categoria, palabra) {
+    estadoAsistente.subcategoria = palabra;
 
-    padding: 12px;
-    border-top: 1px solid #ececf3;
-    background: #ffffff;
-    flex-shrink: 0;
+    asistenteMensajeBot("¿Cuál es tu presupuesto aproximado?");
+    asistenteMostrarOpciones([
+        { texto: "💰 Menos de $50.000", accion: () => asistenteFiltrarYMostrar(categoria, palabra, 0, 50000) },
+        { texto: "💵 $50.000 – $100.000", accion: () => asistenteFiltrarYMostrar(categoria, palabra, 50000, 100000) },
+        { texto: "💎 Más de $100.000", accion: () => asistenteFiltrarYMostrar(categoria, palabra, 100000, Infinity) },
+        { texto: "🤷 No tengo presupuesto definido", accion: () => asistenteFiltrarYMostrar(categoria, palabra, 0, Infinity) }
+    ]);
 }
 
-.asistente-input input {
-    flex: 1;
+function asistenteFiltrarYMostrar(categoria, palabra, min, max) {
+    let ids = asistenteIdsPorCategoria(categoria).filter(id => {
+        const p = productos[id];
+        return p && p.precio >= min && p.precio <= max;
+    });
 
-    border: 1px solid #e2e2ea;
-    border-radius: 20px;
-
-    padding: 10px 16px;
-
-    font-size: 13.5px;
-    outline: none;
-    font-family: inherit;
-}
-
-.asistente-input input:focus {
-    border-color: #0D3E70;
-}
-
-.asistente-input button {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
-
-    background: #044DFF;
-    color: #ffffff;
-
-    border-radius: 50%;
-
-    font-size: 16px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.asistente-input button:hover {
-    background: #0080FF;
-}
-
-/* =========================================================
-   RESPONSIVE — CELULAR
-   La ventana pasa a ocupar toda la pantalla para que no
-   tape botones importantes ni se salga del viewport
-========================================================== */
-@media (max-width: 500px) {
-
-    .asistente-ventana {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-        width: 100%;
-        max-width: 100%;
-        height: 100%;
-        max-height: 100%;
-
-        border-radius: 0;
+    if (palabra) {
+        ids = ids.filter(id => (ASISTENTE_ETIQUETAS[id] || []).includes(palabra));
     }
 
-    .asistente-boton {
-        bottom: 85px;
-        right: 16px;
-
-        padding: 12px 14px;
-    }
-
-    .asistente-boton-texto {
-        display: none;
-    }
+    asistenteMostrarResultado(ids, categoria, min, max);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .asistente-boton,
-    .asistente-opcion,
-    .asistente-input button {
-        transition: none;
+function asistenteMostrarResultado(ids, categoriaFallback, min, max) {
+    if (ids.length === 0) {
+        asistenteMensajeBot("No encontré exactamente eso, pero estas opciones podrían servirte:");
+        const alternativas = categoriaFallback ? asistenteIdsPorCategoria(categoriaFallback) : Object.keys(productos).map(Number);
+        asistenteTarjetasProductos(alternativas);
+    } else {
+        asistenteMensajeBot("⭐ Te recomiendo:");
+        asistenteTarjetasProductos(ids);
     }
+    asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
 }
+
+
+/* =========================================================
+   6. FLUJO "BUSCO UN REGALO"
+========================================================== */
+function asistenteIniciarRegalo() {
+    estadoAsistente.flujo = "regalo";
+    asistenteMensajeBot("🎁 ¿Para quién es el regalo?");
+    asistenteMostrarOpciones([
+        { texto: "🏠 Alguien que ama su hogar", accion: () => asistenteRegaloPresupuesto("habitacion") },
+        { texto: "👩‍🍳 Alguien que disfruta cocinar", accion: () => asistenteRegaloPresupuesto("cocina") },
+        { texto: "🛏️ Alguien que disfruta decorar", accion: () => asistenteRegaloPresupuesto("decoracion") },
+        { texto: "🎁 No estoy seguro", accion: () => asistenteRegaloPresupuesto("") }
+    ]);
+}
+
+function asistenteRegaloPresupuesto(categoria) {
+    estadoAsistente.categoria = categoria;
+    asistenteMensajeBot("¿Cuánto quieres gastar?");
+    asistenteMostrarOpciones([
+        { texto: "💰 Menos de $50.000", accion: () => asistenteMostrarRegalo(categoria, 0, 50000) },
+        { texto: "💵 $50.000 – $100.000", accion: () => asistenteMostrarRegalo(categoria, 50000, 100000) },
+        { texto: "💎 Más de $100.000", accion: () => asistenteMostrarRegalo(categoria, 100000, Infinity) }
+    ]);
+}
+
+function asistenteMostrarRegalo(categoria, min, max) {
+    const base = categoria ? asistenteIdsPorCategoria(categoria) : Object.keys(productos).map(Number);
+    const ids = base.filter(id => productos[id] && productos[id].precio >= min && productos[id].precio <= max);
+    asistenteMostrarResultado(ids, categoria, min, max);
+}
+
+
+/* =========================================================
+   7. OFERTAS
+   Solo muestra productos que YA tienen "descuento: true" en
+   script.js. Nunca inventa precios ni descuentos.
+========================================================== */
+function asistenteMostrarOfertas() {
+    const ids = Object.keys(productos).map(Number).filter(id => productos[id].descuento);
+
+    if (ids.length === 0) {
+        asistenteMensajeBot("En este momento no tenemos ofertas activas, ¡pero vuelve pronto! 🔥");
+    } else {
+        asistenteMensajeBot("🔥 Estas son nuestras ofertas activas:");
+        asistenteTarjetasProductos(ids);
+    }
+    asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
+}
+
+
+/* =========================================================
+   8. BÚSQUEDA LIBRE (el usuario escribe texto)
+========================================================== */
+function asistenteParsearPresupuesto(texto) {
+    // Busca frases como "menos de 50.000" o "máximo 100000"
+    const numeros = (texto.match(/[\d.]{4,}/g) || []).map(n => Number(n.replace(/\./g, "")));
+    if (numeros.length === 0) return null;
+
+    if (/menos de|máximo|maximo|hasta/.test(texto)) {
+        return { min: 0, max: numeros[0] };
+    }
+    if (/más de|mas de|desde/.test(texto)) {
+        return { min: numeros[0], max: Infinity };
+    }
+    return { min: 0, max: numeros[0] };
+}
+
+function asistenteBuscarLibre(textoOriginal) {
+    const texto = textoOriginal.toLowerCase();
+
+    const coincidenciasDirectas = buscarProductos(textoOriginal);
+    if (coincidenciasDirectas.length > 0) {
+        asistenteMensajeBot("⭐ Encontré este producto:");
+        asistenteTarjetasProductos(coincidenciasDirectas);
+        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
+        return;
+    }
+
+    // Detecta intención de regalo directamente por texto libre
+    if (texto.includes("regalo")) {
+        asistenteIniciarRegalo();
+        return;
+    }
+
+    // Detecta intención de ofertas
+    if (texto.includes("oferta") || texto.includes("descuento")) {
+        asistenteMostrarOfertas();
+        return;
+    }
+
+    // Detecta tamaño de sábana mencionado directamente
+    if (texto.includes("1.60") || texto.includes("1,60")) {
+        asistenteMensajeBot("🛏️ ¡Perfecto! Para una cama de 1.60 m necesitas una opción Queen.\n\n⭐ Te recomiendo:");
+        asistenteTarjetasProductos([11]);
+        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
+        return;
+    }
+    if (texto.includes("1.40") || texto.includes("1,40")) {
+        asistenteMensajeBot("🛏️ Para una cama de 1.40 m necesitas una opción Doble.\n\n⭐ Te recomiendo:");
+        asistenteTarjetasProductos([8]);
+        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
+        return;
+    }
+    if (texto.includes("2x2") || texto.includes("2 x 2") || texto.includes("king")) {
+        asistenteMensajeBot("🛏️ Para una cama King necesitas esta opción:\n\n⭐ Te recomiendo:");
+        asistenteTarjetasProductos([10]);
+        asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
+        return;
+    }
+
+    // Búsqueda por palabras clave de producto
+    let ids = Object.keys(ASISTENTE_ETIQUETAS)
+        .map(Number)
+        .filter(id => ASISTENTE_ETIQUETAS[id].some(palabra => texto.includes(palabra)));
+
+    // Si el texto trae un presupuesto, se aplica como filtro adicional
+    const presupuesto = asistenteParsearPresupuesto(texto);
+    if (presupuesto) {
+        const candidatos = ids.length > 0 ? ids : Object.keys(productos).map(Number);
+        ids = candidatos.filter(id => productos[id].precio >= presupuesto.min && productos[id].precio <= presupuesto.max);
+    }
+
+    if (ids.length === 0) {
+        asistenteMensajeBot("No encontré exactamente ese producto, pero estas opciones podrían servirte:");
+        asistenteTarjetasProductos(Object.keys(productos).map(Number).filter(id => productos[id].descuento).length
+            ? Object.keys(productos).map(Number).slice(0, 3)
+            : Object.keys(productos).map(Number).slice(0, 3));
+    } else {
+        asistenteMensajeBot("⭐ Te recomiendo:");
+        asistenteTarjetasProductos(ids);
+    }
+
+    asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
+}
+
+
+/* =========================================================
+   9. ABRIR / CERRAR Y ARRANQUE
+========================================================== */
+function abrirAsistente() {
+    elVentana.classList.add("asistente-abierta");
+    elVentana.removeAttribute("hidden");
+    if (elMensajes.childElementCount === 0) {
+        asistenteMensajeBot("🔵 ¡Hola! Soy el Asistente KY.\nEstoy aquí para ayudarte a encontrar el producto ideal para tu hogar.");
+        asistenteMenuPrincipal();
+    }
+    document.getElementById("asistenteTexto").focus();
+}
+
+function cerrarAsistente() {
+    elVentana.classList.remove("asistente-abierta");
+    elVentana.setAttribute("hidden", "");
+}
+
+function asistenteEstaAbierto() {
+    return elVentana.classList.contains("asistente-abierta");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    elBoton.addEventListener("click", () => {
+        if (asistenteEstaAbierto()) {
+            cerrarAsistente();
+        } else {
+            abrirAsistente();
+        }
+    });
+
+    document.getElementById("asistenteCerrar").addEventListener("click", cerrarAsistente);
+
+    document.getElementById("asistenteForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const input = document.getElementById("asistenteTexto");
+        const texto = input.value.trim();
+        if (!texto) return;
+
+        asistenteMensajeUsuario(texto);
+        input.value = "";
+        asistenteLimpiarOpciones();
+        asistenteBuscarLibre(texto);
+    });
+});
