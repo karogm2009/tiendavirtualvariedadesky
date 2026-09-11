@@ -1,37 +1,10 @@
-/* =========================================================
-   ASISTENTE KY — ASISTENTE DE COMPRA INTELIGENTE
-   Este archivo NO modifica script.js. Reutiliza lo que ya
-   existe ahí: el objeto "productos", "agregarCarrito",
-   "formatearPrecio" y "numeroWhatsapp".
-
-   ÍNDICE DE ESTE ARCHIVO:
-   1. Mapa de categorías y palabras clave por producto
-   2. Estado de la conversación
-   3. Funciones para dibujar mensajes y tarjetas de producto
-   4. Flujo del menú principal
-   5. Flujo "Ayúdame a elegir" (preguntas progresivas)
-   6. Flujo "Busco un regalo"
-   7. Ofertas
-   8. Búsqueda libre (cuando el usuario escribe texto)
-   9. Abrir/cerrar y arranque
-========================================================== */
-
-
-/* =========================================================
-   1. MAPA DE CATEGORÍAS Y PALABRAS CLAVE
-   Como "productos" (en script.js) no guarda la categoría,
-   aquí se define aparte para que el asistente pueda filtrar.
-   Si agregas un producto nuevo en script.js, agrégalo también
-   aquí con su categoría y sus palabras clave de búsqueda.
-========================================================== */
-const ASISTENTE_CATEGORIA = {
-    1: "electrodomesticos", 2: "cocina", 3: "electrodomesticos", 4: "cocina",
-    5: "hogar", 6: "cocina", 7: "decoracion",
-    8: "habitacion", 10: "habitacion", 11: "habitacion", 12: "habitacion",
-    13: "cocina", 14: "usopersonal", 15: "usopersonal", 16: "usopersonal",
-    17: "habitacion", 18: "habitacion", 19: "habitacion", 20: "habitacion",
-    21: "habitacion", 22: "habitacion", 23: "habitacion", 24: "habitacion", 25: "habitacion", 26: "cocina"
-};
+/* NOTA: antes existía aquí un mapa "ASISTENTE_CATEGORIA" que repetía a mano
+   la categoría de cada producto. Era una segunda fuente de datos que había
+   que recordar actualizar cada vez que se agregaba un producto nuevo en
+   script.js, y era fácil que quedara desincronizada. Ahora la categoría se
+   lee siempre directamente de "productos[id].categoria" (ver
+   asistenteIdsPorCategoria más abajo), así que solo existe una fuente de
+   datos: el objeto "productos" de script.js. */
 
 const ASISTENTE_ETIQUETAS = {
     1: ["cafetera", "café", "cafe"],
@@ -61,7 +34,6 @@ const ASISTENTE_ETIQUETAS = {
     26: ["procesador", "alimentos", "electrico", "electrica", "cocina"]
 };
 
-// Grupos de subcategoría usados en "Ayúdame a elegir"
 const ASISTENTE_SUBCATEGORIAS = {
     cocina: [
         { texto: "🥘 Ollas y sartenes", palabra: "olla" },
@@ -78,12 +50,8 @@ const ASISTENTE_SUBCATEGORIAS = {
     ]
 };
 
-
-/* =========================================================
-   2. ESTADO DE LA CONVERSACIÓN
-========================================================== */
 const estadoAsistente = {
-    flujo: null,      // "ayudame" | "regalo" | null
+    flujo: null,
     categoria: null,
     subcategoria: null
 };
@@ -93,15 +61,10 @@ const elOpciones = document.getElementById("asistenteOpciones");
 const elVentana = document.getElementById("asistenteVentana");
 const elBoton = document.getElementById("asistenteBoton");
 
-
-/* =========================================================
-   3. DIBUJAR MENSAJES Y TARJETAS
-========================================================== */
 function asistenteScrollAbajo() {
     elMensajes.scrollTop = elMensajes.scrollHeight;
 }
 
-// texto: puede incluir HTML (nosotros lo generamos, no viene del usuario)
 function asistenteMensajeBot(html) {
     const div = document.createElement("div");
     div.className = "asistente-msg asistente-msg-bot";
@@ -110,7 +73,6 @@ function asistenteMensajeBot(html) {
     asistenteScrollAbajo();
 }
 
-// El texto del usuario sí puede venir de un input, se inserta como texto plano
 function asistenteMensajeUsuario(texto) {
     const div = document.createElement("div");
     div.className = "asistente-msg asistente-msg-user";
@@ -119,7 +81,6 @@ function asistenteMensajeUsuario(texto) {
     asistenteScrollAbajo();
 }
 
-// botones: [{ texto: "Cocina", accion: function }]
 function asistenteMostrarOpciones(botones) {
     elOpciones.innerHTML = "";
     botones.forEach(b => {
@@ -140,7 +101,6 @@ function asistenteLimpiarOpciones() {
     elOpciones.innerHTML = "";
 }
 
-// Dibuja hasta 3 productos como tarjetas dentro de un mensaje del bot
 function asistenteTarjetasProductos(ids) {
     const lista = ids.slice(0, 3);
 
@@ -191,10 +151,6 @@ function asistenteConsultarWhatsapp(id) {
     window.open(`https://wa.me/${numeroWhatsapp}?text=${mensaje}`, "_blank");
 }
 
-
-/* =========================================================
-   4. MENÚ PRINCIPAL
-========================================================== */
 function asistenteMenuPrincipal() {
     estadoAsistente.flujo = null;
     estadoAsistente.categoria = null;
@@ -212,10 +168,11 @@ function asistenteMenuPrincipal() {
     ]);
 }
 
+// Lee la categoría directamente del objeto "productos" (fuente única de datos).
 function asistenteIdsPorCategoria(categoria) {
-    return Object.keys(ASISTENTE_CATEGORIA)
+    return Object.keys(productos)
         .map(Number)
-        .filter(id => ASISTENTE_CATEGORIA[id] === categoria);
+        .filter(id => productos[id].categoria === categoria);
 }
 
 function asistenteMostrarCategoria(categoria) {
@@ -230,10 +187,6 @@ function asistenteMostrarCategoria(categoria) {
     asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
 }
 
-
-/* =========================================================
-   5. FLUJO "AYÚDAME A ELEGIR" (preguntas progresivas)
-========================================================== */
 function asistenteIniciarAyudame() {
     estadoAsistente.flujo = "ayudame";
     asistenteMensajeBot("¿Qué estás buscando?");
@@ -312,10 +265,6 @@ function asistenteMostrarResultado(ids, categoriaFallback, min, max) {
     asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
 }
 
-
-/* =========================================================
-   6. FLUJO "BUSCO UN REGALO"
-========================================================== */
 function asistenteIniciarRegalo() {
     estadoAsistente.flujo = "regalo";
     asistenteMensajeBot("🎁 ¿Para quién es el regalo?");
@@ -343,12 +292,6 @@ function asistenteMostrarRegalo(categoria, min, max) {
     asistenteMostrarResultado(ids, categoria, min, max);
 }
 
-
-/* =========================================================
-   7. OFERTAS
-   Solo muestra productos que YA tienen "descuento: true" en
-   script.js. Nunca inventa precios ni descuentos.
-========================================================== */
 function asistenteMostrarOfertas() {
     const ids = Object.keys(productos).map(Number).filter(id => productos[id].descuento);
 
@@ -361,12 +304,7 @@ function asistenteMostrarOfertas() {
     asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
 }
 
-
-/* =========================================================
-   8. BÚSQUEDA LIBRE (el usuario escribe texto)
-========================================================== */
 function asistenteParsearPresupuesto(texto) {
-    // Busca frases como "menos de 50.000" o "máximo 100000"
     const numeros = (texto.match(/[\d.]{4,}/g) || []).map(n => Number(n.replace(/\./g, "")));
     if (numeros.length === 0) return null;
 
@@ -390,19 +328,16 @@ function asistenteBuscarLibre(textoOriginal) {
         return;
     }
 
-    // Detecta intención de regalo directamente por texto libre
     if (texto.includes("regalo")) {
         asistenteIniciarRegalo();
         return;
     }
 
-    // Detecta intención de ofertas
     if (texto.includes("oferta") || texto.includes("descuento")) {
         asistenteMostrarOfertas();
         return;
     }
 
-    // Detecta tamaño de sábana mencionado directamente
     if (texto.includes("1.60") || texto.includes("1,60")) {
         asistenteMensajeBot("🛏️ ¡Perfecto! Para una cama de 1.60 m necesitas una opción Queen.\n\n⭐ Te recomiendo:");
         asistenteTarjetasProductos([11]);
@@ -422,12 +357,10 @@ function asistenteBuscarLibre(textoOriginal) {
         return;
     }
 
-    // Búsqueda por palabras clave de producto
     let ids = Object.keys(ASISTENTE_ETIQUETAS)
         .map(Number)
         .filter(id => ASISTENTE_ETIQUETAS[id].some(palabra => texto.includes(palabra)));
 
-    // Si el texto trae un presupuesto, se aplica como filtro adicional
     const presupuesto = asistenteParsearPresupuesto(texto);
     if (presupuesto) {
         const candidatos = ids.length > 0 ? ids : Object.keys(productos).map(Number);
@@ -436,9 +369,8 @@ function asistenteBuscarLibre(textoOriginal) {
 
     if (ids.length === 0) {
         asistenteMensajeBot("No encontré exactamente ese producto, pero estas opciones podrían servirte:");
-        asistenteTarjetasProductos(Object.keys(productos).map(Number).filter(id => productos[id].descuento).length
-            ? Object.keys(productos).map(Number).slice(0, 3)
-            : Object.keys(productos).map(Number).slice(0, 3));
+        const enOferta = Object.keys(productos).map(Number).filter(id => productos[id].descuento);
+        asistenteTarjetasProductos(enOferta.length ? enOferta : Object.keys(productos).map(Number).slice(0, 3));
     } else {
         asistenteMensajeBot("⭐ Te recomiendo:");
         asistenteTarjetasProductos(ids);
@@ -447,10 +379,6 @@ function asistenteBuscarLibre(textoOriginal) {
     asistenteMostrarOpciones([{ texto: "⬅ Volver al menú", accion: asistenteMenuPrincipal }]);
 }
 
-
-/* =========================================================
-   9. ABRIR / CERRAR Y ARRANQUE
-========================================================== */
 function abrirAsistente() {
     elVentana.classList.add("asistente-abierta");
     elVentana.removeAttribute("hidden");
