@@ -25,7 +25,7 @@ const productos = {
     23: { nombre: "Tendido King (Beige crema)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking2.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
     24: { nombre: "Tendido Doble (Blanco)", precio: 170000, categoria: "habitacion", imagenes: ["img/tendidoble1.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
     25: { nombre: "Tendido Doble estampado", precio: 100000, categoria: "habitacion", imagenes: ["img/tendido1.401.png", "img/tendido1.402.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
-    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Práctico procesador de alimentos eléctrico, ideal para facilitar diferentes tareas en la cocina. Una opción funcional para preparar y procesar alimentos de manera rápida y sencilla." }
+    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", alias: "molino picatodo picador", imagenes: ["img/picatodo1.png"], descripcion: "Práctico procesador de alimentos eléctrico, ideal para facilitar diferentes tareas en la cocina. Una opción funcional para preparar y procesar alimentos de manera rápida y sencilla." }
 };
 
 const variantes = { "tendido-queen": [18, 19, 20, 21], "tendido-king": [22, 23] };
@@ -194,26 +194,115 @@ function cambiarImagenModal(src, miniatura) { const imagen = document.getElement
 function comprarYa(id) { agregarCarrito(null, id); cerrarProducto(); abrirCarrito(); }
 
 function normalizarTexto(texto) { return String(texto).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
+
+/* =========================================================
+   TOLERANCIA A ERRORES DE ESCRITURA (distancia de edición)
+   Permite que "chuchillo", "exprimidr" o "sabnas" encuentren
+   el producto correcto aunque el usuario se equivoque al
+   escribir. El límite de errores permitidos crece con el
+   tamaño de la palabra para no generar falsos positivos en
+   palabras cortas.
+========================================================== */
+function distanciaEdicion(a, b) {
+    if (a === b) return 0;
+    if (!a.length) return b.length;
+    if (!b.length) return a.length;
+    const fila = new Array(b.length + 1);
+    for (let j = 0; j <= b.length; j++) fila[j] = j;
+    for (let i = 1; i <= a.length; i++) {
+        let anterior = fila[0];
+        fila[0] = i;
+        for (let j = 1; j <= b.length; j++) {
+            const temp = fila[j];
+            fila[j] = a[i - 1] === b[j - 1]
+                ? anterior
+                : 1 + Math.min(anterior, fila[j], fila[j - 1]);
+            anterior = temp;
+        }
+    }
+    return fila[b.length];
+}
+
+function toleranciaPermitida(longitud) {
+    if (longitud <= 9) return 1;
+    return 2;
+}
+
+// ¿La palabra buscada aparece (exacta, parcial o con un pequeño error de escritura)
+// dentro del texto objetivo? La tolerancia a errores exige que la palabra empiece
+// igual y que la diferencia de longitud sea mínima, para no generar coincidencias
+// falsas entre palabras distintas que por casualidad quedan "cerca" en edición
+// (por ejemplo, que "toallas" no termine encontrando "ollas").
+function palabraCoincide(palabraBuscada, textoObjetivo) {
+    if (!palabraBuscada) return true;
+    if (textoObjetivo.includes(palabraBuscada)) return true;
+    if (palabraBuscada.length < 4) return false; // evita falsos positivos en palabras muy cortas
+    return textoObjetivo.split(" ").some(palabraObjetivo => {
+        if (!palabraObjetivo || palabraObjetivo.length < 4) return false;
+        if (palabraObjetivo[0] !== palabraBuscada[0]) return false; // deben empezar igual
+        if (Math.abs(palabraObjetivo.length - palabraBuscada.length) > 2) return false;
+        return distanciaEdicion(palabraBuscada, palabraObjetivo) <= toleranciaPermitida(Math.max(palabraBuscada.length, palabraObjetivo.length));
+    });
+}
+
+// Texto de búsqueda de un producto: nombre + categoría + alias de búsqueda opcionales
+// (todo sale del objeto "productos", que es la única fuente de datos). Si un producto
+// se conoce por otro nombre común (ej. "molino"/"picatodo" para el procesador de
+// alimentos), se agrega en su campo "alias" dentro de "productos" y el buscador
+// principal, el Asistente KY y todo lo demás lo encuentran automáticamente.
+function textoBusquedaProducto(id) {
+    const p = productos[id];
+    if (!p) return "";
+    return normalizarTexto(`${p.nombre} ${p.categoria || ""} ${p.alias || ""}`);
+}
+
+/* =========================================================
+   BÚSQUEDA — FUENTE ÚNICA DE DATOS
+   Tanto el buscador principal como el Asistente KY llaman a
+   esta misma función, que siempre lee del objeto "productos".
+   Cualquier producto nuevo que se agregue ahí aparece
+   automáticamente en ambas búsquedas, sin listas aparte.
+========================================================== */
 function buscarProductos(texto) {
     const consulta = normalizarTexto(texto);
-    const palabras = consulta.split(" ").filter(palabra => palabra.length > 2);
+    if (!consulta) return Object.keys(productos).map(Number);
+    const palabras = consulta.split(" ").filter(Boolean);
     return Object.keys(productos).map(Number).filter(id => {
-        const nombre = normalizarTexto(productos[id].nombre);
-        return nombre.includes(consulta) || palabras.every(palabra => nombre.includes(palabra));
+        const nombre = textoBusquedaProducto(id);
+        if (nombre.includes(consulta)) return true;
+        return palabras.every(palabra => palabraCoincide(palabra, nombre));
     });
 }
 
 let categoriaSeleccionada = "";
 
+// Ids de producto que representa una tarjeta (una sola id, o varias si es un grupo de variantes)
+function idsDeTarjeta(tarjeta) {
+    if (tarjeta.dataset.ids) return tarjeta.dataset.ids.split(",").map(Number).filter(id => productos[id]);
+    if (tarjeta.dataset.id) return [Number(tarjeta.dataset.id)].filter(id => productos[id]);
+    return [];
+}
+
+// Mantiene sincronizado el texto de cada tarjeta con el objeto "productos" (fuente única),
+// para que el buscador nunca dependa de un dato manual que alguien olvidó actualizar.
+function sincronizarTarjetasProductos() {
+    document.querySelectorAll(".producto").forEach(tarjeta => {
+        const ids = idsDeTarjeta(tarjeta);
+        if (!ids.length) return;
+        tarjeta.dataset.nombre = ids.map(id => textoBusquedaProducto(id)).join(" ");
+    });
+}
+
 function ejecutarBusqueda() {
     const entrada = document.getElementById("inputBuscar");
     if (!entrada) return;
     const consulta = normalizarTexto(entrada.value);
+    const palabras = consulta.split(" ").filter(Boolean);
     const tarjetas = [...document.querySelectorAll(".producto")];
     tarjetas.forEach(tarjeta => {
-        const nombre = normalizarTexto(tarjeta.dataset.nombre || tarjeta.querySelector("h3")?.textContent || "");
+        const nombre = tarjeta.dataset.nombre || "";
         const categoria = tarjeta.dataset.categoria || "";
-        const coincideTexto = !consulta || nombre.includes(consulta) || consulta.split(" ").filter(Boolean).every(palabra => nombre.includes(palabra));
+        const coincideTexto = !consulta || nombre.includes(consulta) || palabras.every(palabra => palabraCoincide(palabra, nombre));
         const coincideCategoria = !categoriaSeleccionada || categoria === categoriaSeleccionada;
         tarjeta.hidden = !(coincideTexto && coincideCategoria);
     });
@@ -241,6 +330,7 @@ function mostrarTodosLosProductos(evento) {
 }
 
 function iniciarTienda() {
+    sincronizarTarjetasProductos();
     actualizarContadorCarrito(); actualizarGruposVariantes(); renderizarCarrito();
     const secciones = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
