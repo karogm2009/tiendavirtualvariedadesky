@@ -664,8 +664,8 @@ header {
 .precio-anterior {
     font-size: 14px;
     text-decoration: line-through;
-    color: #858d9a;
-    font-weight: bold;
+    color: #777777;
+    font-weight: normal;
 }
 
 .etiqueta-oferta {
@@ -674,14 +674,17 @@ header {
     justify-content: center;
     padding: 4px 8px;
     border-radius: 999px;
-    background: #FFE04F;
-    color: #0D3E70;
+    background: #F4511E;
+    color: #FFFFFF;
     font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
 .precio-actual {
+    color: #F4511E;
+    font-size: 24px;
+    font-weight: 800;
     margin-bottom: 12px;
 }
 
@@ -1392,9 +1395,14 @@ footer {
     font-size: 16px;
     font-weight: normal;
 
-    color: #999;
+    color: #777777;
 
     text-decoration: line-through;
+}
+
+.modal-producto .precio-actual {
+    color: #F4511E;
+    font-weight: 800;
 }
 
 .modal-miniaturas {
