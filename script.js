@@ -332,11 +332,32 @@ function iniciarTienda() {
         secciones.forEach(seccion => seccion.classList.add("visible"));
     }
     document.getElementById("btnCarrito")?.addEventListener("click", evento => { evento.preventDefault(); abrirCarrito(); });
+    const menu = document.querySelector(".header-menu");
+    const menuToggle = document.getElementById("menuToggle");
+    const menuLinks = document.querySelectorAll(".menu-izquierda a");
+    menuToggle?.addEventListener("click", () => {
+        const abierto = menu?.classList.toggle("menu-abierto") || false;
+        menuToggle.setAttribute("aria-expanded", String(abierto));
+        menuToggle.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+    });
+    menuLinks.forEach(enlace => enlace.addEventListener("click", () => {
+        menu?.classList.remove("menu-abierto");
+        menuToggle?.setAttribute("aria-expanded", "false");
+        menuToggle?.setAttribute("aria-label", "Abrir menú");
+    }));
     document.getElementById("cerrarCarrito")?.addEventListener("click", cerrarCarrito);
     document.getElementById("overlay")?.addEventListener("click", cerrarCarrito);
     document.getElementById("cerrarModal")?.addEventListener("click", cerrarProducto);
     document.getElementById("modalOverlay")?.addEventListener("click", evento => { if (evento.target.id === "modalOverlay") cerrarProducto(); });
-    document.addEventListener("keydown", evento => { if (evento.key === "Escape") { cerrarProducto(); cerrarCarrito(); } });
+    document.addEventListener("keydown", evento => {
+        if (evento.key === "Escape") {
+            cerrarProducto();
+            cerrarCarrito();
+            menu?.classList.remove("menu-abierto");
+            menuToggle?.setAttribute("aria-expanded", "false");
+            menuToggle?.setAttribute("aria-label", "Abrir menú");
+        }
+    });
     document.getElementById("finalizarCompra")?.addEventListener("click", evento => {
         evento.preventDefault();
         const detalle = obtenerCarrito().map(item => `${productos[item.id].nombre} x${item.cantidad}`).join(", ");
