@@ -371,6 +371,29 @@
     background: #0080FF;
 }
 
+.asistente-tarjeta-acciones button,
+.asistente-opcion,
+.asistente-input button,
+.asistente-cerrar {
+    min-height: 44px;
+}
+
+@media (min-width: 501px) and (max-width: 767px) {
+    .asistente-boton {
+        right: 16px;
+        bottom: 78px;
+        max-width: calc(100vw - 32px);
+    }
+
+    .asistente-ventana {
+        right: 16px;
+        bottom: 140px;
+        width: min(370px, calc(100vw - 32px));
+        height: min(560px, 72vh);
+        max-height: calc(100vh - 160px);
+    }
+}
+
 /* =========================================================
    RESPONSIVE — CELULAR
    La ventana pasa a ocupar toda la pantalla para que no
@@ -397,6 +420,7 @@
         right: 16px;
 
         padding: 12px 14px;
+        max-width: calc(100vw - 32px);
     }
 
     .asistente-boton-texto {
