@@ -653,6 +653,38 @@ header {
     margin-bottom: 12px;
 }
 
+.precio-oferta-catalogo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.precio-anterior {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #858d9a;
+    font-weight: bold;
+}
+
+.etiqueta-oferta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #FFE04F;
+    color: #0D3E70;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.precio-actual {
+    margin-bottom: 12px;
+}
+
 
 /* BOTÓN AGREGAR AL CARRITO */
 
