@@ -25,15 +25,74 @@ const productos = {
     23: { nombre: "Tendido King (Beige crema)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking2.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
     24: { nombre: "Tendido Doble (Blanco)", precio: 170000, categoria: "habitacion", imagenes: ["img/tendidoble1.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
     25: { nombre: "Tendido Doble estampado", precio: 100000, categoria: "habitacion", imagenes: ["img/tendido1.401.png", "img/tendido1.402.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
-    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", alias: "molino picatodo picador", imagenes: ["img/picatodo1.png"], descripcion: "Práctico procesador de alimentos eléctrico, ideal para facilitar diferentes tareas en la cocina. Una opción funcional para preparar y procesar alimentos de manera rápida y sencilla." }
+    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Práctico procesador de alimentos eléctrico, ideal para facilitar diferentes tareas en la cocina. Una opción funcional para preparar y procesar alimentos de manera rápida y sencilla." },
+    27: { nombre: "Lámpara de cristal redonda", precio: 110000, categoria: "decoracion", imagenes: ["img/lampara1.png"], descripcion: "Lámpara de cristal con diseño redondo, ideal para complementar la decoración del hogar." },
+    28: { nombre: "Lámpara Cubo", precio: 60000, categoria: "decoracion", imagenes: ["img/lampara2.png"], descripcion: "Lámpara con diseño tipo cubo, disponible en negro y dorado." },
+    29: { nombre: "Lámpara Decorativa Géminis", precio: 1200000, categoria: "decoracion", imagenes: ["img/lampara3.png"], descripcion: "Lámpara decorativa de diseño elegante, disponible en negro y blanco." },
+    30: { nombre: "Lámpara colgante Vintage tipo pera", precio: 90000, categoria: "decoracion", imagenes: ["img/lampara4.png"], descripcion: "Lámpara colgante con diseño vintage tipo pera." },
+    31: { nombre: "Lámpara colgante Tijuana", precio: 450000, categoria: "decoracion", imagenes: ["img/lampara5.png"], descripcion: "Lámpara colgante Tijuana para techo." },
+    32: { nombre: "Lámpara de mesa de noche Cristal RGB", precio: 60000, categoria: "decoracion", imagenes: ["img/lampara6.png"], descripcion: "Lámpara decorativa de cristal con iluminación RGB multicolor, ideal para mesa de noche y ambientes decorativos." },
+    33: { nombre: "Lámpara de escritorio Luna Creciente", precio: 90000, categoria: "decoracion", imagenes: ["img/lampara7.png"], descripcion: "Lámpara con diseño de luna creciente, ideal para escritorio o mesa de noche." },
+    34: { nombre: "Lámpara Decorativa Centauro", precio: 850000, categoria: "decoracion", imagenes: ["img/lampara8.png"], descripcion: "Lámpara decorativa de estilo elegante y sofisticado." },
+    35: { nombre: "Lámpara colgante Cubo Vintage", precio: 65000, categoria: "decoracion", imagenes: ["img/lampara9.png"], descripcion: "Lámpara colgante con diseño de cubo vintage, disponible en diferentes colores." },
+    36: { nombre: "Lámpara colgante Tres Esferas", precio: 180000, categoria: "decoracion", imagenes: ["img/lampara10.png"], descripcion: "Lámpara colgante decorativa de tres esferas en tono oro rosa. No incluye bombillos." },
+    37: { nombre: "Lámpara Inca Cilíndrica Dorada", precio: 92000, categoria: "decoracion", imagenes: ["img/lampara11.png"], descripcion: "Lámpara cilíndrica dorada con un socket interior." },
+    38: { nombre: "Lámpara Socket Génova 10", precio: 98000, categoria: "decoracion", imagenes: ["img/lampara12.png"], descripcion: "Lámpara Socket Génova 10.", descuento: true, precioAnterior: 130000 },
+    39: { nombre: "Lámpara clásica de escritorio", precio: 25000, categoria: "decoracion", imagenes: ["img/lampara13.png"], descripcion: "Lámpara clásica de escritorio disponible en diferentes colores.", descuento: true, precioAnterior: 29000 },
+    40: { nombre: "Lámpara colgante Sombrero Chino", precio: 750000, categoria: "decoracion", imagenes: ["img/lampara14.png"], descripcion: "Lámpara colgante con diseño Sombrero Chino." },
+    41: { nombre: "Lámpara para muro", precio: 60000, categoria: "decoracion", imagenes: ["img/lampara15.png"], descripcion: "Lámpara decorativa para muro o pared." },
+    42: { nombre: "Lámpara colgante en pasta fina", precio: 65000, categoria: "decoracion", imagenes: ["img/lampara16.png"], descripcion: "Lámpara colgante fabricada en pasta fina." },
+    43: { nombre: "Lámpara colgante de tres tonos de luz", precio: 130000, categoria: "decoracion", imagenes: ["img/lampara17.png"], descripcion: "Lámpara colgante con tres opciones de tono de luz: cálido, tenue y blanco." },
+    44: { nombre: "Lámpara colgante de cristal", precio: 155000, categoria: "decoracion", imagenes: ["img/lampara18.png"], descripcion: "Lámpara colgante de cristal con diseño elegante." },
+    45: { nombre: "Lámpara colgante circular de 3 tonos", precio: 73000, categoria: "decoracion", imagenes: ["img/lampara19.png"], descripcion: "Lámpara colgante circular con tres tonos de luz." },
+    46: { nombre: "Lámpara colgante Mantarraya dorada", precio: 78000, categoria: "decoracion", imagenes: ["img/lampara20.png"], descripcion: "Lámpara colgante Mantarraya dorada, ideal para barras de cocina.", descuento: true, precioAnterior: 95000 },
+    47: { nombre: "Lámpara 1 Esfera París", precio: 120000, categoria: "decoracion", imagenes: ["img/lampara21.png"], descripcion: "Lámpara decorativa de una esfera con diseño París.", descuento: true, precioAnterior: 160000 },
+    48: { nombre: "Lámpara colgante Maya dorada", precio: 87000, categoria: "decoracion", imagenes: ["img/lampara22.png"], descripcion: "Lámpara colgante Maya de color dorado con un socket." },
+    49: { nombre: "Lámpara tipo Diamante", precio: 95000, categoria: "decoracion", imagenes: ["img/lampara23.png"], descripcion: "Lámpara con diseño tipo diamante, disponible en dorado y negro." },
+    50: { nombre: "Lámpara colgante tipo Diamantes", precio: 139000, categoria: "decoracion", imagenes: ["img/lampara24.png"], descripcion: "Lámpara colgante con diseño tipo diamantes." },
+    51: { nombre: "Lámpara colgante Ari", precio: 75000, categoria: "decoracion", imagenes: ["img/lampara25.png"], descripcion: "Lámpara colgante modelo Ari." },
+    52: { nombre: "Lámpara colgante Recorte Negra", precio: 90000, categoria: "decoracion", imagenes: ["img/lampara26.png"], descripcion: "Lámpara colgante de diseño Recorte en color negro." },
+    53: { nombre: "Lámpara colgante Sombrero Chico Grande", precio: 105000, categoria: "decoracion", imagenes: ["img/lampara27.png"], descripcion: "Lámpara colgante con diseño Sombrero Chico Grande." },
+    54: { nombre: "Lámpara colgante Andina", precio: 79000, categoria: "decoracion", imagenes: ["img/lampara28.png"], descripcion: "Lámpara colgante Andina con un socket." },
+    55: { nombre: "Lámpara colgante tipo Diamante", precio: 185000, categoria: "decoracion", imagenes: ["img/lampara29.png"], descripcion: "Lámpara colgante tipo diamante con tres sockets." },
+    56: { nombre: "Lámpara colgante Venus", precio: 160000, categoria: "decoracion", imagenes: ["img/lampara30.png"], descripcion: "Lámpara colgante Venus con tres sockets." }
 };
 
 const variantes = { "tendido-queen": [18, 19, 20, 21], "tendido-king": [22, 23] };
 const varianteSeleccionada = { "tendido-queen": 18, "tendido-king": 22 };
+const idsLamparas = Object.keys(productos).map(Number).filter(id => id >= 27 && id <= 56);
+const idsOfertas = Object.keys(productos).filter(id => productos[id].descuento).map(Number);
 
 function formatearPrecio(precio) { return `$${Number(precio).toLocaleString("es-CO")}`; }
 function imagenPrincipal(producto) { return producto?.imagenes?.[0] || "img/imageinicio.png"; }
 function obtenerVarianteActual(grupo) { return varianteSeleccionada[grupo] || variantes[grupo][0]; }
+
+function cardProductoHtml(id) {
+    const producto = productos[id];
+    if (!producto) return "";
+    const precioHtml = producto.descuento && producto.precioAnterior
+        ? `<div class="precio-oferta-catalogo"><span class="precio-anterior">${formatearPrecio(producto.precioAnterior)}</span><span class="etiqueta-oferta">OFERTA</span></div><p class="precio precio-actual">${formatearPrecio(producto.precio)}</p>`
+        : `<p class="precio">${formatearPrecio(producto.precio)}</p>`;
+    return `
+        <article class="producto" data-categoria="${producto.categoria}" data-lampara="${idsLamparas.includes(id) ? "true" : "false"}" data-nombre="${producto.nombre.toLowerCase()}" data-oferta="${producto.descuento ? "true" : "false"}" onclick="abrirProducto(${id})">
+            <div class="imagen-producto"><img src="${imagenPrincipal(producto)}" alt="${producto.nombre}"></div>
+            <div class="informacion">
+                <h3>${producto.nombre}</h3>
+                <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                ${precioHtml}
+                <button class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button>
+            </div>
+        </article>
+    `;
+}
+
+function renderizarProductosLamparas() {
+    const contenedor = document.querySelector(".productos");
+    if (!contenedor) return;
+    const tarjetas = idsLamparas.map(id => cardProductoHtml(id)).join("");
+    const existe = [...contenedor.querySelectorAll(".producto")].some(producto => producto.dataset.categoria === "lamparas");
+    if (!existe) contenedor.insertAdjacentHTML("beforeend", tarjetas);
+}
 
 function actualizarGruposVariantes() {
     Object.keys(variantes).forEach(grupo => {
@@ -184,7 +243,10 @@ function abrirProducto(id) {
     const modal = document.getElementById("modalOverlay");
     const contenido = document.getElementById("modalContenido");
     if (!producto || !modal || !contenido) return;
-    contenido.innerHTML = `<div class="modal-galeria"><img id="modalImagenPrincipal" class="modal-imagen-principal" src="${imagenPrincipal(producto)}" alt="${producto.nombre}"><div class="modal-miniaturas">${producto.imagenes.map((imagen, indice) => `<img class="modal-miniatura${indice === 0 ? " activa" : ""}" src="${imagen}" alt="${producto.nombre} ${indice + 1}" onclick="cambiarImagenModal('${imagen}', this)">`).join("")}</div></div><div class="modal-detalles"><h2>${producto.nombre}</h2><div class="resumen-calificacion" aria-live="polite">${resumenCalificacion(id)}</div><p class="descripcion">${producto.descripcion}</p><p class="precio">${formatearPrecio(producto.precio)}</p><div class="modal-acciones"><button type="button" class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button><button type="button" class="boton" onclick="comprarYa(${id})">Comprar ya</button></div></div><section class="resenas-seccion"><h3>¿Ya compraste este producto?</h3><p>Escribe tu opinión</p><form class="formulario-resena" id="formularioResena"><label>Tu nombre<input name="nombre" type="text" maxlength="60" required></label><fieldset><legend>Calificación</legend><div class="selector-estrellas">${[1, 2, 3, 4, 5].map(valor => `<label><input type="radio" name="calificacion" value="${valor}"${valor === 5 ? " checked" : ""}><span>${valor}</span></label>`).join("")}</div></fieldset><label>Tu comentario<textarea name="comentario" rows="4" maxlength="500" required></textarea></label><button type="submit" class="boton">Publicar opinión</button></form><div class="lista-resenas" id="listaResenas"></div></section>`;
+    const precioHtml = producto.descuento && producto.precioAnterior
+        ? `<div class="precio-oferta-catalogo"><span class="precio-anterior">${formatearPrecio(producto.precioAnterior)}</span><span class="etiqueta-oferta">OFERTA</span></div><p class="precio precio-actual">${formatearPrecio(producto.precio)}</p>`
+        : `<p class="precio">${formatearPrecio(producto.precio)}</p>`;
+    contenido.innerHTML = `<div class="modal-galeria"><img id="modalImagenPrincipal" class="modal-imagen-principal" src="${imagenPrincipal(producto)}" alt="${producto.nombre}"><div class="modal-miniaturas">${producto.imagenes.map((imagen, indice) => `<img class="modal-miniatura${indice === 0 ? " activa" : ""}" src="${imagen}" alt="${producto.nombre} ${indice + 1}" onclick="cambiarImagenModal('${imagen}', this)">`).join("")}</div></div><div class="modal-detalles"><h2>${producto.nombre}</h2><div class="resumen-calificacion" aria-live="polite">${resumenCalificacion(id)}</div><p class="descripcion">${producto.descripcion}</p>${precioHtml}<div class="modal-acciones"><button type="button" class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button><button type="button" class="boton" onclick="comprarYa(${id})">Comprar ya</button></div></div><section class="resenas-seccion"><h3>¿Ya compraste este producto?</h3><p>Escribe tu opinión</p><form class="formulario-resena" id="formularioResena"><label>Tu nombre<input name="nombre" type="text" maxlength="60" required></label><fieldset><legend>Calificación</legend><div class="selector-estrellas">${[1, 2, 3, 4, 5].map(valor => `<label><input type="radio" name="calificacion" value="${valor}"${valor === 5 ? " checked" : ""}><span>${valor}</span></label>`).join("")}</div></fieldset><label>Tu comentario<textarea name="comentario" rows="4" maxlength="500" required></textarea></label><button type="submit" class="boton">Publicar opinión</button></form><div class="lista-resenas" id="listaResenas"></div></section>`;
     const formulario = document.getElementById("formularioResena");
     formulario.addEventListener("submit", evento => { evento.preventDefault(); guardarResena(id, formulario.dataset.editando || null); });
     renderizarResenas(id);
@@ -194,116 +256,39 @@ function cambiarImagenModal(src, miniatura) { const imagen = document.getElement
 function comprarYa(id) { agregarCarrito(null, id); cerrarProducto(); abrirCarrito(); }
 
 function normalizarTexto(texto) { return String(texto).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
-
-/* =========================================================
-   TOLERANCIA A ERRORES DE ESCRITURA (distancia de edición)
-   Permite que "chuchillo", "exprimidr" o "sabnas" encuentren
-   el producto correcto aunque el usuario se equivoque al
-   escribir. El límite de errores permitidos crece con el
-   tamaño de la palabra para no generar falsos positivos en
-   palabras cortas.
-========================================================== */
-function distanciaEdicion(a, b) {
-    if (a === b) return 0;
-    if (!a.length) return b.length;
-    if (!b.length) return a.length;
-    const fila = new Array(b.length + 1);
-    for (let j = 0; j <= b.length; j++) fila[j] = j;
-    for (let i = 1; i <= a.length; i++) {
-        let anterior = fila[0];
-        fila[0] = i;
-        for (let j = 1; j <= b.length; j++) {
-            const temp = fila[j];
-            fila[j] = a[i - 1] === b[j - 1]
-                ? anterior
-                : 1 + Math.min(anterior, fila[j], fila[j - 1]);
-            anterior = temp;
-        }
-    }
-    return fila[b.length];
-}
-
-function toleranciaPermitida(longitud) {
-    if (longitud <= 9) return 1;
-    return 2;
-}
-
-// ¿La palabra buscada aparece (exacta, parcial o con un pequeño error de escritura)
-// dentro del texto objetivo? La tolerancia a errores exige que la palabra empiece
-// igual y que la diferencia de longitud sea mínima, para no generar coincidencias
-// falsas entre palabras distintas que por casualidad quedan "cerca" en edición
-// (por ejemplo, que "toallas" no termine encontrando "ollas").
-function palabraCoincide(palabraBuscada, textoObjetivo) {
-    if (!palabraBuscada) return true;
-    if (textoObjetivo.includes(palabraBuscada)) return true;
-    if (palabraBuscada.length < 4) return false; // evita falsos positivos en palabras muy cortas
-    return textoObjetivo.split(" ").some(palabraObjetivo => {
-        if (!palabraObjetivo || palabraObjetivo.length < 4) return false;
-        if (palabraObjetivo[0] !== palabraBuscada[0]) return false; // deben empezar igual
-        if (Math.abs(palabraObjetivo.length - palabraBuscada.length) > 2) return false;
-        return distanciaEdicion(palabraBuscada, palabraObjetivo) <= toleranciaPermitida(Math.max(palabraBuscada.length, palabraObjetivo.length));
-    });
-}
-
-// Texto de búsqueda de un producto: nombre + categoría + alias de búsqueda opcionales
-// (todo sale del objeto "productos", que es la única fuente de datos). Si un producto
-// se conoce por otro nombre común (ej. "molino"/"picatodo" para el procesador de
-// alimentos), se agrega en su campo "alias" dentro de "productos" y el buscador
-// principal, el Asistente KY y todo lo demás lo encuentran automáticamente.
-function textoBusquedaProducto(id) {
-    const p = productos[id];
-    if (!p) return "";
-    return normalizarTexto(`${p.nombre} ${p.categoria || ""} ${p.alias || ""}`);
-}
-
-/* =========================================================
-   BÚSQUEDA — FUENTE ÚNICA DE DATOS
-   Tanto el buscador principal como el Asistente KY llaman a
-   esta misma función, que siempre lee del objeto "productos".
-   Cualquier producto nuevo que se agregue ahí aparece
-   automáticamente en ambas búsquedas, sin listas aparte.
-========================================================== */
 function buscarProductos(texto) {
     const consulta = normalizarTexto(texto);
+    const palabras = consulta.split(" ").filter(palabra => palabra.length > 2);
     if (!consulta) return Object.keys(productos).map(Number);
-    const palabras = consulta.split(" ").filter(Boolean);
+    if (consulta.includes("oferta") || consulta.includes("descuento")) {
+        return idsOfertas;
+    }
     return Object.keys(productos).map(Number).filter(id => {
-        const nombre = textoBusquedaProducto(id);
-        if (nombre.includes(consulta)) return true;
-        return palabras.every(palabra => palabraCoincide(palabra, nombre));
+        const nombre = normalizarTexto(productos[id].nombre);
+        return nombre.includes(consulta) || palabras.every(palabra => nombre.includes(palabra));
     });
 }
 
 let categoriaSeleccionada = "";
 
-// Ids de producto que representa una tarjeta (una sola id, o varias si es un grupo de variantes)
-function idsDeTarjeta(tarjeta) {
-    if (tarjeta.dataset.ids) return tarjeta.dataset.ids.split(",").map(Number).filter(id => productos[id]);
-    if (tarjeta.dataset.id) return [Number(tarjeta.dataset.id)].filter(id => productos[id]);
-    return [];
-}
-
-// Mantiene sincronizado el texto de cada tarjeta con el objeto "productos" (fuente única),
-// para que el buscador nunca dependa de un dato manual que alguien olvidó actualizar.
-function sincronizarTarjetasProductos() {
-    document.querySelectorAll(".producto").forEach(tarjeta => {
-        const ids = idsDeTarjeta(tarjeta);
-        if (!ids.length) return;
-        tarjeta.dataset.nombre = ids.map(id => textoBusquedaProducto(id)).join(" ");
-    });
-}
-
 function ejecutarBusqueda() {
     const entrada = document.getElementById("inputBuscar");
     if (!entrada) return;
     const consulta = normalizarTexto(entrada.value);
-    const palabras = consulta.split(" ").filter(Boolean);
     const tarjetas = [...document.querySelectorAll(".producto")];
     tarjetas.forEach(tarjeta => {
-        const nombre = tarjeta.dataset.nombre || "";
+        const nombre = normalizarTexto(tarjeta.dataset.nombre || tarjeta.querySelector("h3")?.textContent || "");
         const categoria = tarjeta.dataset.categoria || "";
-        const coincideTexto = !consulta || nombre.includes(consulta) || palabras.every(palabra => palabraCoincide(palabra, nombre));
-        const coincideCategoria = !categoriaSeleccionada || categoria === categoriaSeleccionada;
+        const esOferta = tarjeta.dataset.oferta === "true";
+        const consultaOferta = consulta.includes("oferta") || consulta.includes("descuento");
+        let coincideTexto = !consulta || nombre.includes(consulta) || consulta.split(" ").filter(Boolean).every(palabra => nombre.includes(palabra));
+        if (consultaOferta) {
+            coincideTexto = esOferta;
+        }
+        const coincideCategoria = !categoriaSeleccionada
+            || (categoriaSeleccionada === "lamparas" && tarjeta.dataset.lampara === "true")
+            || (categoriaSeleccionada === "ofertas" && esOferta)
+            || categoria === categoriaSeleccionada;
         tarjeta.hidden = !(coincideTexto && coincideCategoria);
     });
     const hayResultados = tarjetas.some(tarjeta => !tarjeta.hidden);
@@ -330,7 +315,7 @@ function mostrarTodosLosProductos(evento) {
 }
 
 function iniciarTienda() {
-    sincronizarTarjetasProductos();
+    renderizarProductosLamparas();
     actualizarContadorCarrito(); actualizarGruposVariantes(); renderizarCarrito();
     const secciones = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
