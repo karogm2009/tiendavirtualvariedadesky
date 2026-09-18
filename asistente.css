@@ -43,6 +43,17 @@
     background: #0080FF;
 }
 
+/* Ajustes de la edición Amor y Amistad */
+.asistente-boton {
+    background: #9A1C20;
+    box-shadow: 0 6px 20px rgba(154, 28, 32, 0.35);
+}
+
+.asistente-boton:hover {
+    background: #D4A84F;
+    color: #4A3226;
+}
+
 .asistente-boton-emoji {
     font-size: 20px;
 }
@@ -90,11 +101,27 @@
     align-items: center;
     gap: 12px;
 
-    background: #0D3E70;
+    background: #9A1C20;
     color: #ffffff;
 
     padding: 16px 16px;
     flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.asistente-header::after {
+    content: "♥  ♥";
+    position: absolute;
+    right: 16px;
+    bottom: -8px;
+    color: #EFCCD3;
+    font-family: Georgia, serif;
+    font-size: 28px;
+    letter-spacing: 12px;
+    opacity: 0.3;
+    transform: rotate(12deg);
+    pointer-events: none;
 }
 
 .asistente-avatar {
@@ -105,7 +132,7 @@
     align-items: center;
     justify-content: center;
 
-    background: #FFE04F;
+    background: #EFCCD3;
     border-radius: 50%;
 
     font-size: 18px;
@@ -116,6 +143,8 @@
     display: flex;
     flex-direction: column;
     line-height: 1.3;
+    position: relative;
+    z-index: 1;
 }
 
 .asistente-header-texto strong {
@@ -133,6 +162,8 @@
     color: #ffffff;
     font-size: 22px;
     line-height: 1;
+    position: relative;
+    z-index: 1;
 }
 
 /* =========================================================
@@ -148,7 +179,7 @@
     flex-direction: column;
     gap: 10px;
 
-    background: #F8FAFF;
+    background: #F7F3EA;
 }
 
 .asistente-msg {
@@ -170,12 +201,17 @@
 
     border: 1px solid #ececf3;
     border-bottom-left-radius: 4px;
+    border-color: rgba(154, 28, 32, 0.14);
+}
+
+.asistente-msg-bot:first-child {
+    border-top: 3px solid #EFCCD3;
 }
 
 .asistente-msg-user {
     align-self: flex-end;
 
-    background: #044DFF;
+    background: #9A1C20;
     color: #ffffff;
 
     border-bottom-right-radius: 4px;
@@ -434,4 +470,74 @@
     .asistente-input button {
         transition: none;
     }
+}
+
+/* Detalles cromáticos de la edición Amor y Amistad */
+.asistente-tarjeta-info h4 {
+    color: #9A1C20;
+}
+
+.asistente-tarjeta-precio,
+.asistente-tarjeta-descuento {
+    color: #4A3226;
+}
+
+.asistente-tarjeta-descuento,
+.asistente-btn-agregar {
+    background: #D4A84F;
+}
+
+.asistente-btn-agregar {
+    color: #4A3226;
+}
+
+.asistente-btn-agregar:hover {
+    background: #EFCCD3;
+}
+
+.asistente-btn-ver {
+    background: #9A1C20;
+}
+
+.asistente-btn-ver:hover,
+.asistente-input button:hover,
+.asistente-opcion:hover {
+    background: #D4A84F;
+    color: #4A3226;
+}
+
+.asistente-opciones {
+    background: #F7F3EA;
+}
+
+.asistente-opcion {
+    color: #9A1C20;
+    border-color: #9A1C20;
+}
+
+.asistente-input input:focus {
+    border-color: #9A1C20;
+}
+
+.asistente-input button {
+    background: #9A1C20;
+}
+
+/* Botón flotante compacto con sticker de atención */
+.asistente-boton {
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    background: #9A1C20;
+}
+
+.asistente-boton-emoji {
+    font-size: 30px;
+    line-height: 1;
+}
+
+.asistente-boton-texto {
+    display: none;
 }
