@@ -54,6 +54,15 @@ button {
     cursor: pointer;
 }
 
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.producto:focus-visible {
+    outline: 3px solid var(--dorado-principal);
+    outline-offset: 3px;
+}
+
 
 /* ================================
    ENCABEZADO
@@ -517,7 +526,7 @@ header {
     display: grid;
 
     grid-template-columns:
-        repeat(5, 1fr);
+        repeat(4, minmax(0, 1fr));
 
     gap: 20px;
 }
@@ -2089,10 +2098,6 @@ img {
 }
 
 @media (max-width: 767px) {
-    html {
-        overflow-x: hidden;
-    }
-
     .header-top {
         padding: 10px 5%;
         display: grid;
@@ -2273,31 +2278,7 @@ img {
     }
 
     .productos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-    }
-
-    .imagen-producto {
-        height: clamp(145px, 42vw, 190px);
-    }
-
-    .informacion {
-        padding: 9px;
-    }
-
-    .informacion h3 {
-        font-size: 13px;
-        min-height: 54px;
-    }
-
-    .precio {
-        font-size: 17px;
-    }
-
-    .btn-agregar {
-        padding: 9px 5px;
-        font-size: 11px;
-        overflow-wrap: anywhere;
+        grid-template-columns: 1fr;
     }
 
     .titulo-productos {
