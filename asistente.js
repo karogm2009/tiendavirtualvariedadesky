@@ -235,8 +235,14 @@ function asistenteMenuPrincipal() {
     estadoAsistente.categoria = null;
     estadoAsistente.subcategoria = null;
 
-    asistenteMensajeBot("¿En qué te puedo ayudar hoy?");
+    asistenteMensajeBot("Elige una opción y te ayudo a encontrar un detalle especial:");
     asistenteMostrarOpciones([
+        { texto: "💕 Para mi pareja", accion: asistenteIniciarRegalo },
+        { texto: "🫶 Para mi mejor amigo/a", accion: asistenteIniciarRegalo },
+        { texto: "🎁 Para sorprender", accion: asistenteIniciarRegalo },
+        { texto: "🏠 Para el hogar", accion: () => asistenteMostrarCategoria("hogar") },
+        { texto: "✨ Algo especial", accion: asistenteIniciarAyudame },
+        { texto: "🤔 No sé qué regalar", accion: asistenteIniciarAyudame },
         { texto: "🍳 Cocina", accion: () => asistenteMostrarCategoria("cocina") },
         { texto: "🛏️ Dormitorio", accion: () => asistenteMostrarCategoria("habitacion") },
         { texto: "🏠 Hogar", accion: () => asistenteMostrarCategoria("hogar") },
@@ -491,7 +497,7 @@ function abrirAsistente() {
     elVentana.classList.add("asistente-abierta");
     elVentana.removeAttribute("hidden");
     if (elMensajes.childElementCount === 0) {
-        asistenteMensajeBot("🔵 ¡Hola! Soy el Asistente KY.\nEstoy aquí para ayudarte a encontrar el producto ideal para tu hogar.");
+        asistenteMensajeBot("💕 ¡Hola! Soy KY 💕\n¿Qué regalo estás buscando para esta temporada de Amor y Amistad? 🎁\n\nEstoy aquí para ayudarte a encontrar un detalle especial. 🫶");
         asistenteMenuPrincipal();
     }
     document.getElementById("asistenteTexto").focus();
