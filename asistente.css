@@ -143,8 +143,6 @@
     display: flex;
     flex-direction: column;
     line-height: 1.3;
-    position: relative;
-    z-index: 1;
 }
 
 .asistente-header-texto strong {
@@ -162,8 +160,6 @@
     color: #ffffff;
     font-size: 22px;
     line-height: 1;
-    position: relative;
-    z-index: 1;
 }
 
 /* =========================================================
