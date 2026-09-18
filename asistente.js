@@ -26,7 +26,7 @@
 ========================================================== */
 const ASISTENTE_CATEGORIA = {
     1: "electrodomesticos", 2: "cocina", 3: "electrodomesticos", 4: "cocina",
-    5: "hogar", 6: "cocina", 7: "decoracion",
+    5: "electrodomesticos", 6: "cocina", 7: "decoracion",
     8: "habitacion", 10: "habitacion", 11: "habitacion", 12: "habitacion",
     13: "cocina", 14: "usopersonal", 15: "usopersonal", 16: "usopersonal",
     17: "habitacion", 18: "habitacion", 19: "habitacion", 20: "habitacion",
@@ -35,7 +35,8 @@ const ASISTENTE_CATEGORIA = {
     33: "lamparas", 34: "lamparas", 35: "lamparas", 36: "lamparas", 37: "lamparas", 38: "lamparas",
     39: "lamparas", 40: "lamparas", 41: "lamparas", 42: "lamparas", 43: "lamparas", 44: "lamparas",
     45: "lamparas", 46: "lamparas", 47: "lamparas", 48: "lamparas", 49: "lamparas", 50: "lamparas",
-    51: "lamparas", 52: "lamparas", 53: "lamparas", 54: "lamparas", 55: "lamparas", 56: "lamparas"
+    51: "lamparas", 52: "lamparas", 53: "lamparas", 54: "lamparas", 55: "lamparas", 56: "lamparas",
+    57: "habitacion", 58: "limpieza", 59: "cocina", 60: "limpieza"
 };
 
 const ASISTENTE_ETIQUETAS = {
@@ -64,6 +65,10 @@ const ASISTENTE_ETIQUETAS = {
     24: ["tendido", "doble", "blanco"],
     25: ["tendido", "doble", "estampado"],
     26: ["procesador", "alimentos", "electrico", "electrica", "cocina"],
+    57: ["cobija", "cobijas", "peluche", "dormir", "dormitorio", "acogedor", "regalo", "descanso"],
+    58: ["limpieza", "limpiar", "paño", "paños", "microfibra", "superficies", "cocina", "muebles"],
+    59: ["aceite", "aceites", "condimento", "condimentos", "organizar", "cocina", "aceitera", "aceiteras", "recipiente", "recipientes"],
+    60: ["esponja", "esponjas", "limpieza", "limpiar", "cocina", "superficies", "fregadero", "multiuso"],
     27: ["lampara", "lámpara", "cristal", "redonda"],
     28: ["lampara", "lámpara", "cubo", "negra", "dorada"],
     29: ["lampara", "lámpara", "geminis", "decorativa", "negro", "blanco"],
