@@ -86,6 +86,78 @@ header {
     flex-wrap: wrap;
 }
 
+/* Corazones decorativos del encabezado */
+.header-top,
+.header-menu {
+    overflow: hidden;
+}
+
+.header-top {
+    position: relative;
+}
+
+.header-top > *,
+.header-menu > * {
+    position: relative;
+    z-index: 1;
+}
+
+.header-top::before,
+.header-top::after,
+.header-menu::before,
+.header-menu::after {
+    position: absolute;
+    z-index: 0;
+    line-height: 1;
+    pointer-events: none;
+    font-family: Georgia, serif;
+}
+
+.header-top::before {
+    content: "♥  ♥";
+    top: -6px;
+    right: 24%;
+    color: #9A1C20;
+    font-size: 42px;
+    letter-spacing: 18px;
+    opacity: 0.18;
+    transform: rotate(14deg);
+}
+
+.header-top::after {
+    content: "♥  ♥";
+    top: 12px;
+    right: 4%;
+    color: #EFCCD3;
+    font-size: 21px;
+    letter-spacing: 12px;
+    opacity: 0.75;
+    transform: rotate(-12deg);
+    animation: corazon-flotante 8s ease-in-out infinite;
+}
+
+.header-menu::before {
+    content: "♥  ♥";
+    top: 4px;
+    left: 53%;
+    color: #EFCCD3;
+    font-size: 22px;
+    letter-spacing: 14px;
+    opacity: 0.55;
+    transform: rotate(10deg);
+}
+
+.header-menu::after {
+    content: "♥  ♥  ♥";
+    right: 12%;
+    bottom: -9px;
+    color: #9A1C20;
+    font-size: 32px;
+    letter-spacing: 20px;
+    opacity: 0.16;
+    transform: rotate(18deg);
+}
+
 
 /* LOGO */
 
@@ -932,6 +1004,283 @@ footer {
     font-size: 13px;
 }
 
+/* ================================
+   EDICIÓN ESPECIAL — AMOR Y AMISTAD
+================================ */
+
+:root {
+    --borgona: #9A1C20;
+    --rosa-suave: #EFCCD3;
+    --crema: #F7F3EA;
+    --chocolate: #4A3226;
+    --dorado-temporada: #D4A84F;
+}
+
+body {
+    background: var(--crema);
+    color: var(--chocolate);
+}
+
+body::before,
+body::after {
+    position: fixed;
+    z-index: 0;
+    color: var(--rosa-suave);
+    font-family: Georgia, serif;
+    line-height: 1;
+    pointer-events: none;
+    opacity: 0.16;
+}
+
+body::before {
+    content: "♥  ♥  ♥";
+    top: 34%;
+    left: 2%;
+    font-size: 26px;
+    letter-spacing: 22px;
+    transform: rotate(-14deg);
+}
+
+body::after {
+    content: "♥  ♥";
+    right: 3%;
+    bottom: 24%;
+    color: var(--borgona);
+    font-size: 42px;
+    letter-spacing: 24px;
+    transform: rotate(15deg);
+}
+
+.header-top,
+.header-menu {
+    background: #FFFFFF;
+}
+
+footer {
+    background: var(--borgona);
+}
+
+.header-menu {
+    border-bottom-color: rgba(154, 28, 32, 0.16);
+}
+
+.logo strong,
+.menu-izquierda,
+.menu-derecha,
+.menu-toggle {
+    color: var(--borgona);
+}
+
+.menu-izquierda a.activo {
+    color: var(--borgona);
+}
+
+.envio-gratis .rotulo,
+.carrito-contador,
+.boton,
+.oferta .boton {
+    background: var(--dorado-temporada);
+    color: var(--chocolate);
+}
+
+.menu-izquierda a.activo,
+.footer-contenido a:hover,
+.redes a.facebook-enlace:hover,
+.titulo-productos > a {
+    color: var(--rosa-suave);
+}
+
+.hero {
+    background: var(--borgona);
+}
+
+.boton:hover,
+.oferta .boton:hover {
+    background: var(--rosa-suave);
+    color: var(--borgona);
+}
+
+.seccion {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--crema);
+}
+
+.seccion > * {
+    position: relative;
+    z-index: 1;
+}
+
+.seccion::before,
+.seccion::after,
+.hero::after,
+footer::before {
+    position: absolute;
+    z-index: 0;
+    color: var(--rosa-suave);
+    font-family: Georgia, serif;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.seccion::before {
+    content: "♥  ♥";
+    top: 18px;
+    right: 7%;
+    font-size: 48px;
+    letter-spacing: 22px;
+    opacity: 0.28;
+    transform: rotate(14deg);
+    animation: corazon-flotante 9s ease-in-out infinite;
+}
+
+.seccion::after {
+    content: "♥  ·  ♥  ·  ♥";
+    bottom: 24px;
+    left: 4%;
+    font-size: 20px;
+    letter-spacing: 18px;
+    opacity: 0.2;
+    transform: rotate(-12deg);
+}
+
+.productos-seccion {
+    background-color: var(--crema);
+    background-image: radial-gradient(circle, rgba(154, 28, 32, 0.08) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+
+.hero::after {
+    content: "♥  ·  ♥  ·  ♥";
+    top: 32px;
+    right: 6%;
+    font-size: 30px;
+    letter-spacing: 18px;
+    opacity: 0.5;
+    transform: rotate(10deg);
+    animation: corazon-flotante 11s ease-in-out infinite reverse;
+}
+
+.hero::before {
+    content: "♥  ♥";
+    position: absolute;
+    top: 18%;
+    left: 4%;
+    z-index: 0;
+    color: var(--rosa-suave);
+    font-family: Georgia, serif;
+    font-size: 25px;
+    letter-spacing: 24px;
+    opacity: 0.35;
+    transform: rotate(-12deg);
+    pointer-events: none;
+}
+
+footer {
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: "♥  ♥  ♥";
+    right: 8%;
+    top: 24px;
+    font-size: 74px;
+    letter-spacing: 18px;
+    opacity: 0.12;
+    transform: rotate(-15deg);
+}
+
+.seccion h2,
+.categoria h3,
+.carrito-header h3,
+.carrito-total,
+.modal-producto h2,
+.resenas-seccion h3 {
+    color: var(--borgona);
+}
+
+.categoria,
+.producto,
+.testimonio {
+    border-color: rgba(154, 28, 32, 0.12);
+}
+
+.categoria:hover,
+.categoria.activa {
+    border-color: var(--borgona);
+    box-shadow: 0 10px 30px rgba(154, 28, 32, 0.14);
+}
+
+.producto:hover {
+    box-shadow: 0 12px 30px rgba(74, 50, 38, 0.16);
+}
+
+.precio,
+.modal-detalles .estrellas,
+.calificacion-estrellas,
+.resena-estrellas {
+    color: var(--dorado-temporada);
+}
+
+.btn-agregar {
+    background: var(--borgona);
+    color: #FFFFFF;
+}
+
+.btn-agregar:hover {
+    background: #7D171A;
+}
+
+.descuento,
+.oferta {
+    background: var(--rosa-suave);
+    color: var(--borgona);
+}
+
+.oferta h2 {
+    color: var(--borgona);
+}
+
+.oferta .boton {
+    background: var(--borgona);
+    color: #FFFFFF;
+}
+
+.overlay,
+.modal-overlay {
+    background: rgba(74, 50, 38, 0.5);
+}
+
+.carrito-item-acciones button {
+    background: var(--rosa-suave);
+    color: var(--borgona);
+}
+
+.modal-miniatura.activa,
+.modal-miniatura:hover,
+.swatch-color.activo {
+    border-color: var(--borgona);
+}
+
+@keyframes corazon-flotante {
+    0%, 100% {
+        opacity: 0.18;
+        transform: translateY(0) rotate(14deg);
+    }
+    50% {
+        opacity: 0.34;
+        transform: translate(5px, -10px) rotate(9deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .seccion::before,
+    .hero::after {
+        animation: none;
+    }
+}
+
 
 /* ================================
    BOTÓN FLOTANTE WHATSAPP
@@ -965,6 +1314,43 @@ footer {
 
 .whatsapp-flotante:hover {
     transform: scale(1.08);
+}
+
+/* Logos de marca en los botones existentes, sin alterar sus enlaces ni textos */
+.redes a[href*="wa.me"]::before,
+.whatsapp-flotante::before,
+#finalizarCompra::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    vertical-align: -0.2em;
+    background: url("https://cdn.simpleicons.org/whatsapp/FFFFFF") center / contain no-repeat;
+}
+
+.redes a[href*="wa.me"],
+.whatsapp-flotante {
+    font-size: 0;
+}
+
+.redes a.facebook-enlace {
+    font-size: 0;
+}
+
+.redes a.facebook-enlace::before {
+    content: "";
+    display: block;
+    width: 21px;
+    height: 21px;
+    background: url("https://cdn.simpleicons.org/facebook/FFFFFF") center / contain no-repeat;
+}
+
+#finalizarCompra {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 
@@ -1902,4 +2288,51 @@ img {
     .precio {
         font-size: 20px;
     }
+}
+
+/* Banner de temporada en la sección de ofertas */
+.oferta {
+    position: relative;
+    min-height: clamp(190px, 25vw, 280px);
+    padding: 30px;
+    background: url("img/imagenfin.png") center / cover no-repeat;
+    color: transparent;
+}
+
+.oferta > div {
+    max-width: none;
+    height: auto;
+}
+
+.oferta > div > span,
+.oferta > div > h2,
+.oferta > div > p {
+    display: none;
+}
+
+.oferta .boton {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    margin: 0;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.oferta .boton:hover {
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* WhatsApp en la paleta de Amor y Amistad */
+.whatsapp-flotante {
+    background: #EFCCD3;
+    color: #9A1C20;
+}
+
+.whatsapp-flotante:hover {
+    background: #D4A84F;
+}
+
+.whatsapp-flotante::before {
+    background-image: url("https://cdn.simpleicons.org/whatsapp/9A1C20");
 }
