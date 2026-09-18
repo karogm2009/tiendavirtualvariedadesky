@@ -5,7 +5,7 @@ const productos = {
     2: { nombre: "Juego de cuchillos Cutlery", precio: 89000, categoria: "cocina", imagenes: ["img/cuchilloscutlery1.png", "img/cuchilloscutlery2.png", "img/cuchilloscutlery3.png"], descripcion: "Juego de cuchillos práctico y versátil, ideal para cortar, picar y preparar diferentes alimentos en la cocina." },
     3: { nombre: "Exprimidor", precio: 120000, categoria: "electrodomesticos", imagenes: ["img/exprimidor1.png", "img/exprimidor2.png", "img/exprimidor3.png"], descripcion: "Exprimidor funcional para preparar jugos frescos de manera rápida y sencilla. Ideal para disfrutar bebidas naturales en casa." },
     4: { nombre: "Ollas de acero inoxidable", precio: 580000, categoria: "cocina", imagenes: ["img/ollasdeacero1.png", "img/ollasdeacero2.png"], descripcion: "Set de ollas de acero inoxidable pensado para facilitar la preparación de diferentes comidas. Su diseño combina funcionalidad, resistencia y una apariencia moderna." },
-    5: { nombre: "Plancha para ropa", precio: 40000, categoria: "hogar", imagenes: ["img/plancha1.png", "img/plancha2.png", "img/plancha3.png"], descripcion: "Plancha práctica para eliminar arrugas y mantener tu ropa impecable. Una ayuda esencial para el cuidado diario de tus prendas." },
+    5: { nombre: "Plancha para ropa", precio: 40000, categoria: "electrodomesticos", imagenes: ["img/plancha1.png", "img/plancha2.png", "img/plancha3.png"], descripcion: "Plancha práctica para eliminar arrugas y mantener tu ropa impecable. Una ayuda esencial para el cuidado diario de tus prendas." },
     6: { nombre: "Set de tablas de picar", precio: 30000, categoria: "cocina", imagenes: ["img/tablasdepicar1.png", "img/tablasdepicar2.png", "img/tablasdepicar3.png"], descripcion: "Set de tablas de picar ideal para organizar la preparación de alimentos y trabajar cómodamente en la cocina." },
     7: { nombre: "Cortinas", precio: 55000, categoria: "decoracion", imagenes: ["img/cortinas1.png", "img/cortinas2.png", "img/cortinas3.png"], descripcion: "Cortinas decorativas que ayudan a renovar tus espacios, aportar privacidad y complementar el estilo de tu hogar." },
     8: { nombre: "Sabanas de bambu lisas (1.40 m, Doble)", precio: 75000, categoria: "habitacion", imagenes: ["img/sabanabambu1.401.png", "img/sabanabambu1.402.png", "img/sabanabambu1.403.png", "img/sabanabambu1.404.png", "img/sabanabambu1.405.png"], descripcion: "Sábanas suaves y agradables al tacto, ideales para disfrutar de mayor comodidad durante el descanso. Disponibles en diferentes tamaños y diseños." },
@@ -25,7 +25,7 @@ const productos = {
     23: { nombre: "Tendido King (Beige crema)", precio: 150000, categoria: "habitacion", imagenes: ["img/tendidoking2.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
     24: { nombre: "Tendido Doble (Blanco)", precio: 170000, categoria: "habitacion", imagenes: ["img/tendidoble1.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
     25: { nombre: "Tendido Doble estampado", precio: 100000, categoria: "habitacion", imagenes: ["img/tendido1.401.png", "img/tendido1.402.png"], descripcion: "Tendidos decorativos que ayudan a darle un toque acogedor y elegante a la habitación. Disponibles en diferentes tamaños, colores y diseños." },
-    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Práctico procesador de alimentos eléctrico, ideal para facilitar diferentes tareas en la cocina. Una opción funcional para preparar y procesar alimentos de manera rápida y sencilla." },
+    26: { nombre: "Procesador de alimentos eléctrico", precio: 70000, categoria: "cocina", imagenes: ["img/picatodo1.png"], descripcion: "Práctico procesador de alimentos eléctrico, ideal para facilitar diferentes tareas en la cocina. Una opción funcional para preparar y procesar alimentos de manera rápida y sencilla.", disponible: false, estado: "No disponible por ahora" },
     27: { nombre: "Lámpara de cristal redonda", precio: 110000, categoria: "decoracion", imagenes: ["img/lampara1.png"], descripcion: "Lámpara de cristal con diseño redondo, ideal para complementar la decoración del hogar." },
     28: { nombre: "Lámpara Cubo", precio: 60000, categoria: "decoracion", imagenes: ["img/lampara2.png"], descripcion: "Lámpara con diseño tipo cubo, disponible en negro y dorado." },
     29: { nombre: "Lámpara Decorativa Géminis", precio: 1200000, categoria: "decoracion", imagenes: ["img/lampara3.png"], descripcion: "Lámpara decorativa de diseño elegante, disponible en negro y blanco." },
@@ -55,7 +55,11 @@ const productos = {
     53: { nombre: "Lámpara colgante Sombrero Chico Grande", precio: 105000, categoria: "decoracion", imagenes: ["img/lampara27.png"], descripcion: "Lámpara colgante con diseño Sombrero Chico Grande." },
     54: { nombre: "Lámpara colgante Andina", precio: 79000, categoria: "decoracion", imagenes: ["img/lampara28.png"], descripcion: "Lámpara colgante Andina con un socket." },
     55: { nombre: "Lámpara colgante tipo Diamante", precio: 185000, categoria: "decoracion", imagenes: ["img/lampara29.png"], descripcion: "Lámpara colgante tipo diamante con tres sockets." },
-    56: { nombre: "Lámpara colgante Venus", precio: 160000, categoria: "decoracion", imagenes: ["img/lampara30.png"], descripcion: "Lámpara colgante Venus con tres sockets." }
+    56: { nombre: "Lámpara colgante Venus", precio: 160000, categoria: "decoracion", imagenes: ["img/lampara30.png"], descripcion: "Lámpara colgante Venus con tres sockets." },
+    57: { nombre: "Cobija con Peluche", precio: 95000, categoria: "habitacion", imagenes: ["img/cobijapeluche1.png", "img/cobijapeluche2.png", "img/cobijapeluche3.png", "img/cobijapeluche4.png", "img/cobijapeluche5.png"], descripcion: "Cobija suave y acogedora que viene acompañada de un lindo peluche. Ideal para descansar, regalar o darle un toque especial a la habitación." },
+    58: { nombre: "Paño de Microfibra", precio: 2500, categoria: "limpieza", imagenes: ["img/paños1.png"], descripcion: "Paño de microfibra suave y práctico, ideal para limpiar diferentes superficies del hogar. Perfecto para la cocina, muebles y limpieza diaria." },
+    59: { nombre: "Set de 5 Piezas de Aceiteras y Condimenteros", precio: 30000, categoria: "cocina", imagenes: ["img/setaceitesycondimentos1.png", "img/setaceitesycondimentos2.png"], descripcion: "Set práctico de 5 piezas para organizar aceites, salsas y condimentos. Ideal para mantener la cocina ordenada y tener todo a la mano." },
+    60: { nombre: "Esponja Multiuso para Cocina", precio: 7000, categoria: "limpieza", imagenes: ["img/paños1.png"], descripcion: "Esponja práctica y resistente para limpiar superficies, trastes y zonas de la cocina con facilidad. Ideal para el uso diario del hogar." }
 };
 
 const variantes = { "tendido-queen": [18, 19, 20, 21], "tendido-king": [22, 23] };
@@ -73,6 +77,12 @@ function cardProductoHtml(id) {
     const precioHtml = producto.descuento && producto.precioAnterior
         ? `<div class="precio-oferta-catalogo"><span class="precio-anterior">${formatearPrecio(producto.precioAnterior)}</span><span class="etiqueta-oferta">OFERTA</span></div><p class="precio precio-actual">${formatearPrecio(producto.precio)}</p>`
         : `<p class="precio">${formatearPrecio(producto.precio)}</p>`;
+    const estadoHtml = producto.disponible === false
+        ? '<span class="estado-no-disponible">No disponible por ahora</span>'
+        : '';
+    const botonHtml = producto.disponible === false
+        ? '<button class="btn-agregar btn-no-disponible" type="button" disabled>No disponible</button>'
+        : `<button class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button>`;
     return `
         <article class="producto" data-categoria="${producto.categoria}" data-lampara="${idsLamparas.includes(id) ? "true" : "false"}" data-nombre="${producto.nombre.toLowerCase()}" data-oferta="${producto.descuento ? "true" : "false"}" onclick="abrirProducto(${id})">
             <div class="imagen-producto"><img src="${imagenPrincipal(producto)}" alt="${producto.nombre}"></div>
@@ -80,7 +90,8 @@ function cardProductoHtml(id) {
                 <h3>${producto.nombre}</h3>
                 <div class="estrellas">⭐⭐⭐⭐⭐</div>
                 ${precioHtml}
-                <button class="btn-agregar" onclick="agregarCarrito(event, ${id})">Agregar al carrito</button>
+                ${estadoHtml}
+                ${botonHtml}
             </div>
         </article>
     `;
@@ -90,7 +101,7 @@ function renderizarProductosLamparas() {
     const contenedor = document.querySelector(".productos");
     if (!contenedor) return;
     const tarjetas = idsLamparas.map(id => cardProductoHtml(id)).join("");
-    const existe = [...contenedor.querySelectorAll(".producto")].some(producto => producto.dataset.categoria === "lamparas");
+    const existe = contenedor.querySelector(".producto[data-lampara=\"true\"]");
     if (!existe) contenedor.insertAdjacentHTML("beforeend", tarjetas);
 }
 
@@ -110,14 +121,26 @@ function seleccionarVariante(grupo, id) { varianteSeleccionada[grupo] = id; actu
 
 function actualizarContadorCarrito() {
     const contador = document.getElementById("carritoContador");
-    const carrito = JSON.parse(localStorage.getItem("ky-carrito") || "[]");
+    const carrito = obtenerCarrito();
     if (contador) contador.textContent = carrito.reduce((total, item) => total + item.cantidad, 0);
 }
-function obtenerCarrito() { return JSON.parse(localStorage.getItem("ky-carrito") || "[]"); }
+function obtenerCarrito() {
+    try {
+        const guardado = JSON.parse(localStorage.getItem("ky-carrito") || "[]");
+        if (!Array.isArray(guardado)) return [];
+        const carritoValido = guardado.filter(item => productos[item?.id] && Number.isInteger(item.cantidad) && item.cantidad > 0);
+        if (carritoValido.length !== guardado.length) localStorage.setItem("ky-carrito", JSON.stringify(carritoValido));
+        return carritoValido;
+    } catch {
+        localStorage.removeItem("ky-carrito");
+        return [];
+    }
+}
 
 function agregarCarrito(evento, id) {
     evento?.stopPropagation();
-    if (!productos[id]) return;
+    const producto = productos[id];
+    if (!producto || producto.disponible === false) return;
     const carrito = obtenerCarrito();
     const existente = carrito.find(item => item.id === id);
     if (existente) existente.cantidad += 1;
@@ -147,7 +170,6 @@ function renderizarCarrito() {
     if (!carrito.length) { contenedor.innerHTML = '<p class="carrito-vacio">Tu carrito está vacío.</p>'; totalElemento.textContent = "$0"; return; }
     contenedor.innerHTML = carrito.map(item => {
         const producto = productos[item.id];
-        if (!producto) return "";
         total += producto.precio * item.cantidad;
         return `<div class="carrito-item"><div class="carrito-item-info"><h4>${producto.nombre}</h4><span>${formatearPrecio(producto.precio)} x ${item.cantidad}</span></div><div class="carrito-item-acciones"><button type="button" onclick="cambiarCantidad(${item.id}, -1)">−</button><button type="button" onclick="cambiarCantidad(${item.id}, 1)">+</button><button type="button" class="carrito-item-eliminar" aria-label="Eliminar" onclick="eliminarDelCarrito(${item.id})">×</button></div></div>`;
     }).join("");
@@ -253,7 +275,13 @@ function abrirProducto(id) {
     modal.classList.add("visible"); document.body.classList.add("modal-abierto");
 }
 function cambiarImagenModal(src, miniatura) { const imagen = document.getElementById("modalImagenPrincipal"); if (imagen) imagen.src = src; document.querySelectorAll(".modal-miniatura").forEach(elemento => elemento.classList.remove("activa")); miniatura.classList.add("activa"); }
-function comprarYa(id) { agregarCarrito(null, id); cerrarProducto(); abrirCarrito(); }
+function comprarYa(id) {
+    const producto = productos[id];
+    if (!producto || producto.disponible === false) return;
+    agregarCarrito(null, id);
+    cerrarProducto();
+    abrirCarrito();
+}
 
 function normalizarTexto(texto) { return String(texto).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
 function buscarProductos(texto) {
@@ -314,8 +342,25 @@ function mostrarTodosLosProductos(evento) {
     ejecutarBusqueda();
 }
 
+function habilitarAccesoTecladoTarjetas() {
+    document.querySelectorAll(".producto").forEach(tarjeta => {
+        if (tarjeta.hasAttribute("tabindex")) return;
+        tarjeta.setAttribute("tabindex", "0");
+        tarjeta.setAttribute("role", "button");
+        const nombre = tarjeta.querySelector("h3")?.textContent?.trim();
+        if (nombre) tarjeta.setAttribute("aria-label", `Ver detalles de ${nombre}`);
+        tarjeta.addEventListener("keydown", evento => {
+            if (evento.key !== "Enter" && evento.key !== " ") return;
+            if (evento.target !== tarjeta) return;
+            evento.preventDefault();
+            tarjeta.click();
+        });
+    });
+}
+
 function iniciarTienda() {
     renderizarProductosLamparas();
+    habilitarAccesoTecladoTarjetas();
     actualizarContadorCarrito(); actualizarGruposVariantes(); renderizarCarrito();
     const secciones = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
