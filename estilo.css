@@ -2300,10 +2300,6 @@ img {
         overflow-wrap: anywhere;
     }
 
-    .imagen-producto {
-        height: min(70vw, 260px);
-    }
-
     .titulo-productos {
         align-items: flex-start;
         gap: 12px;
