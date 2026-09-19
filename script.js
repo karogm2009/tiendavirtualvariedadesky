@@ -61,6 +61,7 @@ const productos = {
     59: { nombre: "Set de 5 Piezas de Aceiteras y Condimenteros", precio: 30000, categoria: "cocina", imagenes: ["img/setaceitesycondimentos1.png", "img/setaceitesycondimentos2.png"], descripcion: "Set práctico de 5 piezas para organizar aceites, salsas y condimentos. Ideal para mantener la cocina ordenada y tener todo a la mano." },
     60: { nombre: "Esponja Multiuso para Cocina", precio: 7000, categoria: "limpieza", imagenes: ["img/paños1.png"], descripcion: "Esponja práctica y resistente para limpiar superficies, trastes y zonas de la cocina con facilidad. Ideal para el uso diario del hogar." }
 };
+
 async function cargarProductosDesdeSupabase() {
     const { data, error } = await supabaseClient
         .from("Productos")
@@ -73,38 +74,29 @@ async function cargarProductosDesdeSupabase() {
         return;
     }
 
-    console.log("Productos cargados desde Supabase:", data);
-
     if (!data || !data.length) {
         console.warn("No hay productos activos en Supabase.");
         return;
     }
 
-    // Convertimos los datos de Supabase al formato que usa actualmente la tienda
     data.forEach(producto => {
         productos[producto.id] = {
             nombre: producto.nombre,
             precio: Number(producto.precio_oferta || producto.precio),
-            precioAnterior: producto.precio_oferta
-                ? Number(producto.precio)
-                : null,
-            descuento: !!producto.precio_oferta,
+            precioAnterior: producto.precio_oferta ? Number(producto.precio) : null,
+            descuento: Boolean(producto.precio_oferta),
             categoria: producto.categoria,
-            imagenes: producto.imagen
-                ? [producto.imagen]
-                : ["img/imageinicio.png"],
+            imagenes: producto.imagen ? [producto.imagen] : ["img/imageinicio.png"],
             descripcion: producto.descripcion || "",
             disponible: Number(producto.stock) > 0
         };
     });
-
-    console.log("Catálogo actualizado:", productos);
 }
 
 const variantes = { "tendido-queen": [18, 19, 20, 21], "tendido-king": [22, 23] };
 const varianteSeleccionada = { "tendido-queen": 18, "tendido-king": 22 };
-let idsLamparas = Object.keys(productos).map(Number).filter(id => id >= 27 && id <= 56);
-let idsOfertas = Object.keys(productos).filter(id => productos[id].descuento).map(Number);
+let idsLamparas = [];
+let idsOfertas = [];
 
 function formatearPrecio(precio) { return `$${Number(precio).toLocaleString("es-CO")}`; }
 function imagenPrincipal(producto) { return producto?.imagenes?.[0] || "img/imageinicio.png"; }
@@ -399,12 +391,17 @@ function habilitarAccesoTecladoTarjetas() {
 
 async function iniciarTienda() {
     await cargarProductosDesdeSupabase();
-    idsLamparas = Object.keys(productos).map(Number).filter(id => id >= 27 && id <= 56);
-idsOfertas = Object.keys(productos).filter(id => productos[id].descuento).map(Number);
-    renderizarProductosLamparas();
+    idsLamparas = Object.keys(productos)
+        .map(Number)
+        .filter(id => id >= 27 && id <= 56);
+    idsOfertas = Object.keys(productos)
+        .map(Number)
+        .filter(id => productos[id].descuento);
     renderizarProductosLamparas();
     habilitarAccesoTecladoTarjetas();
-    actualizarContadorCarrito(); actualizarGruposVariantes(); renderizarCarrito();
+    actualizarContadorCarrito();
+    actualizarGruposVariantes();
+    renderizarCarrito();
     const secciones = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
         const observador = new IntersectionObserver(elementos => {
