@@ -1039,18 +1039,6 @@
             SUPABASE_URL,
             SUPABASE_ANON_KEY
         );
-
-        async function probarSupabase() {
-            const { data, error } = await supabaseClient
-                .from('Productos')
-                .select('*')
-                .limit(5);
-
-            console.log("Productos:", data);
-            console.log("Error:", error);
-        }
-
-        probarSupabase();
     </script>
 
     <script src="script.js?v=5"></script>
