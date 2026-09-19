@@ -167,12 +167,18 @@ function actualizarGruposVariantes() {
     Object.keys(variantes).forEach(grupo => {
         const id = obtenerVarianteActual(grupo);
         const producto = productos[id];
+        if (!producto) return;
         const imagen = document.getElementById(`img-grupo-${grupo}`);
         const precio = document.getElementById(`precio-grupo-${grupo}`);
         if (imagen) imagen.src = imagenPrincipal(producto);
         if (precio) precio.textContent = formatearPrecio(producto.precio);
         const contenedor = document.getElementById(`colores-grupo-${grupo}`);
-        if (contenedor) contenedor.innerHTML = variantes[grupo].map(variante => `<button type="button" class="swatch-color${variante === id ? " activo" : ""}" aria-label="${productos[variante].nombre}" style="background-image:url('${imagenPrincipal(productos[variante])}');background-size:cover" onclick="event.stopPropagation(); seleccionarVariante('${grupo}', ${variante})"></button>`).join("");
+        if (contenedor) {
+            contenedor.innerHTML = variantes[grupo]
+                .filter(variante => productos[variante])
+                .map(variante => `<button type="button" class="swatch-color${variante === id ? " activo" : ""}" aria-label="${productos[variante].nombre}" style="background-image:url('${imagenPrincipal(productos[variante])}');background-size:cover" onclick="event.stopPropagation(); seleccionarVariante('${grupo}', ${variante})"></button>`)
+                .join("");
+        }
     });
 }
 function seleccionarVariante(grupo, id) { varianteSeleccionada[grupo] = id; actualizarGruposVariantes(); }
