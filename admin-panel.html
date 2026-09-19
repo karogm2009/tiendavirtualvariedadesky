@@ -510,6 +510,63 @@
 		`;
 	});
 
+	async function guardarCambiosProducto(id) {
+		const nombre = document.getElementById("nombre").value.trim();
+		const descripcion = document.getElementById("descripcion").value.trim();
+		const precio = Number(document.getElementById("precio").value);
+		const precioOfertaTexto = document.getElementById("precioOferta").value;
+		const categoria = document.getElementById("categoria").value.trim();
+		const stock = Number(document.getElementById("stock").value);
+		const imagen = document.getElementById("imagen").value.trim();
+
+		if (!nombre) {
+			alert("Escribe el nombre del producto.");
+			return false;
+		}
+
+		if (Number.isNaN(precio) || precio < 0) {
+			alert("El precio no es válido.");
+			return false;
+		}
+
+		if (Number.isNaN(stock) || stock < 0) {
+			alert("El stock no es válido.");
+			return false;
+		}
+
+		const precioOferta = precioOfertaTexto !== "" ? Number(precioOfertaTexto) : null;
+		if (precioOferta !== null && (Number.isNaN(precioOferta) || precioOferta < 0)) {
+			alert("El precio de oferta no es válido.");
+			return false;
+		}
+
+		const productoActualizado = {
+			nombre,
+			descripcion,
+			precio,
+			precio_oferta: precioOferta,
+			categoria,
+			imagen,
+			stock
+		};
+
+		const resultado = await supabaseClient
+			.from("Productos")
+			.update(productoActualizado)
+			.eq("id", id);
+
+		if (resultado.error) {
+			console.error("Error actualizando producto:", resultado.error);
+			alert("No se pudo guardar el producto:\n" + resultado.error.message);
+			return false;
+		}
+
+		alert("Producto actualizado correctamente.");
+		cerrarModal();
+		await cargarProductos();
+		return true;
+	}
+
 	function cerrarModal() {
 		document.getElementById("modalProducto").classList.remove("activo");
 	}
@@ -526,6 +583,11 @@
 		}
 
 		const id = document.getElementById("productoId").value;
+		if (id) {
+			await guardarCambiosProducto(id);
+			return;
+		}
+
 		const producto = {
 			nombre: document.getElementById("nombre").value.trim(),
 			descripcion: document.getElementById("descripcion").value.trim(),
@@ -539,17 +601,9 @@
 			activo: document.getElementById("activo").checked
 		};
 
-		let resultado;
-		if (id) {
-			resultado = await supabaseClient
-				.from("Productos")
-				.update(producto)
-				.eq("id", id);
-		} else {
-			resultado = await supabaseClient
-				.from("Productos")
-				.insert(producto);
-		}
+		const resultado = await supabaseClient
+			.from("Productos")
+			.insert(producto);
 
 		if (resultado.error) {
 			console.error("ERROR COMPLETO AL GUARDAR:", resultado.error);
@@ -565,11 +619,7 @@
 
 		console.log("PRODUCTO GUARDADO CORRECTAMENTE:", resultado.data);
 
-		alert(
-			id
-				? "Producto actualizado correctamente."
-				: "Producto agregado correctamente."
-		);
+		alert("Producto agregado correctamente.");
 
 		cerrarModal();
 		await cargarProductos();
