@@ -18,14 +18,15 @@
 		.top-panel h2 { margin: 0; }
 		#agregarProducto { background: #173B57; color: white; }
 		.tabla-container { background: white; border-radius: 16px; overflow-x: auto; box-shadow: 0 5px 20px rgba(0,0,0,.08); }
-		table { width: 100%; border-collapse: collapse; min-width: 800px; }
+		table { width: 100%; border-collapse: collapse; min-width: 900px; }
 		th, td { padding: 14px; border-bottom: 1px solid #eee; text-align: left; }
 		th { background: #f7f3ea; }
 		.estado-activo { color: green; font-weight: bold; }
 		.estado-inactivo { color: #999; font-weight: bold; }
-		.btn-editar { background: #D4A84F; color: #173B57; }
+		.btn-editar { background: #D4A84F; color: #173B57; margin-right: 5px; }
 		.btn-estado { background: #eee; color: #333; }
-		.mensaje { padding: 20px; text-align: center; color: #777; }
+		.mensaje { padding: 30px; text-align: center; color: #777; }
+		.contador { margin-top: 10px; color: #777; font-size: 14px; }
 		@media (max-width: 600px) {
 			header { flex-direction: column; align-items: stretch; text-align: center; }
 			.top-panel { flex-direction: column; align-items: stretch; }
@@ -43,7 +44,10 @@
 
 <main>
 	<div class="top-panel">
-		<h2>Productos</h2>
+		<div>
+			<h2>Productos</h2>
+			<div class="contador" id="contadorProductos">Cargando productos...</div>
+		</div>
 		<button id="agregarProducto">+ Agregar producto</button>
 	</div>
 
@@ -76,52 +80,74 @@
 
 	const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+	function escaparTexto(texto) {
+		if (texto === null || texto === undefined) return "";
+		return String(texto)
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;")
+			.replace(/"/g, "&quot;")
+			.replace(/'/g, "&#039;");
+	}
+
 	async function verificarSesion() {
 		const { data: { user }, error } = await supabaseClient.auth.getUser();
+		console.log("USUARIO ADMIN:", user);
+		console.log("ERROR SESIÓN:", error);
 		if (error || !user) {
 			window.location.href = "admin.html";
 			return;
 		}
-		cargarProductos();
+		await cargarProductos();
 	}
 
 	async function cargarProductos() {
 		const tabla = document.getElementById("tablaProductos");
-		const { data, error } = await supabaseClient
+		const contador = document.getElementById("contadorProductos");
+		tabla.innerHTML = '<tr><td colspan="8" class="mensaje">Cargando productos...</td></tr>';
+
+		const resultado = await supabaseClient
 			.from("Productos")
 			.select("*")
 			.order("id", { ascending: true });
+		const data = resultado.data;
+		const error = resultado.error;
 
 		console.log("PRODUCTOS DEL PANEL:", data);
 		console.log("ERROR DEL PANEL:", error);
 
 		if (error) {
-			console.error("Error:", error);
+			console.error("Error cargando productos:", error);
+			contador.textContent = "Error al cargar productos";
 			tabla.innerHTML = '<tr><td colspan="8" class="mensaje">No se pudieron cargar los productos.</td></tr>';
 			return;
 		}
 
 		if (!data || data.length === 0) {
+			contador.textContent = "0 productos";
 			tabla.innerHTML = '<tr><td colspan="8" class="mensaje">No hay productos registrados.</td></tr>';
 			return;
 		}
 
+		contador.textContent = `${data.length} productos registrados`;
+
 		tabla.innerHTML = data.map(producto => {
-			const precio = Number(producto.precio || 0).toLocaleString("es-CO");
-			const oferta = producto.precio_oferta
-				? "$" + Number(producto.precio_oferta).toLocaleString("es-CO")
-				: "-";
+			const precio = "$" + Number(producto.precio || 0).toLocaleString("es-CO");
+			const precioOferta = producto.precio_oferta !== null && producto.precio_oferta !== undefined && producto.precio_oferta !== ""
+				? Number(producto.precio_oferta)
+				: null;
+			const oferta = precioOferta !== null ? "$" + precioOferta.toLocaleString("es-CO") : "-";
 			const estado = producto.activo
-				? '<span class="estado-activo">Activo</span>'
-				: '<span class="estado-inactivo">Inactivo</span>';
+				? '<span class="estado-activo">● Activo</span>'
+				: '<span class="estado-inactivo">● Inactivo</span>';
 			return `
 				<tr>
-					<td>${producto.id}</td>
-					<td>${producto.nombre || ""}</td>
-					<td>$${precio}</td>
+					<td>${escaparTexto(producto.id)}</td>
+					<td><strong>${escaparTexto(producto.nombre)}</strong></td>
+					<td>${precio}</td>
 					<td>${oferta}</td>
-					<td>${producto.categoria || ""}</td>
-					<td>${producto.stock ?? 0}</td>
+					<td>${escaparTexto(producto.categoria)}</td>
+					<td>${escaparTexto(producto.stock ?? 0)}</td>
 					<td>${estado}</td>
 					<td>
 						<button class="btn-editar" onclick="editarProducto(${producto.id})">Editar</button>
@@ -138,16 +164,20 @@
 	}
 
 	async function cambiarEstado(id, estadoActual) {
+		const nuevoEstado = !estadoActual;
+		const confirmar = confirm(nuevoEstado ? "¿Quieres activar este producto?" : "¿Quieres desactivar este producto?");
+		if (!confirmar) return;
+
 		const { error } = await supabaseClient
 			.from("Productos")
-			.update({ activo: !estadoActual })
+			.update({ activo: nuevoEstado })
 			.eq("id", id);
 		if (error) {
-			console.error(error);
-			alert("No se pudo cambiar el estado.");
+			console.error("Error cambiando estado:", error);
+			alert("No se pudo cambiar el estado.\n\n" + error.message);
 			return;
 		}
-		cargarProductos();
+		await cargarProductos();
 	}
 
 	document.getElementById("cerrarSesion").addEventListener("click", async function() {
