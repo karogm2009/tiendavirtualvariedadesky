@@ -92,6 +92,9 @@
 			.select("*")
 			.order("id", { ascending: true });
 
+		console.log("PRODUCTOS DEL PANEL:", data);
+		console.log("ERROR DEL PANEL:", error);
+
 		if (error) {
 			console.error("Error:", error);
 			tabla.innerHTML = '<tr><td colspan="8" class="mensaje">No se pudieron cargar los productos.</td></tr>';
