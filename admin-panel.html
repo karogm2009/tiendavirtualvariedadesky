@@ -435,38 +435,70 @@
 		const archivoInput = document.getElementById("archivoImagen");
 		const archivo = archivoInput.files[0];
 
-		if (!archivo) return null;
+		if (!archivo) {
+			return null;
+		}
 
-		const extensionesPermitidas = ["image/png", "image/jpeg", "image/webp"];
-		if (!extensionesPermitidas.includes(archivo.type)) {
+		const tiposPermitidos = ["image/png", "image/jpeg", "image/webp"];
+		if (!tiposPermitidos.includes(archivo.type)) {
 			alert("Solo puedes subir imágenes PNG, JPG o WEBP.");
 			return null;
 		}
 
 		const vistaPrevia = document.getElementById("vistaPreviaImagen");
-		vistaPrevia.innerHTML = '<div class="subiendo-imagen">Subiendo imagen...</div>';
+		vistaPrevia.innerHTML = `
+			<div class="subiendo-imagen">
+				Subiendo imagen...
+			</div>
+		`;
 
-		const extension = archivo.name.split(".").pop(aa).toLowerCase();
+		const extension = archivo.name.split(".").pop().toLowerCase();
 		const nombreArchivo = "producto-" + Date.now() + "-" + Math.random().toString(36).substring(2, 8) + "." + extension;
-		const ruta = nombreArchivo;
 
-		const { error: errorSubida } = await supabaseClient
-			.storage
-			.from("productos")
-			.upload(ruta, archivo, { cacheControl: "3600", upsert: false });
+		console.log("Intentando subir:", nombreArchivo);
+		console.log("Tipo:", archivo.type);
+		console.log("Tamaño:", archivo.size);
 
-		if (errorSubida) {
-			console.error("Error subiendo imagen:", errorSubida);
+		try {
+			const { data: datosSubida, error: errorSubida } = await supabaseClient
+				.storage
+				.from("productos")
+				.upload(nombreArchivo, archivo, {
+					cacheControl: "3600",
+					upsert: false
+				});
+
+			console.log("RESPUESTA STORAGE:", datosSubida);
+			console.log("ERROR STORAGE:", errorSubida);
+
+			if (errorSubida) {
+				vistaPrevia.innerHTML = "";
+				alert("ERROR AL SUBIR LA IMAGEN\n\n" + errorSubida.message);
+				return null;
+			}
+
+			const { data: urlData } = supabaseClient
+				.storage
+				.from("productos")
+				.getPublicUrl(nombreArchivo);
+
+			console.log("URL GENERADA:", urlData.publicUrl);
+			document.getElementById("imagen").value = urlData.publicUrl;
+			vistaPrevia.innerHTML = `
+				<img
+					src="${escaparTexto(urlData.publicUrl)}"
+					alt="Vista previa"
+					style="width:140px;height:140px;object-fit:contain;border-radius:12px;border:1px solid #ddd;padding:8px;"
+				>
+			`;
+
+			return urlData.publicUrl;
+		} catch (error) {
+			console.error("ERROR INESPERADO:", error);
 			vistaPrevia.innerHTML = "";
-			alert("No se pudo subir la imagen.\n\n" + errorSubida.message);
+			alert("ERROR INESPERADO AL SUBIR LA IMAGEN\n\n" + error.message);
 			return null;
 		}
-
-		const { data } = supabaseClient.storage.from("productos").getPublicUrl(ruta);
-		const urlImagen = data.publicUrl;
-		document.getElementById("imagen").value = urlImagen;
-		vistaPrevia.innerHTML = `<img src="${escaparTexto(urlImagen)}" alt="Vista previa">`;
-		return urlImagen;
 	}
 
 	document.getElementById("archivoImagen").addEventListener("change", function() {
