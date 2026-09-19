@@ -1028,30 +1028,31 @@
             <button type="submit" aria-label="Enviar">➤</button>
         </form>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-    const SUPABASE_URL = "https://omvyifgupqppxftzpkfw.supabase.co/rest/v1/";
-    const SUPABASE_ANON_KEY = "sb_publishable_0TE2cKBynIC9YNRQx_-3-Q_nWtR0HAA";
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    const supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
-</script>
-<script>
-async function probarSupabase() {
-    const { data, error } = await supabaseClient
-        .from('Productos')
-        .select('*')
-        .limit(5);
+    <script>
+        const SUPABASE_URL = "https://omvyifgupqppxftzpkfw.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_0TE2cKBynIC9YNRQx_-3-Q_nWtR0HAA";
 
-    console.log("Productos:", data);
-    console.log("Error:", error);
-}
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
 
-probarSupabase();
-</script>
+        async function probarSupabase() {
+            const { data, error } = await supabaseClient
+                .from('Productos')
+                .select('*')
+                .limit(5);
+
+            console.log("Productos:", data);
+            console.log("Error:", error);
+        }
+
+        probarSupabase();
+    </script>
+
     <script src="script.js?v=5"></script>
     <script src="asistente.js?v=4"></script>
 
