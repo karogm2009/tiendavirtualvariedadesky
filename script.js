@@ -71,26 +71,53 @@ async function cargarProductosDesdeSupabase() {
 
     if (error) {
         console.error("Error cargando productos desde Supabase:", error);
-        return;
+        return false;
     }
 
     if (!data || !data.length) {
         console.warn("No hay productos activos en Supabase.");
-        return;
+        return false;
     }
+
+    Object.keys(productos).forEach(id => {
+        delete productos[id];
+    });
 
     data.forEach(producto => {
         productos[producto.id] = {
-            nombre: producto.nombre,
-            precio: Number(producto.precio_oferta || producto.precio),
-            precioAnterior: producto.precio_oferta ? Number(producto.precio) : null,
-            descuento: Boolean(producto.precio_oferta),
-            categoria: producto.categoria,
-            imagenes: producto.imagen ? [producto.imagen] : ["img/imageinicio.png"],
+            nombre: producto.nombre || "",
+            precio: Number(
+                producto.precio_oferta !== null &&
+                producto.precio_oferta !== undefined
+                    ? producto.precio_oferta
+                    : producto.precio
+            ),
+            precioAnterior:
+                producto.precio_oferta !== null &&
+                producto.precio_oferta !== undefined
+                    ? Number(producto.precio)
+                    : null,
+            descuento:
+                producto.precio_oferta !== null &&
+                producto.precio_oferta !== undefined,
+            categoria: producto.categoria || "otros",
+            imagenes: producto.imagen
+                ? [producto.imagen]
+                : ["img/imageinicio.png"],
             descripcion: producto.descripcion || "",
-            disponible: Number(producto.stock) > 0
+            disponible: Number(producto.stock || 0) > 0
         };
     });
+
+    console.log(
+        "CATÁLOGO CARGADO DESDE SUPABASE:",
+        Object.keys(productos).length,
+        "productos"
+    );
+
+    console.log(productos);
+
+    return true;
 }
 
 const variantes = { "tendido-queen": [18, 19, 20, 21], "tendido-king": [22, 23] };
