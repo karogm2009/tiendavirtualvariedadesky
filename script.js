@@ -158,9 +158,9 @@ function cardProductoHtml(id) {
 function renderizarProductosLamparas() {
     const contenedor = document.querySelector(".productos");
     if (!contenedor) return;
-    const tarjetas = idsLamparas.map(id => cardProductoHtml(id)).join("");
-    const existe = contenedor.querySelector(".producto[data-lampara=\"true\"]");
-    if (!existe) contenedor.insertAdjacentHTML("beforeend", tarjetas);
+    const ids = Object.keys(productos).map(Number).sort((a, b) => a - b);
+    contenedor.querySelectorAll(".producto").forEach(tarjeta => tarjeta.remove());
+    contenedor.insertAdjacentHTML("beforeend", ids.map(id => cardProductoHtml(id)).join(""));
 }
 
 function actualizarGruposVariantes() {
@@ -249,7 +249,13 @@ function escaparHtml(texto) {
 }
 
 function obtenerResenas(id) {
-    return JSON.parse(localStorage.getItem(`ky-resenas-${id}`) || "[]");
+    try {
+        const guardado = JSON.parse(localStorage.getItem(`ky-resenas-${id}`) || "[]");
+        return Array.isArray(guardado) ? guardado : [];
+    } catch {
+        localStorage.removeItem(`ky-resenas-${id}`);
+        return [];
+    }
 }
 
 function obtenerIdentificadorResenador() {
