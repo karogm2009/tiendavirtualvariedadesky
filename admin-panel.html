@@ -520,12 +520,25 @@
 		}
 
 		if (resultado.error) {
-			console.error(resultado.error);
-			alert("No se pudo guardar el producto.\n\n" + resultado.error.message);
+			console.error("ERROR COMPLETO AL GUARDAR:", resultado.error);
+
+			alert(
+				"NO SE PUDO GUARDAR EL PRODUCTO\n\n" +
+				"Mensaje: " + resultado.error.message + "\n\n" +
+				"Código: " + (resultado.error.code || "sin código")
+			);
+
 			return;
 		}
 
-		alert(id ? "Producto actualizado correctamente." : "Producto agregado correctamente.");
+		console.log("PRODUCTO GUARDADO CORRECTAMENTE:", resultado.data);
+
+		alert(
+			id
+				? "Producto actualizado correctamente."
+				: "Producto agregado correctamente."
+		);
+
 		cerrarModal();
 		await cargarProductos();
 	});
