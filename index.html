@@ -1035,10 +1035,9 @@
         const SUPABASE_URL = "https://omvyifgupqppxftzpkfw.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_0TE2cKBynIC9YNRQx_-3-Q_nWtR0HAA";
 
-        const supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-        );
+        const supabaseClient = window.supabase && typeof window.supabase.createClient === "function"
+            ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+            : null;
     </script>
 
     <script src="script.js?v=6"></script>
