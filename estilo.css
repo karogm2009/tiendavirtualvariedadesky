@@ -632,6 +632,10 @@ header {
     flex-direction: column;
 }
 
+.producto[hidden] {
+    display: none;
+}
+
 .producto:hover {
     transform: translateY(-6px);
 
@@ -2354,4 +2358,26 @@ body::after,
 .hero::after,
 footer::before {
     content: none;
+}
+
+#categorias.seccion {
+    padding-top: 38px;
+    padding-bottom: 38px;
+}
+
+#categorias .subtitulo {
+    margin-bottom: 20px;
+}
+
+#categorias .categorias {
+    gap: 16px;
+}
+
+#categorias .categoria {
+    padding: 16px 12px;
+}
+
+#categorias .icono {
+    font-size: 32px;
+    margin-bottom: 8px;
 }
