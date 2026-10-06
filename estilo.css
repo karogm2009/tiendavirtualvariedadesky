@@ -2381,3 +2381,125 @@ footer::before {
     font-size: 32px;
     margin-bottom: 8px;
 }
+
+@media (max-width: 767px) {
+    .header-top {
+        padding: 8px 5%;
+        gap: 6px 10px;
+    }
+
+    .logo img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .logo strong {
+        font-size: 14px;
+    }
+
+    .buscador input {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .envio-gratis {
+        font-size: 11px;
+    }
+
+    .envio-gratis .rotulo,
+    .envio-gratis .detalle {
+        padding: 6px 8px;
+    }
+
+    .header-menu {
+        min-height: 48px;
+        padding: 2px 5%;
+    }
+
+    .hero {
+        min-height: 330px;
+        padding: 32px 5%;
+    }
+
+    .hero-texto {
+        bottom: 20px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p:not(.etiqueta) {
+        font-size: 14px;
+        margin-bottom: 18px;
+    }
+
+    .hero .boton,
+    .btn-agregar,
+    .boton {
+        min-height: 44px;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+
+    .seccion {
+        padding: 36px 5%;
+    }
+
+    #categorias.seccion {
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+
+    #categorias .categorias {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    #categorias .categoria {
+        padding: 10px 4px;
+    }
+
+    #categorias .icono {
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+
+    #categorias .categoria h3 {
+        font-size: 11px;
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+    }
+
+    .productos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .imagen-producto {
+        height: clamp(130px, 38vw, 170px);
+    }
+
+    .informacion {
+        padding: 10px;
+    }
+
+    .informacion h3 {
+        font-size: 13px;
+    }
+
+    .oferta {
+        min-height: 170px;
+        margin: 24px 5%;
+        padding: 24px 16px;
+    }
+
+    footer {
+        padding: 36px 5% 18px;
+    }
+
+    .footer-contenido {
+        gap: 18px;
+        margin-bottom: 24px;
+    }
+}
