@@ -111,7 +111,7 @@
 }
 
 .asistente-header::after {
-    content: "♥  ♥";
+    content: none;
     position: absolute;
     right: 16px;
     bottom: -8px;
@@ -470,7 +470,7 @@
 
 /* Detalles cromáticos de la edición Amor y Amistad */
 .asistente-tarjeta-info h4 {
-    color: #9A1C20;
+    color: #000000;
 }
 
 .asistente-tarjeta-precio,
@@ -507,7 +507,7 @@
 }
 
 .asistente-opcion {
-    color: #9A1C20;
+    color: #000000;
     border-color: #9A1C20;
 }
 
