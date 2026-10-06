@@ -232,6 +232,7 @@
 					<select id="categoria">
 						<option value="cocina">Cocina</option>
 						<option value="habitacion">Habitación</option>
+						<option value="tianguis">Tianguis</option>
 						<option value="decoracion">Decoración</option>
 						<option value="electrodomesticos">Electrodomésticos</option>
 						<option value="usopersonal">Uso personal</option>
@@ -282,6 +283,20 @@
 			.replace(/>/g, "&gt;")
 			.replace(/"/g, "&quot;")
 			.replace(/'/g, "&#039;");
+	}
+
+	function formatearCategoria(categoria) {
+		if (!categoria) return "Otros";
+		if (categoria === "limpieza" || categoria === "tianguis") return "Tianguis";
+		const mapa = {
+			cocina: "Cocina",
+			habitacion: "Habitación",
+			decoracion: "Decoración",
+			electrodomesticos: "Electrodomésticos",
+			usopersonal: "Uso personal",
+			otros: "Otros"
+		};
+		return mapa[categoria] || categoria;
 	}
 
 	async function verificarSesion() {
@@ -335,13 +350,14 @@
 			const estado = producto.activo
 				? '<span class="estado-activo">● Activo</span>'
 				: '<span class="estado-inactivo">● Inactivo</span>';
+			const categoriaFormateada = formatearCategoria(producto.categoria);
 			return `
 				<tr>
 					<td>${escaparTexto(producto.id)}</td>
 					<td><strong>${escaparTexto(producto.nombre)}</strong></td>
 					<td>${precio}</td>
 					<td>${oferta}</td>
-					<td>${escaparTexto(producto.categoria)}</td>
+					<td>${escaparTexto(categoriaFormateada)}</td>
 					<td>${escaparTexto(producto.stock ?? 0)}</td>
 					<td>${estado}</td>
 					<td>
@@ -383,7 +399,8 @@
 		document.getElementById("descripcion").value = data.descripcion || "";
 		document.getElementById("precio").value = data.precio || "";
 		document.getElementById("precioOferta").value = data.precio_oferta || "";
-		document.getElementById("categoria").value = data.categoria || "otros";
+		const categoriaNormalizada = data.categoria === "limpieza" ? "tianguis" : (data.categoria || "otros");
+		document.getElementById("categoria").value = categoriaNormalizada;
 		document.getElementById("stock").value = data.stock ?? 0;
 		document.getElementById("imagen").value = data.imagen || "";
 		document.getElementById("archivoImagen").value = "";
