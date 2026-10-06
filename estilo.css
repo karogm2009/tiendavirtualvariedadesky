@@ -915,7 +915,7 @@ header {
 footer {
     background: #0D3E70;
 
-    color: white;
+    color: #000000;
 
     padding: 60px 7% 20px;
 }
@@ -940,7 +940,7 @@ footer {
 }
 
 .footer-contenido p {
-    color: #cdd9ec;
+    color: #000000;
 
     line-height: 1.6;
 }
@@ -948,7 +948,7 @@ footer {
 .footer-contenido a {
     display: block;
 
-    color: #cdd9ec;
+    color: #000000;
 
     margin-bottom: 10px;
 
@@ -956,7 +956,7 @@ footer {
 }
 
 .footer-contenido a:hover {
-    color: #FFE04F;
+    color: #0D3E70;
 }
 
 .redes {
@@ -990,7 +990,7 @@ footer {
 
 .redes a.facebook-enlace {
     background: transparent;
-    color: #FFFFFF;
+    color: #000000;
     font-size: 28px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
@@ -998,17 +998,17 @@ footer {
 
 .redes a.facebook-enlace:hover {
     background: transparent;
-    color: #FFE04F;
+    color: #0D3E70;
 }
 
 .copyright {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
 
     padding-top: 20px;
 
     text-align: center;
 
-    color: #a9bdd8;
+    color: #000000;
 
     font-size: 13px;
 }
@@ -1066,7 +1066,7 @@ body::after {
 }
 
 footer {
-    background: var(--borgona);
+    background: var(--dorado-temporada);
 }
 
 .header-menu {
