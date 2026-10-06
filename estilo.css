@@ -160,7 +160,7 @@ header {
     content: "♥  ♥  ♥";
     right: 12%;
     bottom: -9px;
-    color: #9A1C20;
+    color: #2f1c9a;
     font-size: 32px;
     letter-spacing: 20px;
     opacity: 0.16;
@@ -1062,7 +1062,7 @@ body::after {
 
 .header-top,
 .header-menu {
-    background: #FFFFFF;
+    background: #0D3E70;
 }
 
 footer {
@@ -1077,11 +1077,11 @@ footer {
 .menu-izquierda,
 .menu-derecha,
 .menu-toggle {
-    color: var(--borgona);
+    color: #FFFFFF;
 }
 
 .menu-izquierda a.activo {
-    color: var(--borgona);
+    color: #000000;
 }
 
 .envio-gratis .rotulo,
@@ -1105,8 +1105,8 @@ footer {
 
 .boton:hover,
 .oferta .boton:hover {
-    background: var(--rosa-suave);
-    color: var(--borgona);
+    background: #0080FF;
+    color: #FFFFFF;
 }
 
 .seccion {
@@ -1206,7 +1206,7 @@ footer::before {
 .carrito-total,
 .modal-producto h2,
 .resenas-seccion h3 {
-    color: var(--borgona);
+    color: #000000;
 }
 
 .categoria,
@@ -1233,26 +1233,26 @@ footer::before {
 }
 
 .btn-agregar {
-    background: var(--borgona);
+    background: #0D3E70;
     color: #FFFFFF;
 }
 
 .btn-agregar:hover {
-    background: #7D171A;
+    background: #0080FF;
 }
 
 .descuento,
 .oferta {
     background: var(--rosa-suave);
-    color: var(--borgona);
+    color: #000000;
 }
 
 .oferta h2 {
-    color: var(--borgona);
+    color: #000000;
 }
 
 .oferta .boton {
-    background: var(--borgona);
+    background: #0D3E70;
     color: #FFFFFF;
 }
 
@@ -1263,7 +1263,7 @@ footer::before {
 
 .carrito-item-acciones button {
     background: var(--rosa-suave);
-    color: var(--borgona);
+    color: #000000;
 }
 
 .modal-miniatura.activa,
@@ -2340,4 +2340,18 @@ img {
 
 .whatsapp-flotante::before {
     background-image: url("https://cdn.simpleicons.org/whatsapp/9A1C20");
+}
+
+.header-top::before,
+.header-top::after,
+.header-menu::before,
+.header-menu::after,
+body::before,
+body::after,
+.seccion::before,
+.seccion::after,
+.hero::before,
+.hero::after,
+footer::before {
+    content: none;
 }
